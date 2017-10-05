@@ -15,6 +15,8 @@ How the BotMystConfig.json should look:
 }
 ```
 
+**WARNING** Please don't publish the BotMystConfig file anywhere as it contains sensitive information that can compromise your bot. This file is already in the .gitignore, but make sure it is also in yours. We're not responsible for any damage done to you or your bot.
+
 ## Issues
 In the <a href="https://github.com/LeonLaci/BotMyst/issues">Issues</a> section you can submit a bug, a new feature you want implemented or request documentation improvements / additions.
 
