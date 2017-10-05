@@ -1,0 +1,10 @@
+/media/leonl/Files/Programs/BotMyst/bin/Debug/netcoreapp2.0/BotMyst.deps.json
+/media/leonl/Files/Programs/BotMyst/bin/Debug/netcoreapp2.0/BotMyst.runtimeconfig.json
+/media/leonl/Files/Programs/BotMyst/bin/Debug/netcoreapp2.0/BotMyst.runtimeconfig.dev.json
+/media/leonl/Files/Programs/BotMyst/bin/Debug/netcoreapp2.0/BotMyst.dll
+/media/leonl/Files/Programs/BotMyst/bin/Debug/netcoreapp2.0/BotMyst.pdb
+/media/leonl/Files/Programs/BotMyst/obj/Debug/netcoreapp2.0/BotMyst.csproj.CoreCompileInputs.cache
+/media/leonl/Files/Programs/BotMyst/obj/Debug/netcoreapp2.0/BotMyst.AssemblyInfoInputs.cache
+/media/leonl/Files/Programs/BotMyst/obj/Debug/netcoreapp2.0/BotMyst.AssemblyInfo.cs
+/media/leonl/Files/Programs/BotMyst/obj/Debug/netcoreapp2.0/BotMyst.dll
+/media/leonl/Files/Programs/BotMyst/obj/Debug/netcoreapp2.0/BotMyst.pdb
