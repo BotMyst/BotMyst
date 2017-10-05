@@ -6,5 +6,20 @@ This project is under the MIT license. You're free to use any part of this proje
 
 Join the BotMyst development server on Discord: https://discord.gg/rNQBq9
 
+## Features
+There are current'y no features. BotMyst can only appear online. Don't worry, we will be adding a ton of features.
+
+## Setup
+BotMyst is build on top of .Net Core using Discord.Net. You should have .Net Core SDK installed (current recommended version for the project is 2.0).
+
+To use BotMyst you should clone or download this repo and make a new file called BotMystConfig.json. For now it is used for setting up the token for the bot.
+
+This is how the config file should look like:
+```json
+{
+  "token": "<your-token-here>"
+}
+```
+
 ## Contributing
 Information about contributing to the project can be found at <a href="https://github.com/LeonLaci/BotMyst/blob/master/CONTRIBUTING.md">CONTRIBUTING</a>.
