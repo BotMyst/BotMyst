@@ -21,7 +21,7 @@ namespace BotMyst
 
         private string commandPrefix = ">";
 
-        private BotMystConfiguration config;
+        public static BotMystConfiguration BotMystConfig;
         private string token;
         
         public async Task Start ()
@@ -33,15 +33,15 @@ namespace BotMyst
             using (StreamReader reader = new StreamReader ("BotMystConfig.json"))
             {
                 string json = await reader.ReadToEndAsync ();
-                config = JsonConvert.DeserializeObject<BotMystConfiguration> (json);
-                token = config.Token;
+                BotMystConfig = JsonConvert.DeserializeObject<BotMystConfiguration> (json);
+                token = BotMystConfig.Token;
             }
 
             services = new ServiceCollection ().BuildServiceProvider ();
 
             await InstallCommands ();
 
-            await client.LoginAsync (TokenType.Bot, config.Token);
+            await client.LoginAsync (TokenType.Bot, BotMystConfig.Token);
             await client.SetGameAsync ("");
             await client.StartAsync ();
 
