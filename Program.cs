@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BotMyst
+﻿namespace BotMyst
 {
     public class Program
     {
