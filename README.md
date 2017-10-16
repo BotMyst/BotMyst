@@ -6,8 +6,12 @@ This project is under the MIT license. You're free to use any part of this proje
 
 Join the BotMyst development server on Discord: https://discord.gg/rNQBq9
 
+## Add BotMyst to your server
+You can invite the original version of BotMyst, that is self hosted by me, to your sever by clicking on this link:
+[Invite BotMyst to your server](https://discordapp.com/oauth2/authorize?client_id=357196134298419200&scope=bot)
+
 ## Features
-There are current'y no features. BotMyst can only appear online. Don't worry, we will be adding a ton of features.
+For now, BotMyst only has dictionary and thesaurus commands. There will be a lot more added soon.
 
 ## Setup
 BotMyst is build on top of .Net Core using Discord.Net. You should have <a href="https://www.microsoft.com/net/core#windowscmd">.Net Core SDK</a> installed (current recommended version for the project is 2.0).
