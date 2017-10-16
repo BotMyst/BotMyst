@@ -92,6 +92,142 @@ namespace BotMyst.Commands
             }
         }
 
+        [Command ("thesaurus"), Summary ("Gets the synonyms and antonyms for a specified word.")]
+        [Alias ("word", "synonym", "antonym")]
+        public async Task Thesaurus (string search)
+        {
+            string url = $"https://od-api.oxforddictionaries.com:443/api/v1/entries/en/{search.ToLower ()}/synonyms;antonyms";
+
+            string json = await FetchJson (url);
+
+            ThesaurusData data = ThesaurusData.FromJson (json);
+
+            string finalMessage = string.Empty;
+
+            ThesaurusResult result = data.Results [0];
+            finalMessage += $"**{result.Word.ToUpper ()}**\n\n";
+
+            foreach (ThesaurusLexicalEntry lexicalEntry in result.LexicalEntries ?? Enumerable.Empty<ThesaurusLexicalEntry> ())
+            {
+                foreach (ThesaurusEntry entry in lexicalEntry.Entries ?? Enumerable.Empty<ThesaurusEntry> ())
+                {
+                    int nOfSenses = 1;
+                    foreach (ThesaurusSense sense in entry.Senses ?? Enumerable.Empty<ThesaurusSense> ())
+                    {
+                        finalMessage += $"{nOfSenses}. \"{sense.Examples [0].Text.UppercaseFirst ()}.\"\n";
+
+                        if (sense.Synonyms != null || sense.Synonyms.Length >= 1)
+                        {
+                            finalMessage += "**Synonyms**\n";
+                        }
+                        string synonyms = string.Empty;
+                        foreach (DictionaryOnym onym in sense.Synonyms ?? Enumerable.Empty<DictionaryOnym> ())
+                        {
+                            synonyms += $"{onym.Text}, ";
+                        }
+                        if (string.IsNullOrEmpty (synonyms) == false)
+                        {
+                            finalMessage += $"    {synonyms.Remove (synonyms.Length - 2).UppercaseFirst ()}.\n";
+                        }
+
+                        foreach (ThesaurusSense subsense in sense.Subsenses ?? Enumerable.Empty<ThesaurusSense> ())
+                        {
+                            finalMessage += "    ";
+                            if (subsense.Regions != null)
+                            {
+                                if (subsense.Regions [0] != null)
+                                {
+                                    finalMessage += $"___{subsense.Regions [0].UppercaseFirst ()}___ ";
+                                }
+                            }
+                            if (subsense.Registers != null)
+                            {
+                                if (subsense.Registers [0] != null)
+                                {
+                                    finalMessage += $"___{subsense.Registers [0].UppercaseFirst ()}___ ";
+                                }
+                            }
+                            string ssynonyms = string.Empty;
+                            foreach (DictionaryOnym onym in subsense.Synonyms ?? Enumerable.Empty<DictionaryOnym> ())
+                            {
+                                ssynonyms += $"{onym.Text}, ";
+                            }
+                            if (string.IsNullOrEmpty (ssynonyms) == false)
+                            {
+                                finalMessage += $"{ssynonyms.Remove (ssynonyms.Length - 2).UppercaseFirst ()}.\n";
+                            }
+                        }
+
+                        if (sense.Antonyms != null)
+                        {
+                            if (sense.Antonyms.Length > 0)
+                            {
+                                finalMessage += "\n**Antonyms**\n";
+                            }
+                        }
+                        string antonyms = string.Empty;
+                        foreach (DictionaryOnym onym in sense.Antonyms ?? Enumerable.Empty<DictionaryOnym> ())
+                        {
+                            antonyms += $"{onym.Text}, ";
+                        }
+                        if (string.IsNullOrEmpty (antonyms) == false)
+                        {
+                            finalMessage += $"    {antonyms.Remove (antonyms.Length - 2).UppercaseFirst ()}.\n";
+                        }
+
+                        foreach (ThesaurusSense subsense in sense.Subsenses ?? Enumerable.Empty<ThesaurusSense> ())
+                        {
+                            string santonyms = string.Empty;
+                            foreach (DictionaryOnym onym in subsense.Antonyms ?? Enumerable.Empty<DictionaryOnym> ())
+                            {
+                                santonyms += $"{onym.Text}, ";
+                            }
+
+                            if (string.IsNullOrEmpty (santonyms))
+                            {
+                                continue;
+                            }
+
+                            finalMessage += "    ";
+                            if (subsense.Regions != null)
+                            {
+                                if (subsense.Regions [0] != null)
+                                {
+                                    finalMessage += $"___{subsense.Regions [0].UppercaseFirst ()}___ ";
+                                }
+                            }
+                            if (subsense.Registers != null)
+                            {
+                                if (subsense.Registers [0] != null)
+                                {
+                                    finalMessage += $"___{subsense.Registers [0].UppercaseFirst ()}___ ";
+                                }
+                            }
+
+                            if (string.IsNullOrEmpty (santonyms) == false)
+                            {
+                                finalMessage += $"{santonyms.Remove (santonyms.Length - 2).UppercaseFirst ()}.\n";
+                            }
+                        }
+
+                        finalMessage += "\n";
+                        nOfSenses++;
+                    }
+                }
+            }
+
+            if (finalMessage.Length >= 2000)
+            {
+                IEnumerable<string> messages = finalMessage.SplitEveryNth (2000);
+                foreach (string message in messages)
+                {
+                    await ReplyAsync (message);
+                }
+                return;
+            }
+            await ReplyAsync (finalMessage);
+        }
+
         private async Task<string> FetchJson (string url)
         {
             string json = string.Empty;
