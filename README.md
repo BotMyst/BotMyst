@@ -5,6 +5,7 @@ BotMyst is a bot written in C# using <a href="https://github.com/RogueException/
 This project is under the MIT license. You're free to use any part of this project without any permission. Check out <a href="https://github.com/LeonLaci/BotMyst/blob/master/LICENSE">LICENESE</a> for more information about permissions, limitations and liability.
 
 Join the BotMyst development server on Discord: https://discord.gg/rNQBq9
+Check out our Trello board to contribute to it or see planned features / changes: https://trello.com/b/bybAwGwQ/botmyst
 
 ## Add BotMyst to your server
 You can invite the original version of BotMyst, that is self hosted by me, to your sever by clicking on this link:
