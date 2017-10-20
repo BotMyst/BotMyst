@@ -1,5 +1,6 @@
 using Discord.Commands;
 
+using System;
 using System.Net;
 using System.IO;
 using System.Linq;
@@ -34,15 +35,17 @@ namespace BotMyst.Commands
         public async Task Dictionary (string search)
         {
             string url = $"https://od-api.oxforddictionaries.com:443/api/v1/entries/en/{search.ToLower ()}";
-        
+
             string json = await FetchJson (url);
+
+            if (string.IsNullOrEmpty (json)) return;
             DictionaryData data = DictionaryData.FromJson (json);
 
             string finalMessage = string.Empty;
             bool hasData = false;
             DictionaryResult result = data.Results [0];
 
-            finalMessage += $"**{result.Word.ToUpper()}**\n";
+            finalMessage += $"**{result.Word.ToUpper ()}**\n";
 
             if (result.LexicalEntries [0].Pronunciations != null)
             {
@@ -50,7 +53,7 @@ namespace BotMyst.Commands
                 hasData = true;
             }
 
-            foreach (DictionaryLexicalEntry lexicalEntry in result.LexicalEntries ?? Enumerable.Empty<DictionaryLexicalEntry>  ())
+            foreach (DictionaryLexicalEntry lexicalEntry in result.LexicalEntries ?? Enumerable.Empty<DictionaryLexicalEntry> ())
             {
                 finalMessage += $"**{lexicalEntry.LexicalCategory.UppercaseFirst ()}**\n";
                 foreach (DictionaryEntry entry in lexicalEntry.Entries ?? Enumerable.Empty<DictionaryEntry> ())
@@ -99,6 +102,7 @@ namespace BotMyst.Commands
             string url = $"https://od-api.oxforddictionaries.com:443/api/v1/entries/en/{search.ToLower ()}/synonyms;antonyms";
 
             string json = await FetchJson (url);
+            if (string.IsNullOrEmpty (json)) return;
 
             ThesaurusData data = ThesaurusData.FromJson (json);
 
@@ -239,10 +243,21 @@ namespace BotMyst.Commands
             request.Method = "GET";
             request.Accept = "application/json";
 
-            using (HttpWebResponse response = (HttpWebResponse) (await Task<WebResponse>.Factory.FromAsync (request.BeginGetResponse, request.EndGetResponse, null)))
-                using (Stream stream = response.GetResponseStream ())
+            try
+            {
+                using (HttpWebResponse response = (HttpWebResponse) (await request.GetResponseAsync ()))
+                {
+                    using (Stream stream = response.GetResponseStream ())
                     using (StreamReader reader = new StreamReader (stream))
                         json += await reader.ReadToEndAsync () + "\n";
+                }
+            }
+            catch (WebException e)
+            {
+                if (e.Status == WebExceptionStatus.ProtocolError)
+                    if (((HttpWebResponse) e.Response).StatusCode == HttpStatusCode.NotFound)
+                        await ReplyAsync ("Word not found. Try again using a different word.");
+            }
 
             return json;
         }
