@@ -67,7 +67,10 @@ namespace BotMyst
             CommandContext context = new CommandContext (client, message);
             IResult result = await commands.ExecuteAsync (context, argPos, services);
             if (result.IsSuccess == false)
+            {
+                if (result.Error == CommandError.UnknownCommand) return;
                 await context.Channel.SendMessageAsync (result.ErrorReason);
+            }
         }
     }
 }
