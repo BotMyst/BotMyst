@@ -255,8 +255,13 @@ namespace BotMyst.Commands
             catch (WebException e)
             {
                 if (e.Status == WebExceptionStatus.ProtocolError)
-                    if (((HttpWebResponse) e.Response).StatusCode == HttpStatusCode.NotFound)
+                {
+                    HttpStatusCode code = ((HttpWebResponse) e.Response).StatusCode;
+                    if (code == HttpStatusCode.NotFound)
                         await ReplyAsync ("Word not found. Try again using a different word.");
+                    if (code == HttpStatusCode.BadRequest)
+                        await ReplyAsync ("The word contains unsupported characters. Try again using a different word.");
+                }     
             }
 
             return json;
