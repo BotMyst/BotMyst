@@ -43,3 +43,34 @@ dotnet run
 
 ## Join our development Discord server
 If you are planning on contributing to the project you should join the BotMyst development Discord server here: https://discord.gg/rNQBq9
+
+## Comprehensive guide on contributing
+Before you even begin working on fixes or features you have to fork the repository as you cannot directly work on this one.
+
+#### Forking a repository
+Forking a repository is very simple. All you have to do is go to the official BotMyst github repository and click the fork button.
+![Forking a repository](https://i.imgur.com/AUnzsEu.png)
+
+#### Adding new features / bug fixing
+You should branch off from the dev branch:
+
+```sh
+$ git checkout -b myFeature dev
+# Create a new branch "myFeature" that branches off from the dev branch, and switch to it.
+```
+
+Then you should do all the new work in that branch (myFeature). Then merge that branch back into the dev branch.
+After you merged the branch back into the dev branch you should do a pull request on the dev branch in THIS repository. After that we will review it and merge it with our dev branch or master branch.
+
+How to do it in CLI:
+```sh
+$ git checkout dev
+# Switch to the dev branch
+$ git merge --no-ff myFeature
+# (Summary of changes)
+$ git branch -d myFeature
+# Delete the myFeature branch
+$ git push origin dev
+# Push to your forked dev branch
+```
+And after that do a simple pull request against our dev branch.
