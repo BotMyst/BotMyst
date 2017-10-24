@@ -10,5 +10,7 @@ namespace BotMyst
         public string DictionaryAppID { get; set; }
         [JsonProperty ("dictionaryAppKey")]
         public string DictionaryAppKey { get; set; }
+        [JsonProperty ("randomYouTubeToken")]
+        public string RandomYouTubeToken { get; set; }
     }
 }
