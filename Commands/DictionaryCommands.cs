@@ -1,6 +1,5 @@
 using Discord.Commands;
 
-using System;
 using System.Net;
 using System.IO;
 using System.Linq;
@@ -118,7 +117,10 @@ namespace BotMyst.Commands
                     int nOfSenses = 1;
                     foreach (ThesaurusSense sense in entry.Senses ?? Enumerable.Empty<ThesaurusSense> ())
                     {
-                        finalMessage += $"{nOfSenses}. \"{sense.Examples [0].Text.UppercaseFirst ()}.\"\n";
+                        if (sense.Examples != null)
+                            finalMessage += $"{nOfSenses}. \"{sense.Examples [0].Text.UppercaseFirst ()}.\"\n";
+                        else
+                            finalMessage += $"{nOfSenses}.\n";
 
                         if (sense.Synonyms != null || sense.Synonyms.Length >= 1)
                         {
