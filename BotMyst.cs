@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -65,6 +66,17 @@ namespace BotMyst
             if ((message.HasStringPrefix (commandPrefix, ref argPos) || message.HasMentionPrefix (client.CurrentUser, ref argPos)) == false) return;
 
             CommandContext context = new CommandContext (client, message);
+
+            // Check if the current executing command is disabled.
+            CommandInfo executedCommand = commands.Search (context, argPos).Commands [0].Command;
+            // Convert all command names to lower just to be sure.
+            string [] disabledCommands = BotMystConfig.DisabledCommands.Select (i => i.ToLower ()).ToArray ();
+            if (disabledCommands.Contains (executedCommand.Name.ToLower ()))
+            {
+                Console.WriteLine ($"{executedCommand.Name} is disabled.");
+                return;
+            }
+
             IResult result = await commands.ExecuteAsync (context, argPos, services);
             if (result.IsSuccess == false)
             {
