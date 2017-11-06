@@ -66,15 +66,15 @@ namespace BotMyst
             if ((message.HasStringPrefix (commandPrefix, ref argPos) || message.HasMentionPrefix (client.CurrentUser, ref argPos)) == false) return;
 
             CommandContext context = new CommandContext (client, message);
-
-            // Check if the current executing command is disabled.
             CommandInfo executedCommand = commands.Search (context, argPos).Commands [0].Command;
-            // Convert all command names to lower just to be sure.
-            string [] disabledCommands = BotMystConfig.DisabledCommands.Select (i => i.ToLower ()).ToArray ();
-            if (disabledCommands.Contains (executedCommand.Name.ToLower ()))
+
+            if (BotMystConfig.DisabledCommands != null)
             {
-                Console.WriteLine ($"{executedCommand.Name} is disabled.");
-                return;
+                // Convert all command names to lower just to be sure.
+                string [] disabledCommands = BotMystConfig.DisabledCommands.Select (i => i.ToLower ()).ToArray ();
+                // Check if the current executing command is disabled.
+                if (disabledCommands.Contains (executedCommand.Name.ToLower ()))
+                    return;
             }
 
             IResult result = await commands.ExecuteAsync (context, argPos, services);
