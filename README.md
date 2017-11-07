@@ -1,4 +1,4 @@
-# BotMyst
+# BotMyst [![Build status](https://ci.appveyor.com/api/projects/status/hvkuxaantytsrku0?svg=true)](https://ci.appveyor.com/project/LeonLaci/botmyst) [![Discord invite](https://discordapp.com/api/guilds/298510542535000065/widget.png)](https://discord.gg/rNQBq9)
 
 BotMyst is a bot written in C# using <a href="https://github.com/RogueException/Discord.Net">Discord.NET</a>. This is an open source project and you're welcomed to contribute. Report any issues in the <a href="https://github.com/LeonLaci/BotMyst/issues">issues section</a>.
 
