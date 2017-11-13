@@ -31,7 +31,9 @@ namespace BotMyst
             commands = new CommandService ();
 
             // Deserialize the config file and get the token (don't wanna hard code it for obvious reasons)
-            using (StreamReader reader = new StreamReader ("BotMystConfig.json"))
+            byte [] configTxt = File.ReadAllBytes ("BotMystConfig.json");
+            using (MemoryStream stream = new MemoryStream (configTxt))
+            using (StreamReader reader = new StreamReader (stream))
             {
                 string json = await reader.ReadToEndAsync ();
                 BotMystConfig = JsonConvert.DeserializeObject<BotMystConfiguration> (json);
