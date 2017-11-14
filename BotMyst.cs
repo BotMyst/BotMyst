@@ -45,7 +45,7 @@ namespace BotMyst
             await InstallCommands ();
 
             await client.LoginAsync (TokenType.Bot, BotMystConfig.Token);
-            await client.SetGameAsync ("");
+            await client.SetGameAsync (">help");
             await client.StartAsync ();
 
             Console.WriteLine ("BotMyst is ready.");
