@@ -62,12 +62,12 @@ namespace BotMyst.Commands
                         DictionarySense sense = entry.Senses [j];
                         foreach (string definition in sense.Definitions ?? Enumerable.Empty<string> ())
                         {
-                            finalMessage += $"{j + 1}. {definition.UppercaseFirst ()}.\n";
+                            finalMessage += $"{j + 1}. {definition.UppercaseFirst ()}\n";
                             hasData = true;
                         }
                         foreach (DictionaryExample example in sense.Examples ?? Enumerable.Empty<DictionaryExample> ())
                         {
-                            finalMessage += $"    {example.Text.UppercaseFirst ()}.\n";
+                            finalMessage += $"    {example.Text.UppercaseFirst ()}\n";
                             hasData = true;
                         }
                         finalMessage += "\n";
@@ -118,7 +118,7 @@ namespace BotMyst.Commands
                     foreach (ThesaurusSense sense in entry.Senses ?? Enumerable.Empty<ThesaurusSense> ())
                     {
                         if (sense.Examples != null)
-                            finalMessage += $"{nOfSenses}. \"{sense.Examples [0].Text.UppercaseFirst ()}.\"\n";
+                            finalMessage += $"{nOfSenses}. \"{sense.Examples [0].Text.UppercaseFirst ()}\"\n";
                         else
                             finalMessage += $"{nOfSenses}.\n";
 
@@ -133,7 +133,7 @@ namespace BotMyst.Commands
                         }
                         if (string.IsNullOrEmpty (synonyms) == false)
                         {
-                            finalMessage += $"    {synonyms.Remove (synonyms.Length - 2).UppercaseFirst ()}.\n";
+                            finalMessage += $"    {synonyms.Remove (synonyms.Length - 2).UppercaseFirst ()}\n";
                         }
 
                         foreach (ThesaurusSense subsense in sense.Subsenses ?? Enumerable.Empty<ThesaurusSense> ())
@@ -160,7 +160,7 @@ namespace BotMyst.Commands
                             }
                             if (string.IsNullOrEmpty (ssynonyms) == false)
                             {
-                                finalMessage += $"{ssynonyms.Remove (ssynonyms.Length - 2).UppercaseFirst ()}.\n";
+                                finalMessage += $"{ssynonyms.Remove (ssynonyms.Length - 2).UppercaseFirst ()}\n";
                             }
                         }
 
@@ -178,7 +178,7 @@ namespace BotMyst.Commands
                         }
                         if (string.IsNullOrEmpty (antonyms) == false)
                         {
-                            finalMessage += $"    {antonyms.Remove (antonyms.Length - 2).UppercaseFirst ()}.\n";
+                            finalMessage += $"    {antonyms.Remove (antonyms.Length - 2).UppercaseFirst ()}\n";
                         }
 
                         foreach (ThesaurusSense subsense in sense.Subsenses ?? Enumerable.Empty<ThesaurusSense> ())
@@ -212,7 +212,7 @@ namespace BotMyst.Commands
 
                             if (string.IsNullOrEmpty (santonyms) == false)
                             {
-                                finalMessage += $"{santonyms.Remove (santonyms.Length - 2).UppercaseFirst ()}.\n";
+                                finalMessage += $"{santonyms.Remove (santonyms.Length - 2).UppercaseFirst ()}\n";
                             }
                         }
 
