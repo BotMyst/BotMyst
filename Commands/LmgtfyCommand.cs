@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Web;
+using System.Threading.Tasks;
 
 using Discord.Commands;
 
@@ -11,12 +12,7 @@ namespace BotMyst.Commands
         public async Task Lmgtfy ([Remainder] string search)
         {
             string url = "http://lmgtfy.com/?q=";
-            string [] parameters = search.Split (' ');
-
-            foreach (string param in parameters)
-                url += $"{param}+";
-
-            await ReplyAsync ($"Help is on the way! :rotating_light:\n{url.Remove (url.Length - 1)}");
+            await ReplyAsync ($"Help is on the way! :rotating_light:\n{url + HttpUtility.UrlEncode (search)}");
         }
     }
 }
