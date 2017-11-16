@@ -1,11 +1,15 @@
-﻿namespace BotMyst
+﻿using System.Threading.Tasks;
+
+namespace BotMyst
 {
     public class Program
     {
-        private static void Main ()
+        public static async Task Main ()
         {
             BotMyst bot = new BotMyst ();
-            bot.Start ().GetAwaiter ().GetResult ();
+            await bot.Start ();
+
+            await Task.Delay (-1);
         }
     }
 }
