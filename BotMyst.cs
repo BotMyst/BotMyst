@@ -30,6 +30,10 @@ namespace BotMyst
             client = new DiscordSocketClient ();
             commands = new CommandService ();
 
+            services = new ServiceCollection ()
+                .AddSingleton (commands)
+                .BuildServiceProvider ();
+
             // Deserialize the config file and get the token (don't wanna hard code it for obvious reasons)
             byte [] configTxt = File.ReadAllBytes ("BotMystConfig.json");
             using (MemoryStream stream = new MemoryStream (configTxt))

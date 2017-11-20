@@ -1,57 +1,37 @@
-﻿using Discord.Commands;
-using System;
-using System.Linq;
-using System.Reflection;
+﻿using Discord;
+using Discord.Commands;
 using System.Threading.Tasks;
 
 namespace BotMyst.Commands
 {
     public class HelpCommand : ModuleBase
     {
+        private readonly CommandService commands;
+
+        public HelpCommand (CommandService commands)
+        {
+            this.commands = commands;
+        }
+
         [Command ("help"), Summary ("Lists the commands and their descriptions.")]
         [Alias ("commands")]
         public async Task Help ()
         {
-            string finalMessage = "**HELP**\n\n";
+            EmbedBuilder eb = new EmbedBuilder ();
+            eb.WithColor (Color.Orange);
+            eb.WithTitle ("HELP");
+            eb.WithDescription
+            (
+                "To view help about a specific command, use \">help <command>\"."
+            );
 
-            // Get the current executing assembly
-            Assembly assembly = Assembly.GetExecutingAssembly ();
+            foreach (ModuleInfo module in this.commands.Modules)
+                foreach (CommandInfo command in module.Commands)
+                {
+                    eb.AddField ($"{command.Name} ({string.Join (", ", command.Aliases)})", command.Summary);
+                }
 
-            // Get all types that inherit from ModuleBase, which is a neccessary class
-            // for all commands
-            Type [] moduleTypes = assembly.GetTypes ().Where (t => typeof (ModuleBase).IsAssignableFrom (t)).ToArray ();
-
-            // Get all methods that have the command attribute
-            MethodInfo [] commands = moduleTypes.SelectMany (t => t.GetMethods ())
-                                                .Where (m => m.GetCustomAttributes (typeof (CommandAttribute), false).Length > 0)
-                                                .ToArray ();
-
-            foreach (MethodInfo command in commands)
-            {
-                string commandName = command.Name.ToLower ();
-                string summary = string.Empty;
-                string aliases = string.Empty;
-
-                // Get the summary attribute on the command method
-                SummaryAttribute summaryAttribute = (SummaryAttribute) command.GetCustomAttribute (typeof (SummaryAttribute), false);
-                summary = summaryAttribute?.Text;
-
-                // Get the alias attribute on the command method
-                AliasAttribute aliasAttribute = (AliasAttribute) command.GetCustomAttribute (typeof (AliasAttribute), false);
-
-                // If the command doesn't have a summary or aliases then don't
-                // include them in the help (obviously). Otherwise this would
-                // throw a NullReferenceException.
-                if (aliasAttribute != null)
-                    aliases = $"({string.Join (", ", aliasAttribute.Aliases)})";
-
-                if (summaryAttribute != null)
-                    summary = $"- {summaryAttribute.Text}";
-
-                finalMessage += $"**{commandName ?? ""}** {aliases} {summary}\n";
-            }
-
-            await ReplyAsync (finalMessage);
+            await ReplyAsync (string.Empty, false, eb);
         }
     }
 }
