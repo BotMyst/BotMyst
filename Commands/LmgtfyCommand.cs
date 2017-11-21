@@ -8,7 +8,7 @@ namespace BotMyst.Commands
     public class LmgtfyCommand : ModuleBase
     {
         [Command ("lmgtfy"), Summary ("Generates a lmgtfy link for a specified search.")]
-        [Alias ("help", "google")]
+        [Alias ("google")]
         public async Task Lmgtfy ([Remainder] string search)
         {
             string url = "http://lmgtfy.com/?q=";
