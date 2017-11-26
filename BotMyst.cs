@@ -85,7 +85,16 @@ namespace BotMyst
             if (result.IsSuccess == false)
             {
                 if (result.Error == CommandError.UnknownCommand) return;
-                await context.Channel.SendMessageAsync (result.ErrorReason);
+                if (result.Error == CommandError.BadArgCount)
+                {
+                    EmbedBuilder eb = new EmbedBuilder ();
+                    eb.WithTitle ("ERROR: Bad argument count");
+                    eb.WithColor (Color.Red);
+                    await context.Channel.SendMessageAsync (string.Empty, false, eb);
+                    await commands.ExecuteAsync (context, $"command {executedCommand.Name}");
+                }
+                else
+                    await context.Channel.SendMessageAsync (result.ErrorReason);
             }
         }
     }
