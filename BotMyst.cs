@@ -20,7 +20,7 @@ namespace BotMyst
         private CommandService commands;
         private IServiceProvider services;
 
-        private string commandPrefix = ">";
+        public static readonly string CommandPrefix = ">";
 
         public static BotMystConfiguration BotMystConfig;
         private string token;
@@ -43,8 +43,6 @@ namespace BotMyst
                 BotMystConfig = JsonConvert.DeserializeObject<BotMystConfiguration> (json);
                 token = BotMystConfig.Token;
             }
-
-            services = new ServiceCollection ().BuildServiceProvider ();
 
             await InstallCommands ();
 
@@ -69,7 +67,7 @@ namespace BotMyst
             if (message == null) return;
             int argPos = 0;
 
-            if ((message.HasStringPrefix (commandPrefix, ref argPos) || message.HasMentionPrefix (client.CurrentUser, ref argPos)) == false) return;
+            if ((message.HasStringPrefix (CommandPrefix, ref argPos) || message.HasMentionPrefix (client.CurrentUser, ref argPos)) == false) return;
 
             CommandContext context = new CommandContext (client, message);
             CommandInfo executedCommand = commands.Search (context, argPos).Commands [0].Command;

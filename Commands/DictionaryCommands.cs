@@ -31,9 +31,9 @@ namespace BotMyst.Commands
 
         [Command ("dictionary"), Summary ("Gets the dictionary information about a word.")]
         [Alias ("dict")]
-        public async Task Dictionary (string search)
+        public async Task Dictionary (string word)
         {
-            string url = $"https://od-api.oxforddictionaries.com:443/api/v1/entries/en/{search.ToLower ()}";
+            string url = $"https://od-api.oxforddictionaries.com:443/api/v1/entries/en/{word.ToLower ()}";
 
             string json = await FetchJson (url);
 
@@ -90,15 +90,15 @@ namespace BotMyst.Commands
             }
             else
             {
-                await ReplyAsync ($"No data found for: {search}.");
+                await ReplyAsync ($"No data found for: {word}.");
             }
         }
 
         [Command ("thesaurus"), Summary ("Gets the synonyms and antonyms for a specified word.")]
         [Alias ("word", "synonym", "antonym")]
-        public async Task Thesaurus (string search)
+        public async Task Thesaurus (string word)
         {
-            string url = $"https://od-api.oxforddictionaries.com:443/api/v1/entries/en/{search.ToLower ()}/synonyms;antonyms";
+            string url = $"https://od-api.oxforddictionaries.com:443/api/v1/entries/en/{word.ToLower ()}/synonyms;antonyms";
 
             string json = await FetchJson (url);
             if (string.IsNullOrEmpty (json)) return;
