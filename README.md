@@ -1,21 +1,21 @@
 # BotMyst [![Build status](https://ci.appveyor.com/api/projects/status/hvkuxaantytsrku0?svg=true)](https://ci.appveyor.com/project/LeonLaci/botmyst) [![Discord invite](https://discordapp.com/api/guilds/298510542535000065/widget.png)](https://discord.gg/rNQBq9)
 
-BotMyst is a bot written in C# using <a href="https://github.com/RogueException/Discord.Net">Discord.NET</a>. This is an open source project and you're welcomed to contribute. Report any issues in the <a href="https://github.com/LeonLaci/BotMyst/issues">issues section</a>.
+BotMyst is a bot written in C# using <a href="https://github.com/RogueException/Discord.Net">Discord.NET</a>. This is an open source project and you're welcome to contribute. Report any issues in the <a href="https://github.com/LeonLaci/BotMyst/issues">issues section</a>.
 
-This project is under the MIT license. You're free to use any part of this project without any permission. Check out <a href="https://github.com/LeonLaci/BotMyst/blob/master/LICENSE">LICENSE</a> for more information about permissions, limitations and liability.
+This project is under the MIT license. You're free to use any part of this project without prior approval from the project's creator. Check out <a href="https://github.com/LeonLaci/BotMyst/blob/master/LICENSE">LICENSE</a> for more information about permissions, limitations and liability.
 
 Join the BotMyst development server on Discord: https://discord.gg/rNQBq9<br>
 Check out our Trello board to contribute to it or see planned features / changes: https://trello.com/b/bybAwGwQ/botmyst
 
 ## Add BotMyst to your server
-You can invite the original version of BotMyst, that is self hosted by me, to your sever by clicking on this link:
+You can invite the original version of BotMyst, that is self hosted by me, to your server by clicking on this link:
 [Invite BotMyst to your server](https://discordapp.com/oauth2/authorize?client_id=357196134298419200&scope=bot)
 
 ## Features
-For now, BotMyst only has dictionary and thesaurus commands. There will be a lot more added soon.
+For now, BotMyst only has dictionary and thesaurus commands. A lot more commands will be added soon.
 
 ## Setup
-BotMyst is build on top of .Net Core using Discord.Net. You should have <a href="https://www.microsoft.com/net/core#windowscmd">.Net Core SDK</a> installed (current recommended version for the project is 2.0).
+BotMyst is built on top of .Net Core using Discord.Net. You should have <a href="https://www.microsoft.com/net/core#windowscmd">.Net Core SDK</a> installed (current recommended version for the project is 2.0).
 
 To use BotMyst you should clone or download this repo and make a new file called BotMystConfig.json. For now it is used for setting up the token for the bot.
 
