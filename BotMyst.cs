@@ -94,7 +94,13 @@ namespace BotMyst
                     await commands.ExecuteAsync (context, $"command {executedCommand.Name}");
                 }
                 else
-                    await context.Channel.SendMessageAsync (result.ErrorReason);
+                {
+                    EmbedBuilder eb = new EmbedBuilder ();
+                    eb.WithTitle ("Error");
+                    eb.WithDescription (result.ErrorReason);
+                    eb.WithColor (Color.Red);
+                    await context.Channel.SendMessageAsync (string.Empty, false, eb);
+                }
             }
         }
     }
