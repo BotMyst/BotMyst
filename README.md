@@ -12,7 +12,11 @@ You can invite the original version of BotMyst, that is self hosted by me, to yo
 [Invite BotMyst to your server](https://discordapp.com/oauth2/authorize?client_id=357196134298419200&scope=bot)
 
 ## Features
-For now, BotMyst only has dictionary and thesaurus commands. A lot more commands will be added soon.
+BotMyst can do these things:
+* [Dictionary](https://github.com/CodeMyst/BotMyst/wiki/Dictionary-command)
+* [Thesaurus](https://github.com/CodeMyst/BotMyst/wiki/Thesaurus)
+* [Random Video](https://github.com/CodeMyst/BotMyst/wiki/Random-YouTube-video-command)
+* [Give / Remove Roles](https://github.com/CodeMyst/BotMyst/wiki/Give---Remove-Role)
 
 ## Setup
 BotMyst is built on top of .Net Core using Discord.Net. You should have <a href="https://www.microsoft.com/net/core#windowscmd">.Net Core SDK</a> installed (current recommended version for the project is 2.0).
