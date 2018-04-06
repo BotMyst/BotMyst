@@ -29,6 +29,15 @@ namespace BotMyst.Commands
                 return;
             }
 
+
+            foreach (IRole r in guildUser.Roles)
+            {
+                if (r.Name != "@everyone" && r.Position < Context.Guild.Roles.FirstOrDefault (x => x.Name == "BotMyst").Position)
+                {
+                    await guildUser.RemoveRoleAsync (r);
+                }
+            }
+
             try
             {
                 await guildUser.AddRoleAsync (role);
