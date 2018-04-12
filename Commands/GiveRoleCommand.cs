@@ -29,15 +29,6 @@ namespace BotMyst.Commands
                 return;
             }
 
-
-            foreach (IRole r in guildUser.Roles)
-            {
-                if (r.Name != "@everyone" && r.Position < Context.Guild.Roles.FirstOrDefault (x => x.Name == "BotMyst").Position)
-                {
-                    await guildUser.RemoveRoleAsync (r);
-                }
-            }
-
             try
             {
                 await guildUser.AddRoleAsync (role);
@@ -54,7 +45,17 @@ namespace BotMyst.Commands
                 }
                 return;
             }
-
+            
+            // Removes all of the user's roles that are below the "BotMyst" role,
+            // because you are only allowed to have one color at a time.
+            foreach (IRole r in guildUser.Roles)
+            {
+                if (r.Name != "@everyone" && r.Position < Context.Guild.Roles.FirstOrDefault (x => x.Name == "BotMyst").Position)
+                {
+                    await guildUser.RemoveRoleAsync (r);
+                }
+            }
+            
             EmbedBuilder eb = new EmbedBuilder ();
             eb.WithColor (Color.Green);
             eb.WithTitle ("Success");
