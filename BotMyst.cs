@@ -95,11 +95,13 @@ namespace BotMyst
             for (int i = 0; i < modules.Count (); i++)
             {
                 ModuleInfo m = modules.ElementAt (i);
+                if (m.Name == "HelpCommand")
+                    continue;
 
                 Module module = new Module
                 {
-                    Name = m.Commands [0].Name,
-                    Description = m.Commands [0].Summary,
+                    Name = m.Name,
+                    Description = m.Summary,
                     Enabled = true,
                     Options = ""
                 };

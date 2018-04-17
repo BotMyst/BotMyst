@@ -5,6 +5,7 @@ using Discord.Commands;
 
 namespace BotMyst.Commands
 {
+    [Summary ("Generates a lmgtfy link for people who are too lazy or stupid to google things.")]
     public class LmgtfyCommand : ModuleBase
     {
         [Command ("lmgtfy"), Summary ("Generates a lmgtfy link for a specified search.")]

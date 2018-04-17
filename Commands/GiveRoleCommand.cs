@@ -10,6 +10,7 @@ using Discord.WebSocket;
 
 namespace BotMyst.Commands
 {
+    [Summary ("Users can assing themselves roles. You can specify which roles should the users be able to assign.")]
     public class GiveRoleCommand : ModuleBase
     {
         [Command ("giverole"), Summary ("Gives you the specified role (if exists)."), Alias ("gimme")]

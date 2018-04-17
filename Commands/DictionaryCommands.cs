@@ -11,6 +11,7 @@ using BotMyst.Helpers;
 
 namespace BotMyst.Commands
 {
+    [Summary ("Get dictionary entries about a word. You can also get synonyms and antonyms for a word.")]
     public class DictionaryCommands : ModuleBase
     {
         private string AppID

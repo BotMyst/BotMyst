@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 namespace BotMyst.Commands
 {
+    [Summary ("Returns a random YouTube video. Uses an API that's pretty crappy. Will be removed.")]
     public class RandomVideoCommand : ModuleBase
     {
         [Command ("randomvideo")]
