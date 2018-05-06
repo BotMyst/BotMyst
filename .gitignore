@@ -7,6 +7,9 @@ nupkg/
 
 appsettings.json
 
+.sass-cache/
+css
+
 # User-specific files
 *.suo
 *.user
@@ -20,7 +23,6 @@ appsettings.json
 [Rr]eleases/
 x64/
 x86/
-build/
 bld/
 [Bb]in/
 [Oo]bj/
