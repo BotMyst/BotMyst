@@ -1,15 +1,21 @@
 $primary-color: #222
 $accent-color: #ee720d
-$light-gray: #e0e0e0
-    
+
+.button-primary
+    background-color: $accent-color !important
+    border-color: $accent-color !important
+
 body
-    background: $light-gray
+    background: white
 
 #navigation
     ul
         list-style: none
+        text-align: center
+
         li
             display: inline
+
             a
                 text-decoration: none
                 text-transform: uppercase
@@ -23,3 +29,23 @@ body
                 
                 &:hover
                     color: $accent-color
+
+#landing
+    text-align: center
+    margin-top: 8rem
+
+    .logo
+        width: 10rem
+
+    .title
+        letter-spacing: .2rem
+
+#features
+    text-align: center
+    margin-top: 8rem
+
+    .feature img
+        width: 8rem
+        display: block
+        text-align: center
+        margin: 2rem auto

@@ -1,8 +1,13 @@
+.button-primary {
+  background-color: #ee720d !important;
+  border-color: #ee720d !important; }
+
 body {
-  background: #e0e0e0; }
+  background: white; }
 
 #navigation ul {
-  list-style: none; }
+  list-style: none;
+  text-align: center; }
   #navigation ul li {
     display: inline; }
     #navigation ul li a {
@@ -17,5 +22,22 @@ body {
       color: #222; }
       #navigation ul li a:hover {
         color: #ee720d; }
+
+#landing {
+  text-align: center;
+  margin-top: 8rem; }
+  #landing .logo {
+    width: 10rem; }
+  #landing .title {
+    letter-spacing: 0.2rem; }
+
+#features {
+  text-align: center;
+  margin-top: 8rem; }
+  #features .feature img {
+    width: 8rem;
+    display: block;
+    text-align: center;
+    margin: 2rem auto; }
 
 /*# sourceMappingURL=index.css.map */
