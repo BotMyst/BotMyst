@@ -1,0 +1,21 @@
+body {
+  background: #e0e0e0; }
+
+#navigation ul {
+  list-style: none; }
+  #navigation ul li {
+    display: inline; }
+    #navigation ul li a {
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 11px;
+      letter-spacing: 0.2rem;
+      color: black;
+      margin-right: 35px;
+      line-height: 6.5rem;
+      color: #222; }
+      #navigation ul li a:hover {
+        color: #ee720d; }
+
+/*# sourceMappingURL=index.css.map */

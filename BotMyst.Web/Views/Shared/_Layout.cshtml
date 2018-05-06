@@ -1,14 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="BotMyst is a general purpose Discord bot.">
+    <meta name="author" content="CodeMyst">
+
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">    
+
     <title>BotMyst</title>
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/build/stylesheets/index.css" />
+    <link rel="stylesheet" href="~/css/normalize.css">
+    <link rel="stylesheet" href="~/css/skeleton.css">
 </head>
 <body>
 
-@RenderBody()
+<div class="container">
+
+    @await Html.PartialAsync("NavigationBar")
+
+    @RenderBody()
+
+</div>
 
 </body>
 </html>
