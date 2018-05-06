@@ -30,14 +30,17 @@ body {
     width: 10rem; }
   #landing .title {
     letter-spacing: 0.2rem; }
-
-#features {
-  text-align: center;
-  margin-top: 8rem; }
-  #features .feature img {
-    width: 8rem;
-    display: block;
+  #landing .row {
     text-align: center;
-    margin: 2rem auto; }
+    margin-top: 8rem; }
+    #landing .row .feature img {
+      width: 5rem;
+      display: block;
+      text-align: center;
+      margin: 2rem auto; }
+
+#footer {
+  position: fixed;
+  bottom: 10px; }
 
 /*# sourceMappingURL=index.css.map */
