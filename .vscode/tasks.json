@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/BotMystV2.sln"                
+                "${workspaceFolder}/BotMyst.sln"                
             ],
             "problemMatcher": "$msCompile"
         }

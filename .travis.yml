@@ -1,0 +1,6 @@
+language: csharp
+solution: BotMyst.sln 
+mono: none
+dotnet: 2.1.105
+script:
+  - dotnet restore
