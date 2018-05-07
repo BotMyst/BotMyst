@@ -1,9 +1,22 @@
 $primary-color: #222
 $accent-color: #ee720d
 
+=transition()
+    -webkit-transition: all 200ms ease-in-out
+    -moz-transition: all 200ms ease-in-out
+    -ms-transition: all 200ms ease-in-out
+    -o-transition: all 200ms ease-in-out
+    transition: all 200ms ease-in-out
+
 .button-primary
     background-color: $accent-color !important
     border-color: $accent-color !important
+
+.sub-header
+    font-weight: bold
+    letter-spacing: .2rem
+    font-size: 1.4rem
+    line-height: 1.6
 
 body
     background: white
@@ -49,6 +62,52 @@ body
             display: block
             text-align: center
             margin: 2rem auto
+
+#dashboard
+    .user-profile
+        text-align: left
+
+        .profile-image
+            display: inline
+            float: left
+
+            img
+                width: 5rem
+                border-radius: 4px
+
+        .profile-name
+            display: inline
+            float: left
+            padding-left: 10px
+
+            p
+                margin: 0
+
+    .guild
+        opacity: 1
+        height: 3rem
+        padding: 5px
+        margin-bottom: 20px
+        border-bottom: 1px solid #E1E1E1
+
+        a
+            color: $primary-color
+            height: 3rem
+
+        .guild-icon
+            display: inline
+            float: left
+
+            img
+                width: 3rem
+                border-radius: 4px
+
+        .guild-name
+            display: inline
+            float: left
+            padding-top: 5px
+            padding-left: 10px
+            height: 0rem
 
 #footer
     position: fixed

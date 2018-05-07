@@ -2,6 +2,12 @@
   background-color: #ee720d !important;
   border-color: #ee720d !important; }
 
+.sub-header {
+  font-weight: bold;
+  letter-spacing: 0.2rem;
+  font-size: 1.4rem;
+  line-height: 1.6; }
+
 body {
   background: white; }
 
@@ -38,6 +44,42 @@ body {
       display: block;
       text-align: center;
       margin: 2rem auto; }
+
+#dashboard .user-profile {
+  text-align: left; }
+  #dashboard .user-profile .profile-image {
+    display: inline;
+    float: left; }
+    #dashboard .user-profile .profile-image img {
+      width: 5rem;
+      border-radius: 4px; }
+  #dashboard .user-profile .profile-name {
+    display: inline;
+    float: left;
+    padding-left: 10px; }
+    #dashboard .user-profile .profile-name p {
+      margin: 0; }
+#dashboard .guild {
+  opacity: 1;
+  height: 3rem;
+  padding: 5px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #E1E1E1; }
+  #dashboard .guild a {
+    color: #222;
+    height: 3rem; }
+  #dashboard .guild .guild-icon {
+    display: inline;
+    float: left; }
+    #dashboard .guild .guild-icon img {
+      width: 3rem;
+      border-radius: 4px; }
+  #dashboard .guild .guild-name {
+    display: inline;
+    float: left;
+    padding-top: 5px;
+    padding-left: 10px;
+    height: 0rem; }
 
 #footer {
   position: fixed;
