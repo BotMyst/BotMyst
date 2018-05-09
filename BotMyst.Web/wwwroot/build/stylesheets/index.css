@@ -102,6 +102,8 @@ body {
   #dashboard .guild a {
     color: #222;
     height: 3rem; }
+    #dashboard .guild a:hover {
+      color: #ee720d; }
   #dashboard .guild .guild-icon {
     display: inline;
     float: left; }
