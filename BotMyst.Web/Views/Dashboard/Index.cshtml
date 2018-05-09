@@ -27,6 +27,13 @@
             <a href="" class="twelve columns">
                 <div class="guild-icon">
                     <img src="@($"https://cdn.discordapp.com/icons/{g.Id}/{g.Icon}.png")">
+                    @if (g.HasBotMyst)
+                    {
+                        <img class="checkmark tooltip" src="~/img/checkmark-icon.svg">
+                        <div class="tooltip-text">
+                            BotMyst is in the <strong>@g.Name</strong> server
+                        </div>
+                    }
                 </div>
                 <div class="guild-name">
                     <p>@g.Name</p>

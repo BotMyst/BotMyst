@@ -52,7 +52,9 @@ namespace BotMyst.Web
 
         public async Task<DiscordGuildModel> GetGuildAsync (string guildId)
         {
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue ("Bot", Startup.Configuration ["BotToken"]);            
+            httpClient.DefaultRequestHeaders.Clear ();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue ("Bot", Startup.Configuration ["Discord:BotToken"]);  
+            System.Console.WriteLine(Startup.Configuration ["BotToken"]);          
             httpClient.DefaultRequestHeaders.Accept.Clear ();
             httpClient.DefaultRequestHeaders.Accept.Add (new MediaTypeWithQualityHeaderValue ("application/json"));
             httpClient.DefaultRequestHeaders.Connection.Clear ();
@@ -66,7 +68,7 @@ namespace BotMyst.Web
             }
             else
             {
-                throw new HttpRequestException ();
+                return null;
             }
         }
     }

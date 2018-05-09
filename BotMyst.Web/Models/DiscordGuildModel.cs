@@ -98,5 +98,7 @@ namespace BotMyst.Web.Models
 
         [JsonProperty ("presences")]
         public DiscordPresenceUpdateModel [] Presences { get; set; }
+
+        public bool HasBotMyst { get; set; }
     }
 }

@@ -18,6 +18,11 @@ namespace BotMyst.Web.Controllers
 
             DiscordAPI api = new DiscordAPI ();
             List<DiscordGuildModel> guilds = (await api.GetUserGuildsAsync (HttpContext)).WherePermissions (8).ToList ();
+
+            foreach (var g in guilds)
+            {
+                g.HasBotMyst = await api.GetGuildAsync (g.Id) != null;
+            }
                 
             return View (guilds);
         }
