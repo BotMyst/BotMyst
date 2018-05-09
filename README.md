@@ -1,5 +1,7 @@
 # BotMyst [![Build status](https://ci.appveyor.com/api/projects/status/hvkuxaantytsrku0?svg=true)](https://ci.appveyor.com/project/LeonLaci/botmyst) [![Discord invite](https://discordapp.com/api/guilds/298510542535000065/widget.png)](https://discord.gg/k2WEr)
 
+**BotMyst V2 is in works. All new commits will be done to the V2 branch. There's no proper documentation or guides on contributing yet. If you want to contribute (I really need contributors) join the Discord server: https://discord.gg/rNQBq9**
+
 BotMyst is a bot written in C# using <a href="https://github.com/RogueException/Discord.Net">Discord.NET</a>. This is an open source project and you're welcome to contribute. Report any issues in the <a href="https://github.com/LeonLaci/BotMyst/issues">issues section</a>.
 
 This project is under the MIT license. You're free to use any part of this project without prior approval from the project's creator. Check out <a href="https://github.com/LeonLaci/BotMyst/blob/master/LICENSE">LICENSE</a> for more information about permissions, limitations and liability.
