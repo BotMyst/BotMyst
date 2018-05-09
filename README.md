@@ -1,4 +1,4 @@
-# BotMyst [![Build status](https://ci.appveyor.com/api/projects/status/hvkuxaantytsrku0?svg=true)](https://ci.appveyor.com/project/LeonLaci/botmyst) [![Discord invite](https://discordapp.com/api/guilds/298510542535000065/widget.png)](https://discord.gg/k2WEr)
+# BotMyst [![Discord invite](https://discordapp.com/api/guilds/298510542535000065/widget.png)](https://discord.gg/k2WEr)
 
 **BotMyst V2 is in works. All new commits will be done to the V2 branch. There's no proper documentation or guides on contributing yet. If you want to contribute (I really need contributors) join the Discord server: https://discord.gg/rNQBq9**
 
