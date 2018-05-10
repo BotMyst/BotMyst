@@ -42,6 +42,9 @@
     border-style: solid;
     border-color: transparent transparent #222 transparent; }
 
+.enabled {
+  color: #ee720d; }
+
 body {
   background: white; }
 
@@ -79,6 +82,20 @@ body {
       text-align: center;
       margin: 2rem auto; }
 
+.bar {
+  height: 3rem;
+  padding: 5px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #E1E1E1; }
+  .bar a {
+    color: #222;
+    height: 3rem; }
+    .bar a:link {
+      text-decoration: none; }
+  .bar p {
+    display: inline;
+    float: left; }
+
 #dashboard .user-profile {
   text-align: left; }
   #dashboard .user-profile .profile-image {
@@ -97,33 +114,35 @@ body {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis; }
-#dashboard .guild {
-  opacity: 1;
-  height: 3rem;
-  padding: 5px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #E1E1E1; }
-  #dashboard .guild a {
-    color: #222;
-    height: 3rem; }
-    #dashboard .guild a:hover {
-      color: #ee720d; }
-  #dashboard .guild .guild-icon {
-    display: inline;
-    float: left; }
-    #dashboard .guild .guild-icon img {
-      width: 3rem;
-      border-radius: 4px; }
-    #dashboard .guild .guild-icon .checkmark {
-      width: 1.5rem;
-      margin-left: -13px;
-      margin-bottom: -3px; }
-  #dashboard .guild .guild-name {
-    display: inline;
-    float: left;
-    padding-top: 5px;
-    padding-left: 10px;
-    height: 0rem; }
+#dashboard .guild a:hover {
+  color: #ee720d; }
+#dashboard .guild .guild-icon {
+  display: inline;
+  float: left; }
+  #dashboard .guild .guild-icon img {
+    width: 3rem;
+    border-radius: 4px; }
+  #dashboard .guild .guild-icon .checkmark {
+    width: 1.5rem;
+    margin-left: -13px;
+    margin-bottom: -3px; }
+#dashboard .guild .guild-name {
+  display: inline;
+  float: left;
+  padding-top: 5px;
+  padding-left: 10px;
+  height: 0rem; }
+#dashboard .module a:hover > .module-name {
+  color: #ee720d; }
+#dashboard .module .module-name {
+  font-weight: bold; }
+#dashboard .module .module-description p {
+  opacity: 0.8;
+  margin-left: 20px; }
+#dashboard .module .module-enabled {
+  float: right; }
+  #dashboard .module .module-enabled .button {
+    border: none; }
 
 #footer {
   position: fixed;

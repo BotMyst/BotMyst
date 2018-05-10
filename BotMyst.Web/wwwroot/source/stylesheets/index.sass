@@ -50,6 +50,9 @@ $accent-color: #ee720d
         border-style: solid
         border-color: transparent transparent $primary-color transparent
 
+.enabled
+    color: $accent-color
+
 body
     background: white
 
@@ -95,6 +98,23 @@ body
             text-align: center
             margin: 2rem auto
 
+.bar
+    height: 3rem
+    padding: 5px
+    margin-bottom: 20px
+    border-bottom: 1px solid #E1E1E1
+
+    a
+        color: $primary-color
+        height: 3rem
+
+        &:link
+            text-decoration: none
+
+    p
+        display: inline
+        float: left
+
 #dashboard
     .user-profile
         text-align: left
@@ -120,16 +140,7 @@ body
                 text-overflow: ellipsis
 
     .guild
-        opacity: 1
-        height: 3rem
-        padding: 5px
-        margin-bottom: 20px
-        border-bottom: 1px solid #E1E1E1
-
         a
-            color: $primary-color
-            height: 3rem
-
             &:hover
                 color: $accent-color
 
@@ -152,6 +163,25 @@ body
             padding-top: 5px
             padding-left: 10px
             height: 0rem
+
+    .module
+        a
+            &:hover > .module-name
+                color: $accent-color
+
+        .module-name
+            font-weight: bold
+
+        .module-description
+            p
+                opacity: 0.8
+                margin-left: 20px
+
+        .module-enabled
+            float: right
+
+            .button
+                border: none
 
 #footer
     position: fixed

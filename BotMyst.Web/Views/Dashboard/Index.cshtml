@@ -10,7 +10,7 @@
 
     @foreach (DiscordGuildModel g in Model)
     {
-        <div class="row guild">
+        <div class="row guild bar">
             <a asp-controller="Dashboard" asp-action="GuildSettings" asp-route-id="@g.Id" class="twelve columns">
                 <div class="guild-icon">
                     <img src="@($"https://cdn.discordapp.com/icons/{g.Id}/{g.Icon}.png")">
