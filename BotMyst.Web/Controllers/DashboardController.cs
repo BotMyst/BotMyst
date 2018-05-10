@@ -26,5 +26,23 @@ namespace BotMyst.Web.Controllers
                 
             return View (guilds);
         }
+
+        public async Task<IActionResult> GuildSettings (string id)
+        {
+            DiscordAPI api = new DiscordAPI ();
+            DiscordGuildModel guild = await api.GetGuildAsync (id);
+
+            if (guild == null)
+            {
+                guild = (await api.GetUserGuildsAsync (HttpContext)).FirstOrDefault (g => g.Id == id);
+                guild.HasBotMyst = false;
+            }
+            else
+            {
+                guild.HasBotMyst = true;
+            }
+
+            return View (guild);
+        }
     }
 }

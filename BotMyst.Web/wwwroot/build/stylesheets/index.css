@@ -90,9 +90,13 @@ body {
   #dashboard .user-profile .profile-name {
     display: inline;
     float: left;
-    padding-left: 10px; }
+    padding-left: 10px;
+    max-width: 150px; }
     #dashboard .user-profile .profile-name p {
-      margin: 0; }
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
 #dashboard .guild {
   opacity: 1;
   height: 3rem;

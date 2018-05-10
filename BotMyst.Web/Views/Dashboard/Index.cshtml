@@ -1,21 +1,8 @@
-@using System.Security.Claims
-@using System.Linq
 @model List<DiscordGuildModel>
 
 <section id="dashboard">
     
-    <div class="row user-profile">
-        <div class="twelve columns">
-            <div>
-                <div class="profile-image">
-                    <img src="@($"https://cdn.discordapp.com/avatars/{User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value}/{User.FindFirst(c => c.Type == "urn:discord:avatar")?.Value}.png")" alt="Avatar">
-                </div>
-                <div class="profile-name">
-                    <p>@User.FindFirst(c => c.Type == ClaimTypes.Name)?.Value</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    @await Html.PartialAsync("DashboardProfilePartial")
 
     <hr>
 
@@ -24,7 +11,7 @@
     @foreach (DiscordGuildModel g in Model)
     {
         <div class="row guild">
-            <a href="" class="twelve columns">
+            <a asp-controller="Dashboard" asp-action="GuildSettings" asp-route-id="@g.Id" class="twelve columns">
                 <div class="guild-icon">
                     <img src="@($"https://cdn.discordapp.com/icons/{g.Id}/{g.Icon}.png")">
                     @if (g.HasBotMyst)

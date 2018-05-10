@@ -1,0 +1,39 @@
+@using System.Security.Claims
+@using System.Linq
+
+@model DiscordGuildModel
+
+<section id="dashboard">
+
+<div class="row user-profile">
+    <div class="three columns">
+        <div>
+            <div class="profile-image">
+                <img src="@($"https://cdn.discordapp.com/avatars/{User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value}/{User.FindFirst(c => c.Type == "urn:discord:avatar")?.Value}.png")" alt="Avatar">
+            </div>
+            <div class="profile-name">
+                <p>@User.FindFirst(c => c.Type == ClaimTypes.Name)?.Value</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="eight columns">
+        <div>
+            <div class="profile-image">
+                <img src="@($"https://cdn.discordapp.com/icons/{Model.Id}/{Model.Icon}.png")">
+            </div>
+            <div class="profile-name">
+                <p>@Model.Name</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+@if(Model.HasBotMyst == false)
+{
+    <p>Botmyst isn't on <strong>@Model.Name</strong> server</p>
+}
+
+</section>
