@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,10 @@ using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace BotMyst.Web
 {
@@ -32,11 +37,24 @@ namespace BotMyst.Web
         {
             services.AddMvc ();
 
-            services.AddAuthentication (options =>
+            services
+            .AddAuthentication (options =>
             {
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = "Discord";
+            })
+            .AddJwtBearer (options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration ["Jwt:Issuer"],
+                    ValidAudience = Configuration ["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey (Encoding.UTF8.GetBytes (Configuration ["Jwt:Key"]))
+                };
             })
             .AddCookie (options =>
             {
@@ -111,6 +129,16 @@ namespace BotMyst.Web
                     template: "{controller=Home}/{action=Index}/{id?}"
                 );
             });
+
+            // var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]));
+            // var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            // var token = new JwtSecurityToken(Configuration["Jwt:Issuer"],
+            // Configuration["Jwt:Issuer"],
+            // expires: DateTime.Now.AddMinutes(30),
+            // signingCredentials: creds);
+
+            // System.Console.WriteLine(new JwtSecurityTokenHandler ().WriteToken (token));
         }
     }
 }
