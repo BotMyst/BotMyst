@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace BotMyst.Helpers
+namespace BotMyst.Bot.Helpers
 {
     public static class StringHelpers
     {
