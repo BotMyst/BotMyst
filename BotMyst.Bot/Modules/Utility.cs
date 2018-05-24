@@ -1,19 +1,33 @@
+using System;
+using System.Web;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
 using Discord;
 using Discord.Commands;
-using System;
 
 namespace BotMyst.Bot.Modules
 {
-    [Summary ("Retrieve information about a specified user.")]
-    public class UserInfo : ModuleBase
+    public class Utility : ModuleBase
     {
+        [Command ("lmgtfy")]
+        [Alias ("google")]
+        [Summary ("Generates a lmgtfy link for people too lazy / stupid to google on their own")]
+        public async Task Lmgtfy ([Remainder] string searchString)
+        {
+            string url = $"https://lmgtfy.com/?q={HttpUtility.UrlEncode (searchString)}";
+
+            EmbedBuilder embed = new EmbedBuilder ();
+            embed.Title = "LMGTFY (Google)";
+            embed.Description = url;
+
+            await ReplyAsync ("", false, embed.Build ());
+        }
+
         [Command ("userinfo")]
         [Alias ("user")]
         [Summary ("Retrieves information about a specified user.")]
-        private async Task DisplayUserInfo ([Remainder] IGuildUser user)
+        private async Task UserInfo ([Remainder] IGuildUser user)
         {
             EmbedBuilder emb = new EmbedBuilder ();
 
