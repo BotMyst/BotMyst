@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
+using BotMyst.Web.Models;
 
 namespace BotMyst.Web
 {
@@ -104,6 +105,8 @@ namespace BotMyst.Web
                 options.Scope.Add ("guilds");
                 options.Scope.Add ("email");
             });
+
+            services.AddDbContext<ModulesContext> ();
         }
 
         public void Configure (IApplicationBuilder app, IHostingEnvironment env)
@@ -135,7 +138,7 @@ namespace BotMyst.Web
 
             // var token = new JwtSecurityToken(Configuration["Jwt:Issuer"],
             // Configuration["Jwt:Issuer"],
-            // expires: DateTime.Now.AddMinutes(30),
+            // expires: DateTime.Now.AddDays(30),
             // signingCredentials: creds);
 
             // System.Console.WriteLine(new JwtSecurityTokenHandler ().WriteToken (token));

@@ -46,7 +46,21 @@ namespace BotMyst.Bot
 
             client.Log += Log;
 
+            client.Ready += GenerateSettings;
+
             await Task.Delay (-1);
+        }
+
+        private async Task GenerateSettings ()
+        {
+            System.Console.WriteLine($"{DateTime.Now.ToString ("HH:mm:ss")} Generating guild settings");
+
+            foreach (IGuild g in client.Guilds)
+            {
+                BotMystAPI.GenerateOptions (g.Id);
+            }
+
+            System.Console.WriteLine($"{DateTime.Now.ToString ("HH:mm:ss")} Successfully generated guild settings for {client.Guilds.Count} guilds.");
         }
 
         private Task Log (LogMessage arg)
