@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using System.Linq;
 
 namespace BotMyst.Bot
 {
@@ -17,8 +19,9 @@ namespace BotMyst.Bot
         public static IConfiguration Configuration { get; set; }
 
         private DiscordSocketClient client;
-        private CommandService commandService;
         private IServiceProvider services;
+
+        private List<Type> commandTypes = new List<Type> ();
 
         public BotMyst ()
         {
@@ -32,10 +35,8 @@ namespace BotMyst.Bot
         public async Task Start ()
         {
             client = new DiscordSocketClient ();
-            commandService = new CommandService ();
 
             services = new ServiceCollection ()
-                    .AddSingleton (commandService)
                     .BuildServiceProvider ();
 
             await InstallCommands ();
@@ -72,7 +73,11 @@ namespace BotMyst.Bot
         private async Task InstallCommands ()
         {
             client.MessageReceived += HandleCommand;
-            await commandService.AddModulesAsync (Assembly.GetEntryAssembly ());
+
+            commandTypes.AddRange (Assembly.GetExecutingAssembly ().GetTypes ().Where (t => t.IsSubclassOf (typeof (Command)) && !t.IsAbstract && t.GetCustomAttributes ().Any (a => a.GetType () == typeof (CommandAttribute))));
+
+            foreach (Type t in commandTypes)
+                System.Console.WriteLine(t.Name);
         }
 
         private async Task HandleCommand (SocketMessage arg)
