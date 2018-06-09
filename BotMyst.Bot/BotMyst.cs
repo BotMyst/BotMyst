@@ -53,14 +53,14 @@ namespace BotMyst.Bot
 
         private async Task GenerateSettings ()
         {
-            System.Console.WriteLine($"{DateTime.Now.ToString ("HH:mm:ss")} Generating guild settings");
+            // System.Console.WriteLine($"{DateTime.Now.ToString ("HH:mm:ss")} Generating guild settings");
 
-            foreach (IGuild g in client.Guilds)
-            {
-                BotMystAPI.GenerateOptions (g.Id);
-            }
+            // foreach (IGuild g in client.Guilds)
+            // {
+            //     BotMystAPI.GenerateOptions (g.Id);
+            // }
 
-            System.Console.WriteLine($"{DateTime.Now.ToString ("HH:mm:ss")} Successfully generated guild settings for {client.Guilds.Count} guilds.");
+            // System.Console.WriteLine($"{DateTime.Now.ToString ("HH:mm:ss")} Successfully generated guild settings for {client.Guilds.Count} guilds.");
         }
 
         private Task Log (LogMessage arg)
@@ -78,34 +78,21 @@ namespace BotMyst.Bot
         private async Task HandleCommand (SocketMessage arg)
         {
             SocketUserMessage message = arg as SocketUserMessage;
+            string messageString = message.ToString ();
+
             if (message == null) return;
+            if (message.Author.Id == client.CurrentUser.Id) return;
+
             int argPos = 0;
 
             if ((message.HasStringPrefix (Configuration ["prefix"], ref argPos) || message.HasMentionPrefix (client.CurrentUser, ref argPos)) == false) return;
 
-            CommandContext context = new CommandContext (client, message);
-            CommandInfo executedCommand = commandService.Search (context, argPos).Commands [0].Command;
+            ICommandContext commandContext = new CommandContext (client, message);
 
-            IResult result = await commandService.ExecuteAsync (context, argPos, services);
-            if (result.IsSuccess == false)
-            {
-                if (result.Error == CommandError.UnknownCommand) return;
-                if (result.Error == CommandError.BadArgCount)
-                {
-                    EmbedBuilder eb = new EmbedBuilder ();
-                    eb.WithTitle ("ERROR: Bad argument count");
-                    eb.WithColor (Color.Red);
-                    await context.Channel.SendMessageAsync (string.Empty, false, eb);
-                }
-                else
-                {
-                    EmbedBuilder eb = new EmbedBuilder ();
-                    eb.WithTitle ("Error");
-                    eb.WithDescription (result.ErrorReason);
-                    eb.WithColor (Color.Red);
-                    await context.Channel.SendMessageAsync (string.Empty, false, eb);
-                }
-            }
+            // if the command is just: >test it will return: test
+            // if the command is >test arguments it will return: test
+            // have to check if it has an empty space
+            string commandName = messageString.Substring (Configuration ["prefix"].Length, messageString.Contains (" ") ? messageString.IndexOf (" ") - 1 : messageString.Length - 1);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using BotMyst.Web.Models;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace BotMyst.Web.Controllers
 {
@@ -23,15 +24,8 @@ namespace BotMyst.Web.Controllers
         [HttpPost]
         [Authorize (AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route ("generateoptions")]
-        public async Task<JsonResult> GenerateOptions (ulong guildId)
+        public async Task GenerateOptions (ulong guildId)
         {
-            if (_context.UtilityOptions.Any (o => o.Id == guildId) == false)
-            {
-                await _context.AddAsync (new Bot.Options.UtilityOptions { Id = guildId, LmgtfyOptions = new Bot.Options.LmgtfyOptions { Id = guildId} , UserInfoOptions = new Bot.Options.UserInfoOptions { Id = guildId } });
-                await _context.SaveChangesAsync ();
-            }
-
-            return new JsonResult ($"successfully added {guildId}");
         }
     }
 }

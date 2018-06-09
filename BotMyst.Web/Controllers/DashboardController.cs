@@ -42,6 +42,8 @@ namespace BotMyst.Web.Controllers
                 guild.HasBotMyst = true;
             }
 
+            
+
             return View (guild);
         }
     }
