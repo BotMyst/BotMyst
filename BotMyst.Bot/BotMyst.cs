@@ -11,6 +11,7 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using System.Linq;
+using BotMyst.Bot.Helpers;
 
 namespace BotMyst.Bot
 {
@@ -19,9 +20,8 @@ namespace BotMyst.Bot
         public static IConfiguration Configuration { get; set; }
 
         private DiscordSocketClient client;
+        private CommandService commandService;
         private IServiceProvider services;
-
-        private List<Type> commandTypes = new List<Type> ();
 
         public BotMyst ()
         {
@@ -36,6 +36,8 @@ namespace BotMyst.Bot
         {
             client = new DiscordSocketClient ();
 
+            commandService = new CommandService ();
+
             services = new ServiceCollection ()
                     .BuildServiceProvider ();
 
@@ -47,22 +49,9 @@ namespace BotMyst.Bot
 
             client.Log += Log;
 
-            client.Ready += GenerateSettings;
-
             await Task.Delay (-1);
         }
 
-        private async Task GenerateSettings ()
-        {
-            // System.Console.WriteLine($"{DateTime.Now.ToString ("HH:mm:ss")} Generating guild settings");
-
-            // foreach (IGuild g in client.Guilds)
-            // {
-            //     BotMystAPI.GenerateOptions (g.Id);
-            // }
-
-            // System.Console.WriteLine($"{DateTime.Now.ToString ("HH:mm:ss")} Successfully generated guild settings for {client.Guilds.Count} guilds.");
-        }
 
         private Task Log (LogMessage arg)
         {
@@ -73,31 +62,40 @@ namespace BotMyst.Bot
         private async Task InstallCommands ()
         {
             client.MessageReceived += HandleCommand;
-
-            commandTypes.AddRange (Assembly.GetExecutingAssembly ().GetTypes ().Where (t => t.IsSubclassOf (typeof (Command)) && !t.IsAbstract && t.GetCustomAttributes ().Any (a => a.GetType () == typeof (CommandAttribute))));
-
-            foreach (Type t in commandTypes)
-                System.Console.WriteLine(t.Name);
+            await commandService.AddModulesAsync (Assembly.GetEntryAssembly ());
         }
 
         private async Task HandleCommand (SocketMessage arg)
         {
             SocketUserMessage message = arg as SocketUserMessage;
-            string messageString = message.ToString ();
-
             if (message == null) return;
-            if (message.Author.Id == client.CurrentUser.Id) return;
-
             int argPos = 0;
 
-            if ((message.HasStringPrefix (Configuration ["prefix"], ref argPos) || message.HasMentionPrefix (client.CurrentUser, ref argPos)) == false) return;
+            if ((message.HasStringPrefix(Configuration["prefix"], ref argPos) || message.HasMentionPrefix(client.CurrentUser, ref argPos)) == false) return;
 
-            ICommandContext commandContext = new CommandContext (client, message);
+            CommandContext context = new CommandContext(client, message);
+            CommandInfo executedCommand = commandService.Search(context, argPos).Commands[0].Command;
 
-            // if the command is just: >test it will return: test
-            // if the command is >test arguments it will return: test
-            // have to check if it has an empty space
-            string commandName = messageString.Substring (Configuration ["prefix"].Length, messageString.Contains (" ") ? messageString.IndexOf (" ") - 1 : messageString.Length - 1);
+            IResult result = await commandService.ExecuteAsync(context, argPos, services);
+            if (result.IsSuccess == false)
+            {
+                if (result.Error == CommandError.UnknownCommand) return;
+                if (result.Error == CommandError.BadArgCount)
+                {
+                    EmbedBuilder eb = new EmbedBuilder();
+                    eb.WithTitle("ERROR: Bad argument count");
+                    eb.WithColor(Color.Red);
+                    await context.Channel.SendMessageAsync(string.Empty, false, eb);
+                }
+                else
+                {
+                    EmbedBuilder eb = new EmbedBuilder();
+                    eb.WithTitle("Error");
+                    eb.WithDescription(result.ErrorReason);
+                    eb.WithColor(Color.Red);
+                    await context.Channel.SendMessageAsync(string.Empty, false, eb);
+                }
+            }
         }
     }
 }
