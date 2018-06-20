@@ -76,6 +76,10 @@ namespace BotMyst.Bot
             CommandContext context = new CommandContext(client, message);
             CommandInfo executedCommand = commandService.Search(context, argPos).Commands[0].Command;
 
+            Type commandOptionsType = ((CommandOptionsAttribute) executedCommand.Attributes.First (a => a.GetType () == typeof (CommandOptionsAttribute))).CommandOptionsType;
+
+            BotMystAPI.GetOptions (commandOptionsType, context.Guild.Id);
+
             IResult result = await commandService.ExecuteAsync(context, argPos, services);
             if (result.IsSuccess == false)
             {

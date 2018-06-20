@@ -5,21 +5,16 @@ using System.Collections.Generic;
 using Discord;
 using Discord.Commands;
 
+using BotMyst.Bot.Options.Utility;
+
 namespace BotMyst.Bot.Commands.Utility
 {
     public partial class Utility : ModuleBase
     {
-        [Name("User Info")]
-        [Command("userinfo")]
-        [Summary("Gets information about the specified user")]
-        public async Task UserInfo ()
-        {
-            await UserInfo (Context.User as IGuildUser);
-        }
-
         [Name ("User Info")]
         [Command ("userinfo")]
         [Summary ("Gets information about the specified user")]
+        [CommandOptions (typeof (UserInfoOptions))]
         public async Task UserInfo ([Remainder] IGuildUser user)
         {
             EmbedBuilder emb = new EmbedBuilder();
