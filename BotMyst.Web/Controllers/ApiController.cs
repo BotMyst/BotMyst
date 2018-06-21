@@ -38,12 +38,14 @@ namespace BotMyst.Web.Controllers
         [Route ("getcommandoptions")]
         public async Task GetCommandOptions (string commandOptionsType, ulong guildId)
         {
-            List<Type> dbSets = new List<Type> ();
-
             foreach (PropertyInfo p in typeof (ModulesContext).GetProperties ())
             {
                 if (p.PropertyType.GenericTypeArguments.Length == 1 && p.PropertyType.GenericTypeArguments [0].Name == commandOptionsType)
+                {
                     System.Console.WriteLine($"Found the options type: {p.PropertyType.GenericTypeArguments [0].Name}");
+
+                    dynamic dbSet = p.GetValue (_context);
+                }
             }
         }
     }
