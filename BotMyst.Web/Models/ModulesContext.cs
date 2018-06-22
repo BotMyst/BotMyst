@@ -15,7 +15,7 @@ namespace BotMyst.Web.Models
         protected override void OnConfiguring (DbContextOptionsBuilder optionsBuilder)
         {
             // optionsBuilder.UseSqlite ("Data Source=ModuleOptions.db");
-            optionsBuilder.UseSqlite ($"Data Source={Path.Combine (Directory.GetCurrentDirectory (), "BotMyst.Web/ModuleOptions.db")}");
+            optionsBuilder.UseSqlite ($"Data Source={Path.Combine (Directory.GetCurrentDirectory (), "ModuleOptions.db")}");
         }
     }
 }
