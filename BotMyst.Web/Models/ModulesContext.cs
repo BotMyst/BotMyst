@@ -12,10 +12,12 @@ namespace BotMyst.Web.Models
         public DbSet<LmgtfyOptions>     LmgtfyOptions { get; set; }
         public DbSet<UserInfoOptions>   UserInfoOptions { get; set; }
 
-        protected override void OnConfiguring (DbContextOptionsBuilder optionsBuilder)
+        public ModulesContext (DbContextOptions<ModulesContext> options) : base (options) {}
+
+        protected override void OnModelCreating (ModelBuilder builder)
         {
-            // optionsBuilder.UseSqlite ("Data Source=ModuleOptions.db");
-            optionsBuilder.UseSqlite ($"Data Source={Path.Combine (Directory.GetCurrentDirectory (), "ModuleOptions.db")}");
+            builder.Entity<LmgtfyOptions> ().ToTable ("LmgtfyOptions");
+            builder.Entity<UserInfoOptions> ().ToTable ("UserInfoOptions");
         }
     }
 }

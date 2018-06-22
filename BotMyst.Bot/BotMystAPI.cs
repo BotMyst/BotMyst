@@ -7,15 +7,15 @@ namespace BotMyst.Bot
     {
         private const string ApiUrl = "http://localhost:5000/";
 
-        // public static void GenerateOptions (ulong guildId)
-        // {
-        //     RestClient client = new RestClient (ApiUrl);
+        public static void GenerateOptions (ulong guildId)
+        {
+            RestClient client = new RestClient (ApiUrl);
 
-        //     RestRequest request = new RestRequest ($"api/modules/generateoptions?guildId={guildId}", Method.POST);
-        //     request.AddHeader ("Authorization", $"Bearer {BotMyst.Configuration ["BotMystApiToken"]}");
+            RestRequest request = new RestRequest ($"api/generateoptions?guildId={guildId}", Method.POST);
+            request.AddHeader ("Authorization", $"Bearer {BotMyst.Configuration ["BotMystApiToken"]}");
             
-        //     IRestResponse response = client.Execute (request);
-        // }
+            IRestResponse response = client.Execute (request);
+        }
 
         public static void GetOptions (Type commandOptionsType, ulong guildId)
         {

@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace BotMyst.Bot
 {
-    public class CommandOptions
+    public abstract class CommandOptions
     {
+        [Key]
         public ulong GuildId { get; set; }
         public bool Enabled { get; set; }
         public bool Dm { get; set; }

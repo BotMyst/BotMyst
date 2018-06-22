@@ -49,9 +49,18 @@ namespace BotMyst.Bot
 
             client.Log += Log;
 
+            client.Ready += OnReady;
+
             await Task.Delay (-1);
         }
 
+        private Task OnReady ()
+        {
+            foreach (var g in client.Guilds)
+                BotMystAPI.GenerateOptions (g.Id);
+
+            return Task.CompletedTask;
+        }
 
         private Task Log (LogMessage arg)
         {

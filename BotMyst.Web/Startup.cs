@@ -106,7 +106,7 @@ namespace BotMyst.Web
                 options.Scope.Add ("email");
             });
 
-            services.AddDbContext<ModulesContext> ();
+            services.AddDbContext<ModulesContext> (options => options.UseSqlite ("Data Source=BotMyst.Web/ModuleOptions.db"));
         }
 
         public void Configure (IApplicationBuilder app, IHostingEnvironment env)

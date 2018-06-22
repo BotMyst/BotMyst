@@ -25,12 +25,18 @@ namespace BotMyst.Web.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [Route ("getmoduleoptions")]
-        public async Task GetModuleOptions (string ModuleType, ulong guildId)
+        [Route ("generateoptions")]
+        public async Task GenerateOptions (ulong guildId)
         {
+            if (_context.LmgtfyOptions.Any (a => a.GuildId == guildId) == false)
+                _context.LmgtfyOptions.Add (new LmgtfyOptions { GuildId = guildId });
 
+            if (_context.UserInfoOptions.Any (a => a.GuildId == guildId) == false)
+                _context.UserInfoOptions.Add (new UserInfoOptions { GuildId = guildId });
+
+            await _context.SaveChangesAsync ();
         }
 
         [HttpGet]
