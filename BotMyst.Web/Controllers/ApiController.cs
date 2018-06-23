@@ -2,16 +2,18 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
+using BotMyst.Bot;
 using BotMyst.Web.Models;
 using BotMyst.Bot.Options.Utility;
-using BotMyst.Bot;
 
 namespace BotMyst.Web.Controllers
 {
@@ -51,6 +53,16 @@ namespace BotMyst.Web.Controllers
                     System.Console.WriteLine($"Found the options type: {p.PropertyType.GenericTypeArguments [0].Name}");
 
                     dynamic dbSet = p.GetValue (_context);
+
+                    List<CommandOptions> commandOptions = new List<CommandOptions> ();
+                    foreach (var s in dbSet)
+                    {
+                        commandOptions.Add (s);
+                    }
+
+                    CommandOptions option = commandOptions.Find (c => c.GuildId == guildId);
+
+                    System.Console.WriteLine(option.GuildId);
                 }
             }
         }
