@@ -1,6 +1,8 @@
 using System.Web;
 using System.Threading.Tasks;
 
+using Newtonsoft.Json;
+
 using Discord;
 using Discord.Commands;
 
@@ -16,6 +18,8 @@ namespace BotMyst.Bot.Commands.Utility
         [CommandOptions (typeof (LmgtfyOptions))]
         public async Task Lmgtfy ([Remainder] string search)
         {
+            LmgtfyOptions options = BotMystAPI.GetOptions<LmgtfyOptions> (Context.Guild.Id);
+
             string url = $"http://lmgtfy.com/?q={HttpUtility.UrlEncode (search)}";
 
             EmbedBuilder eb = new EmbedBuilder ();

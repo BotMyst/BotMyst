@@ -1,4 +1,7 @@
 using System;
+
+using Newtonsoft.Json;
+
 using RestSharp;
 
 namespace BotMyst.Bot
@@ -17,7 +20,7 @@ namespace BotMyst.Bot
             IRestResponse response = client.Execute (request);
         }
 
-        public static void GetOptions (Type commandOptionsType, ulong guildId)
+        public static string GetOptions (Type commandOptionsType, ulong guildId)
         {
             RestClient client = new RestClient(ApiUrl);
 
@@ -25,6 +28,17 @@ namespace BotMyst.Bot
             request.AddHeader("Authorization", $"Bearer {BotMyst.Configuration["BotMystApiToken"]}");
 
             IRestResponse response = client.Execute(request);
+        
+            return response.Content;
+        }
+
+        public static T GetOptions<T> (ulong guildId) where T : CommandOptions
+        {
+            string res = GetOptions (typeof (T), guildId);
+
+            T options = JsonConvert.DeserializeObject<T> (res);
+
+            return options;
         }
     }
 }

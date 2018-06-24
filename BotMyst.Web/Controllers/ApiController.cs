@@ -44,8 +44,10 @@ namespace BotMyst.Web.Controllers
         [HttpGet]
         [Authorize (AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route ("getcommandoptions")]
-        public async Task GetCommandOptions (string commandOptionsType, ulong guildId)
+        public JsonResult GetCommandOptions (string commandOptionsType, ulong guildId)
         {
+            CommandOptions result = null;
+
             foreach (PropertyInfo p in typeof (ModulesContext).GetProperties ())
             {
                 if (p.PropertyType.GenericTypeArguments.Length == 1 && p.PropertyType.GenericTypeArguments [0].Name == commandOptionsType)
@@ -60,11 +62,12 @@ namespace BotMyst.Web.Controllers
                         commandOptions.Add (s);
                     }
 
-                    CommandOptions option = commandOptions.Find (c => c.GuildId == guildId);
-
-                    System.Console.WriteLine(option.GuildId);
+                    result = commandOptions.Find (c => c.GuildId == guildId);
+                    return new JsonResult (result);
                 }
             }
+
+            return new JsonResult (result);
         }
     }
 }
