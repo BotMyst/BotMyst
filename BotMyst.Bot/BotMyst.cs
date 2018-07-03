@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -10,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
-using System.Linq;
 using BotMyst.Bot.Helpers;
 
 namespace BotMyst.Bot
@@ -58,7 +58,7 @@ namespace BotMyst.Bot
         {
             foreach (var g in client.Guilds)
                 BotMystAPI.GenerateOptions (g.Id);
-
+                
             return Task.CompletedTask;
         }
 
@@ -72,6 +72,7 @@ namespace BotMyst.Bot
         {
             client.MessageReceived += HandleCommand;
             await commandService.AddModulesAsync (Assembly.GetEntryAssembly ());
+            BotMystAPI.SendModuleData (commandService);
         }
 
         private async Task HandleCommand (SocketMessage arg)

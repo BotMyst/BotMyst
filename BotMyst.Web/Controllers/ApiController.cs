@@ -20,11 +20,13 @@ namespace BotMyst.Web.Controllers
     [Route ("/api")]
     public class ApiController : Controller
     {
-        private ModulesContext _context;
+        private ModulesContext modulesContext;
+        private ModuleOptionsContext moduleOptionsContext;
 
-        public ApiController (ModulesContext context)
+        public ApiController (ModulesContext modulesContext, ModuleOptionsContext moduleOptionsContext)
         {
-            _context = context;
+            this.modulesContext = modulesContext;
+            this.moduleOptionsContext = moduleOptionsContext;
         }
 
         [HttpPost]
@@ -32,13 +34,13 @@ namespace BotMyst.Web.Controllers
         [Route ("generateoptions")]
         public async Task GenerateOptions (ulong guildId)
         {
-            if (_context.LmgtfyOptions.Any (a => a.GuildId == guildId) == false)
-                _context.LmgtfyOptions.Add (new LmgtfyOptions { GuildId = guildId });
+            if (moduleOptionsContext.LmgtfyOptions.Any (a => a.GuildId == guildId) == false)
+                moduleOptionsContext.LmgtfyOptions.Add (new LmgtfyOptions { GuildId = guildId });
 
-            if (_context.UserInfoOptions.Any (a => a.GuildId == guildId) == false)
-                _context.UserInfoOptions.Add (new UserInfoOptions { GuildId = guildId });
+            if (moduleOptionsContext.UserInfoOptions.Any (a => a.GuildId == guildId) == false)
+                moduleOptionsContext.UserInfoOptions.Add (new UserInfoOptions { GuildId = guildId });
 
-            await _context.SaveChangesAsync ();
+            await moduleOptionsContext.SaveChangesAsync ();
         }
 
         [HttpGet]
@@ -48,13 +50,13 @@ namespace BotMyst.Web.Controllers
         {
             CommandOptions result = null;
 
-            foreach (PropertyInfo p in typeof (ModulesContext).GetProperties ())
+            foreach (PropertyInfo p in typeof (ModuleOptionsContext).GetProperties ())
             {
                 if (p.PropertyType.GenericTypeArguments.Length == 1 && p.PropertyType.GenericTypeArguments [0].Name == commandOptionsType)
                 {
                     System.Console.WriteLine($"Found the options type: {p.PropertyType.GenericTypeArguments [0].Name}");
 
-                    dynamic dbSet = p.GetValue (_context);
+                    dynamic dbSet = p.GetValue (moduleOptionsContext);
 
                     List<CommandOptions> commandOptions = new List<CommandOptions> ();
                     foreach (var s in dbSet)
@@ -68,6 +70,30 @@ namespace BotMyst.Web.Controllers
             }
 
             return new JsonResult (result);
+        }
+
+        [HttpPost]
+        [Authorize (AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route ("sendmoduledata")]
+        public async Task SendModuleData ([FromBody] Models.ModuleDescriptionModel[] modules)
+        {
+            foreach (var s in modulesContext.Modules)
+                modulesContext.Remove (s);
+
+            foreach (var m in modules)
+            {
+                await modulesContext.AddAsync (m);
+            }
+
+            await modulesContext.SaveChangesAsync ();
+
+            foreach (var s in modulesContext.Modules)
+            {
+                System.Console.WriteLine(s.Name);
+
+                foreach (var c in s.CommandDescriptions)
+                    System.Console.WriteLine(c.Name);
+            }
         }
     }
 }
