@@ -12,10 +12,10 @@ namespace BotMyst.Web.Models
     
         public ModuleOptionsContext (DbContextOptions<ModuleOptionsContext> options) : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.Entity<LmgtfyOptions>().ToTable("LmgtfyOptions");
-            builder.Entity<UserInfoOptions>().ToTable("UserInfoOptions");
-        }
+        // protected override void OnModelCreating(ModelBuilder builder)
+        // {
+        //     builder.Entity<LmgtfyOptions>().ToTable("LmgtfyOptions");
+        //     builder.Entity<UserInfoOptions>().ToTable("UserInfoOptions");
+        // }
     }
 }

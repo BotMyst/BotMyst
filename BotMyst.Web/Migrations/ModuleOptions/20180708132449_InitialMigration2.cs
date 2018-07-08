@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BotMyst.Web.Migrations.ModuleOptions
 {
-    public partial class ModuleOptions : Migration
+    public partial class InitialMigration2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

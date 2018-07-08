@@ -10,8 +10,8 @@ using System;
 namespace BotMyst.Web.Migrations
 {
     [DbContext(typeof(ModulesContext))]
-    [Migration("20180626111245_ModulesData")]
-    partial class ModulesData
+    [Migration("20180708132248_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,7 +28,7 @@ namespace BotMyst.Web.Migrations
 
                     b.Property<string>("CommandOptionsType");
 
-                    b.Property<int?>("ModuleDescriptionModelId");
+                    b.Property<int>("ModuleDescriptionId");
 
                     b.Property<string>("Name");
 
@@ -36,9 +36,9 @@ namespace BotMyst.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ModuleDescriptionModelId");
+                    b.HasIndex("ModuleDescriptionId");
 
-                    b.ToTable("CommandDescriptionModel");
+                    b.ToTable("CommandDescriptions");
                 });
 
             modelBuilder.Entity("BotMyst.Web.Models.ModuleDescriptionModel", b =>
@@ -55,9 +55,10 @@ namespace BotMyst.Web.Migrations
 
             modelBuilder.Entity("BotMyst.Web.Models.CommandDescriptionModel", b =>
                 {
-                    b.HasOne("BotMyst.Web.Models.ModuleDescriptionModel")
+                    b.HasOne("BotMyst.Web.Models.ModuleDescriptionModel", "ModuleDescription")
                         .WithMany("CommandDescriptions")
-                        .HasForeignKey("ModuleDescriptionModelId");
+                        .HasForeignKey("ModuleDescriptionId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

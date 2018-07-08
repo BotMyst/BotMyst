@@ -11,6 +11,13 @@ namespace BotMyst.Web.Controllers
 {
     public class DashboardController : Controller
     {
+        private ModulesContext _modulesContext;
+
+        public DashboardController (ModulesContext modulesContext)
+        {
+            _modulesContext = modulesContext;
+        }
+
         public async Task<IActionResult> Index ()
         {
             if (User.Identity.IsAuthenticated == false)
@@ -29,6 +36,11 @@ namespace BotMyst.Web.Controllers
 
         public async Task<IActionResult> GuildSettings (string id)
         {
+            foreach (var module in _modulesContext.Modules)
+            {
+                System.Console.WriteLine($"{module.Name}:");
+            }
+
             DiscordAPI api = new DiscordAPI ();
             DiscordGuildModel guild = await api.GetGuildAsync (id);
 

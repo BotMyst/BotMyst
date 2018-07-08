@@ -10,8 +10,8 @@ using System;
 namespace BotMyst.Web.Migrations.ModuleOptions
 {
     [DbContext(typeof(ModuleOptionsContext))]
-    [Migration("20180625143832_ModuleOptions")]
-    partial class ModuleOptions
+    [Migration("20180708132449_InitialMigration2")]
+    partial class InitialMigration2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

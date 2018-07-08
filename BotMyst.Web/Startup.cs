@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using System.Net.Http.Headers;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using Newtonsoft.Json.Linq;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.IdentityModel.Tokens.Jwt;
+
 using BotMyst.Web.Models;
 
 namespace BotMyst.Web

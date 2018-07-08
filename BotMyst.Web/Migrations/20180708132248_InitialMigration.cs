@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BotMyst.Web.Migrations
 {
-    public partial class ModulesData : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,38 +22,38 @@ namespace BotMyst.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CommandDescriptionModel",
+                name: "CommandDescriptions",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Command = table.Column<string>(nullable: true),
                     CommandOptionsType = table.Column<string>(nullable: true),
-                    ModuleDescriptionModelId = table.Column<int>(nullable: true),
+                    ModuleDescriptionId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Summary = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CommandDescriptionModel", x => x.Id);
+                    table.PrimaryKey("PK_CommandDescriptions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CommandDescriptionModel_Modules_ModuleDescriptionModelId",
-                        column: x => x.ModuleDescriptionModelId,
+                        name: "FK_CommandDescriptions_Modules_ModuleDescriptionId",
+                        column: x => x.ModuleDescriptionId,
                         principalTable: "Modules",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CommandDescriptionModel_ModuleDescriptionModelId",
-                table: "CommandDescriptionModel",
-                column: "ModuleDescriptionModelId");
+                name: "IX_CommandDescriptions_ModuleDescriptionId",
+                table: "CommandDescriptions",
+                column: "ModuleDescriptionId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CommandDescriptionModel");
+                name: "CommandDescriptions");
 
             migrationBuilder.DropTable(
                 name: "Modules");
