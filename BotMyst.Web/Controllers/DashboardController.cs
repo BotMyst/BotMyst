@@ -36,25 +36,31 @@ namespace BotMyst.Web.Controllers
 
         public async Task<IActionResult> GuildSettings (string id)
         {
-            foreach (var module in _modulesContext.Modules)
+            GuildSettingsModel model = new GuildSettingsModel ();
+
+            model.Modules = new List<ModuleDescriptionModel> ();
+
+            foreach (var m in _modulesContext.Modules)
             {
-                System.Console.WriteLine($"{module.Name}:");
+                m.CommandDescriptions = new List<CommandDescriptionModel> (_modulesContext.CommandDescriptions.Where (d => d.ModuleDescriptionId == m.Id));
+
+                model.Modules.Add (m);
             }
 
             DiscordAPI api = new DiscordAPI ();
-            DiscordGuildModel guild = await api.GetGuildAsync (id);
+            model.Guild = await api.GetGuildAsync (id);
 
-            if (guild == null)
+            if (model.Guild == null)
             {
-                guild = (await api.GetUserGuildsAsync (HttpContext)).FirstOrDefault (g => g.Id == id);
-                guild.HasBotMyst = false;
+                model.Guild = (await api.GetUserGuildsAsync (HttpContext)).FirstOrDefault (g => g.Id == id);
+                model.Guild.HasBotMyst = false;
             }
             else
             {
-                guild.HasBotMyst = true;
+                model.Guild.HasBotMyst = true;
             }
 
-            return View (guild);
+            return View (model);
         }
     }
 }

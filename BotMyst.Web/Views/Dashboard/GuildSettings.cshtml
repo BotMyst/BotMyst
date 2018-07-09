@@ -1,7 +1,7 @@
-@using System.Security.Claims
 @using System.Linq
+@using System.Security.Claims
 
-@model DiscordGuildModel
+@model GuildSettingsModel
 
 <section id="dashboard">
 
@@ -20,10 +20,10 @@
     <div class="eight columns">
         <div>
             <div class="profile-image">
-                <img src="@($"https://cdn.discordapp.com/icons/{Model.Id}/{Model.Icon}.png")">
+                <img src="@($"https://cdn.discordapp.com/icons/{Model.Guild.Id}/{Model.Guild.Icon}.png")">
             </div>
             <div class="profile-name">
-                <p>@Model.Name</p>
+                <p>@Model.Guild.Name</p>
             </div>
         </div>
     </div>
@@ -31,27 +31,37 @@
 
 <hr>
 
-@if(Model.HasBotMyst == false)
+@if(Model.Guild.HasBotMyst == false)
 {
-    <p>Botmyst isn't on <strong>@Model.Name</strong> server</p>
+    <p>Botmyst isn't on <strong>@Model.Guild.Name</strong> server</p>
 }
 else
 {
-    <h6 class="sub-header">AVAILABLE MODULES</h6>    
+    <h6 class="sub-header">AVAILABLE MODULES</h6>
 
-    <div class="row bar module">
-        <a href="" class="twelve-columns">
-            <div class="module-name">
-                <p>Dictionary</p>
+    <p>List of all the available modules and commands.</p>
+
+    foreach (var module in Model.Modules)
+    {
+        <h6 class="sub-header">@module.Name</h6>
+
+        foreach (var command in module.CommandDescriptions)
+        {
+            <div class="row bar module">
+                <a href="" class="twelve-columns">
+                    <div class="module-name">
+                        <p>@command.Name</p>
+                    </div>
+                    <div class="module-description">
+                        <p>@command.Summary</p>
+                    </div>
+                    <div class="module-enabled">
+                        <button class="button enabled">Enabled</button>
+                    </div>
+                </a>
             </div>
-            <div class="module-description">
-                <p>Comprehensive dictionary entries, and entries for synonyms / antonyms.</p>
-            </div>
-            <div class="module-enabled">
-                <button class="button enabled">Enabled</button>
-            </div>
-        </a>
-    </div>
+        }
+    }
 }
 
 </section>

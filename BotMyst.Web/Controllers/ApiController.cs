@@ -86,14 +86,6 @@ namespace BotMyst.Web.Controllers
             }
 
             await modulesContext.SaveChangesAsync ();
-
-            foreach (var s in modulesContext.Modules)
-            {
-                System.Console.WriteLine(s.Name);
-
-                foreach (var c in s.CommandDescriptions)
-                    System.Console.WriteLine(c.Name);
-            }
         }
     }
 }
