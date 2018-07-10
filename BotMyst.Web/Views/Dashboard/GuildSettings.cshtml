@@ -48,7 +48,7 @@ else
         foreach (var command in module.CommandDescriptions)
         {
             <div class="row bar module">
-                <a href="" class="twelve-columns">
+                <a class="twelve-columns" asp-controller="CommandSettings" asp-action="Index" asp-route-guildId="@Model.Guild.Id" asp-route-commandId="@command.Id">
                     <div class="module-name">
                         <p>@command.Name</p>
                     </div>

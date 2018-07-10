@@ -1,0 +1,39 @@
+@model CommandSettingsModel
+
+@using System.Linq
+@using System.Security.Claims
+
+<section id="commandSettings">
+
+<div class="row user-profile">
+    <div class="three columns">
+        <div>
+            <div class="profile-image">
+                <img src="@($"https://cdn.discordapp.com/avatars/{User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value}/{User.FindFirst(c => c.Type == "urn:discord:avatar")?.Value}.png")" alt="Avatar">
+            </div>
+            <div class="profile-name">
+                <p>@User.FindFirst(c => c.Type == ClaimTypes.Name)?.Value</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="eight columns">
+        <div>
+            <div class="profile-image">
+                <img src="@($"https://cdn.discordapp.com/icons/{Model.Guild.Id}/{Model.Guild.Icon}.png")">
+            </div>
+            <div class="profile-name">
+                <p>@Model.Guild.Name</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<h6 class="sub-header">@Model.CommandDescription.Name</h6>
+<p>@Model.CommandDescription.Summary</p>
+
+<hr>
+
+</section>
