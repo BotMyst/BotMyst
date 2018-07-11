@@ -8,10 +8,14 @@ using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using Newtonsoft.Json;
+
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+
 using BotMyst.Bot.Helpers;
+using Newtonsoft.Json.Linq;
 
 namespace BotMyst.Bot
 {
@@ -85,6 +89,14 @@ namespace BotMyst.Bot
 
             CommandContext context = new CommandContext(client, message);
             CommandInfo executedCommand = commandService.Search(context, argPos).Commands[0].Command;
+
+            CommandOptionsAttribute at = (CommandOptionsAttribute) executedCommand.Attributes.First(a => a.GetType() == typeof(CommandOptionsAttribute));
+            var optionsJson = BotMystAPI.GetOptions (at.CommandOptionsType, context.Guild.Id);
+            var options = JsonConvert.DeserializeObject (optionsJson);
+            JObject jo = options as JObject;
+            // The command is disabled
+            if (((bool) jo ["enabled"]) == false)
+                return;
 
             IResult result = await commandService.ExecuteAsync(context, argPos, services);
             if (result.IsSuccess == false)

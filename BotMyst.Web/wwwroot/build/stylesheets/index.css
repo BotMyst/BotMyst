@@ -186,4 +186,15 @@ body {
   bottom: 10px;
 }
 
+#commandSettings .command-summary {
+  float: left;
+}
+#commandSettings .command-enabled {
+  float: right;
+  margin-top: -10px;
+}
+#commandSettings hr {
+  clear: both;
+}
+
 /*# sourceMappingURL=index.css.map */

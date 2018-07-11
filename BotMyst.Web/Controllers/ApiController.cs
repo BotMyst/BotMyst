@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using BotMyst.Bot;
 using BotMyst.Web.Models;
 using BotMyst.Bot.Options.Utility;
+using BotMyst.Web.Helpers;
 
 namespace BotMyst.Web.Controllers
 {
@@ -46,37 +47,15 @@ namespace BotMyst.Web.Controllers
         [HttpGet]
         [Authorize (AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route ("getcommandoptions")]
-        public JsonResult GetCommandOptions (string commandOptionsType, ulong guildId)
-        {
-            CommandOptions result = null;
-
-            foreach (PropertyInfo p in typeof (ModuleOptionsContext).GetProperties ())
-            {
-                if (p.PropertyType.GenericTypeArguments.Length == 1 && p.PropertyType.GenericTypeArguments [0].Name == commandOptionsType)
-                {
-                    System.Console.WriteLine($"Found the options type: {p.PropertyType.GenericTypeArguments [0].Name}");
-
-                    dynamic dbSet = p.GetValue (moduleOptionsContext);
-
-                    List<CommandOptions> commandOptions = new List<CommandOptions> ();
-                    foreach (var s in dbSet)
-                    {
-                        commandOptions.Add (s);
-                    }
-
-                    result = commandOptions.Find (c => c.GuildId == guildId);
-                    return new JsonResult (result);
-                }
-            }
-
-            return new JsonResult (result);
-        }
+        public JsonResult GetCommandOptions (string commandOptionsType, ulong guildId) =>
+            new JsonResult (ApiHelpers.GetCommandOptions (moduleOptionsContext, commandOptionsType, guildId));
 
         [HttpPost]
         [Authorize (AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route ("sendmoduledata")]
         public async Task SendModuleData ([FromBody] Models.ModuleDescriptionModel[] modules)
         {
+            // TODO: Don't remove it each time as the ID changes
             foreach (var s in modulesContext.Modules)
                 modulesContext.Remove (s);
 
