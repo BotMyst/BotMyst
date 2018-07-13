@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using BotMyst.Bot;
 using BotMyst.Web.Models;
 using BotMyst.Web.Helpers;
+using System.Reflection;
+using System.Collections.Generic;
 
 namespace BotMyst.Web.Controllers
 {
@@ -29,6 +31,31 @@ namespace BotMyst.Web.Controllers
 
             model.CommandDescription = _modulesContext.CommandDescriptions.First (c => c.Id == int.Parse (commandId));
             model.CommandOptions = ApiHelpers.GetCommandOptions (_moduleOptionsContext, model.CommandDescription.CommandOptionsType, ulong.Parse (guildId));
+
+            model.CommandOptionDescriptions = new List<CommandOptionDescriptionModel> ();
+
+            PropertyInfo [] commandProperties = model.CommandOptions.GetType ().GetProperties ();
+
+            foreach (var prop in commandProperties)
+            {
+                if (prop.Name == "GuildId" || prop.Name == "Enabled")
+                    continue;
+
+                var attributes = prop.GetCustomAttributes ();
+
+                CommandOptionNameAttribute nameAttribute = (CommandOptionNameAttribute) attributes.First (a => a.GetType () == typeof (CommandOptionNameAttribute));
+                CommandOptionSummaryAttribute summaryAttribute = (CommandOptionSummaryAttribute) attributes.First (a => a.GetType () == typeof (CommandOptionSummaryAttribute));
+                DisaplayAttribute displayAttribute = (DisaplayAttribute) attributes.First (a => a.GetType ().IsSubclassOf (typeof (DisaplayAttribute)));
+
+                CommandOptionDescriptionModel commandDesc = new CommandOptionDescriptionModel
+                {
+                    Name = nameAttribute.Name,
+                    Summary = summaryAttribute.Summary,
+                    OptionType = displayAttribute.GetType ().Name
+                };
+
+                model.CommandOptionDescriptions.Add (commandDesc);
+            }
 
             return View (model);
         }

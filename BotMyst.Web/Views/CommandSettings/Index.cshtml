@@ -47,4 +47,22 @@
 
 <hr>
 
+@foreach (var cmd in Model.CommandOptionDescriptions)
+{
+    @if (cmd.OptionType == "ToggleAttribute")
+    {
+        <div class="option toggle-option">
+            <p class="sub-header option-name">@cmd.Name</p>
+            <p class="sub-p">@cmd.Summary</p>
+
+            <div>
+                <label class="switch"><input type="checkbox" />    <div></div>
+                </label>
+            </div>
+        </div>
+    }
+}
+
+<button class="button save-button">Save</button>
+
 </section>

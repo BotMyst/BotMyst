@@ -195,5 +195,59 @@ body
         float: right
         margin-top: -10px
 
+    .option
+        margin-bottom: 6rem
+
+        .option-name
+            margin-bottom: 0px
+
+    .toggle-option
+        .switch
+            float: right
+            margin-top: -50px
+
+    .save-button
+        color: $accent-color
+        float: right
+
     hr
         clear: both
+
+.sub-p
+    opacity: 0.8
+    font-size: 1.5rem
+
+.switch input
+    position: absolute
+    opacity: 0
+
+.switch
+    display: inline-block
+    font-size: 20px
+    height: 1em
+    width: 2em
+    background: white
+    border-radius: 4px
+    border: 1px solid #222
+
+.switch input:checked ~ div
+    background: $accent-color
+
+.switch div
+    height: 0.7em
+    position: relative
+    margin-left: 0.15em
+    width: 0.8em
+    top: 0.15em
+    bottom: 0.15em
+    border-radius: 4px
+    background: #222
+    -webkit-transition: all 300ms
+    -moz-transition: all 300ms
+    transition: all 300ms
+    cursor: pointer
+
+.switch input:checked + div
+    -webkit-transform: translate3d(105%, 0, 0)
+    -moz-transform: translate3d(105%, 0, 0)
+    transform: translate3d(105%, 0, 0)
