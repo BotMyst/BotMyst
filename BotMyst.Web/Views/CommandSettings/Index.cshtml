@@ -55,14 +55,16 @@
             <p class="sub-header option-name">@cmd.Name</p>
             <p class="sub-p">@cmd.Summary</p>
 
+            @{
+                var toggleEnabled = (bool) cmd.Value ? "checked" : "";
+            }
+
             <div>
-                <label class="switch"><input type="checkbox" />    <div></div>
+                <label class="switch"><input type="checkbox" @toggleEnabled onchange="location.href='@Url.Action("ChangeValue", "CommandSettings", new { guildId = Model.Guild.Id, commandId = Model.CommandDescription.Id, optionName = cmd.Name })'" />    <div></div>
                 </label>
             </div>
         </div>
     }
 }
-
-<button class="button save-button">Save</button>
 
 </section>

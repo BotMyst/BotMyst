@@ -22,6 +22,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using Newtonsoft.Json.Linq;
 
+using Npgsql;
+
 using BotMyst.Web.Models;
 
 namespace BotMyst.Web
@@ -107,8 +109,15 @@ namespace BotMyst.Web
                 options.Scope.Add ("email");
             });
 
-            services.AddDbContext<ModulesContext> (options => options.UseSqlite ("Data Source=ModuleData.db"));
-            services.AddDbContext<ModuleOptionsContext> (options => options.UseSqlite ("Data Source=ModuleOptions.db"));
+            // services.AddDbContext<ModulesContext> (options => options.UseSqlite ("Data Source=ModuleData.db"));
+            // services.AddDbContext<ModuleOptionsContext> (options => options.UseSqlite ("Data Source=ModuleOptions.db"));
+
+            string dbUri = Environment.GetEnvironmentVariable ("DATABASE_URL");
+
+            string username = dbUri.Split (":") [0];
+
+            services.AddDbContext<ModulesContext> (options => options.UseNpgsql ($"Host=localhost;Username={username};Password={Configuration ["Postgres:Password"]};Database=ModuleData"));
+            services.AddDbContext<ModuleOptionsContext> (options => options.UseNpgsql ($"Host=localhost;Username={username};Password={Configuration ["Postgres:Password"]};Database=ModuleOptions"));
         }
 
         public void Configure (IApplicationBuilder app, IHostingEnvironment env)

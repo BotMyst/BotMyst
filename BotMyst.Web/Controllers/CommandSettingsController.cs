@@ -51,7 +51,8 @@ namespace BotMyst.Web.Controllers
                 {
                     Name = nameAttribute.Name,
                     Summary = summaryAttribute.Summary,
-                    OptionType = displayAttribute.GetType ().Name
+                    OptionType = displayAttribute.GetType ().Name,
+                    Value = prop.GetValue (model.CommandOptions, null)
                 };
 
                 model.CommandOptionDescriptions.Add (commandDesc);
@@ -68,6 +69,13 @@ namespace BotMyst.Web.Controllers
             options.Enabled = !options.Enabled;
 
             await _moduleOptionsContext.SaveChangesAsync ();
+
+            return RedirectToAction ("Index", new { guildId = guildId, commandId = commandId });
+        }
+
+        public async Task<ActionResult> ChangeValue (string guildId, string commandId, string optionName)
+        {
+            
 
             return RedirectToAction ("Index", new { guildId = guildId, commandId = commandId });
         }
