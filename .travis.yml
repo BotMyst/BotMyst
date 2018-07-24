@@ -1,6 +1,6 @@
 language: csharp
 solution: BotMyst.sln 
 mono: none
-dotnet: 2.1.105
+dotnet: 2.1.302
 script:
   - dotnet build
