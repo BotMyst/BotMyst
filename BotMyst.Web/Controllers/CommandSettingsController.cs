@@ -1,14 +1,14 @@
 using System;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Mvc;
 
 using BotMyst.Bot;
 using BotMyst.Web.Models;
 using BotMyst.Web.Helpers;
-using System.Reflection;
-using System.Collections.Generic;
 
 namespace BotMyst.Web.Controllers
 {
@@ -73,9 +73,27 @@ namespace BotMyst.Web.Controllers
             return RedirectToAction ("Index", new { guildId = guildId, commandId = commandId });
         }
 
-        public async Task<ActionResult> ChangeValue (string guildId, string commandId, string optionName)
+        public async Task<ActionResult> ToggleValue (string guildId, string commandId, string optionName, bool currentValue)
         {
-            
+            var description = _modulesContext.CommandDescriptions.First (c => c.Id == int.Parse (commandId));
+            var options = ApiHelpers.GetCommandOptions (_moduleOptionsContext, description.CommandOptionsType, ulong.Parse (guildId));
+
+            var properties = options.GetType ().GetProperties ();
+
+            PropertyInfo optionProp = null;
+
+            foreach (var prop in properties)
+            {
+                var attr = (CommandOptionNameAttribute) prop.GetCustomAttribute (typeof (CommandOptionNameAttribute));
+                if (attr != null && attr.Name == optionName)
+                    optionProp = prop;
+            }
+
+            Console.WriteLine ($"Current value of the toggle is {currentValue}");
+
+            optionProp.SetValue (options, !currentValue);
+
+            await _moduleOptionsContext.SaveChangesAsync ();
 
             return RedirectToAction ("Index", new { guildId = guildId, commandId = commandId });
         }
