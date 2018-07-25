@@ -60,7 +60,7 @@
             }
 
             <div>
-                <label class="switch"><input type="checkbox" @toggleEnabled onchange="location.href='@Url.Action("ChangeValue", "CommandSettings", new { guildId = Model.Guild.Id, commandId = Model.CommandDescription.Id, optionName = cmd.Name })'" />    <div></div>
+                <label class="switch"><input type="checkbox" @toggleEnabled onchange="location.href='@Url.Action("ToggleValue", "CommandSettings", new { guildId = Model.Guild.Id, commandId = Model.CommandDescription.Id, optionName = cmd.Name, currentValue = (bool) cmd.Value})'" />    <div></div>
                 </label>
             </div>
         </div>
