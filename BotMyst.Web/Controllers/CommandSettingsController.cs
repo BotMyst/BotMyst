@@ -89,8 +89,6 @@ namespace BotMyst.Web.Controllers
                     optionProp = prop;
             }
 
-            Console.WriteLine ($"Current value of the toggle is {currentValue}");
-
             optionProp.SetValue (options, !currentValue);
 
             await _moduleOptionsContext.SaveChangesAsync ();
