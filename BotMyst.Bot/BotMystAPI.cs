@@ -30,7 +30,7 @@ namespace BotMyst.Bot
             request.AddHeader("Authorization", $"Bearer {BotMyst.Configuration["BotMystApiToken"]}");
 
             IRestResponse response = client.Execute(request);
-        
+
             return response.Content;
         }
 

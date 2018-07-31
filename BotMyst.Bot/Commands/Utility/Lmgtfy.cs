@@ -10,7 +10,7 @@ using BotMyst.Bot.Options.Utility;
 
 namespace BotMyst.Bot.Commands.Utility
 {
-    public partial class Utility : ModuleBase
+    public partial class Utility : Module
     {
         [Name ("LMGTFY")]
         [Command ("lmgtfy")]
@@ -18,8 +18,6 @@ namespace BotMyst.Bot.Commands.Utility
         [CommandOptions (typeof (LmgtfyOptions))]
         public async Task Lmgtfy ([Remainder] string search)
         {
-            LmgtfyOptions options = BotMystAPI.GetOptions<LmgtfyOptions> (Context.Guild.Id);
-
             string url = $"http://lmgtfy.com/?q={HttpUtility.UrlEncode (search)}";
 
             EmbedBuilder eb = new EmbedBuilder ();
@@ -28,7 +26,7 @@ namespace BotMyst.Bot.Commands.Utility
 
             eb.Build ();
 
-            await ReplyAsync (string.Empty, false, eb);
+            await SendMessage<LmgtfyOptions> (string.Empty, false, eb);
         }
     }
 }

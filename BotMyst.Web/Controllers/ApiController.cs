@@ -47,8 +47,8 @@ namespace BotMyst.Web.Controllers
         [HttpGet]
         [Authorize (AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route ("getcommandoptions")]
-        public JsonResult GetCommandOptions (string commandOptionsType, ulong guildId) =>
-            new JsonResult (ApiHelpers.GetCommandOptions (moduleOptionsContext, commandOptionsType, guildId));
+        public IActionResult GetCommandOptions (string commandOptionsType, ulong guildId) =>
+            Ok (ApiHelpers.GetCommandOptions (moduleOptionsContext, commandOptionsType, guildId));
 
         [HttpPost]
         [Authorize (AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]

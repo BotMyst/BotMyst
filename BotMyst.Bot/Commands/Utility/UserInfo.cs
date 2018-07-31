@@ -9,7 +9,7 @@ using BotMyst.Bot.Options.Utility;
 
 namespace BotMyst.Bot.Commands.Utility
 {
-    public partial class Utility : ModuleBase
+    public partial class Utility : Module
     {
         [Name ("User Info")]
         [Command ("userinfo")]
