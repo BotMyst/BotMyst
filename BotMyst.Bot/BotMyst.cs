@@ -98,6 +98,9 @@ namespace BotMyst.Bot
             if (((bool) jo ["enabled"]) == false)
                 return;
 
+            if (((bool) jo ["deleteInvocationMessage"]) == true)
+                await arg.DeleteAsync ();
+
             IResult result = await commandService.ExecuteAsync(context, argPos, services);
             if (result.IsSuccess == false)
             {
@@ -118,9 +121,6 @@ namespace BotMyst.Bot
                     await context.Channel.SendMessageAsync(string.Empty, false, eb);
                 }
             }
-
-            if (((bool) jo ["deleteInvocationMessage"]) == false)
-                await arg.DeleteAsync ();
         }
     }
 }
