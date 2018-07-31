@@ -65,6 +65,27 @@
             </div>
         </div>
     }
+    else if (cmd.OptionType == "RoleListAttribute")
+    {
+        <div class="option toggle-option">
+            <p class="sub-header option-name">@cmd.Name</p>
+            <p class="sub-p">@cmd.Summary</p>
+
+            <div class="role-list">
+                <ul>
+                    <li style="border: 1px solid rgb(231, 76, 60)"><div class="remove"><img style="border: 1px solid rgb(231, 76, 60)" src="img/x-icon.svg" /></div><div class="role-name">Admin</div></li>
+                    <li style="border: 1px solid rgb(230, 126, 34)"><div class="remove"><img style="border: 1px solid rgb(230, 126, 34)" src="img/x-icon.svg" /></div><div class="role-name">Moderator</div></li>
+                    <li style="border: 1px solid rgb(155, 89, 182)"><div class="remove"><img style="border: 1px solid rgb(155, 89, 182)" src="img/x-icon.svg" /></div><div class="role-name">Guru</div></li>
+                </ul>
+
+                <div class="plus">
+                    +
+                </div>
+            </div>
+        </div>
+
+        <div style="clear:both"></div>
+    }
 }
 
 </section>
