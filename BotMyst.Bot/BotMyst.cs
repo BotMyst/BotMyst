@@ -118,6 +118,9 @@ namespace BotMyst.Bot
                     await context.Channel.SendMessageAsync(string.Empty, false, eb);
                 }
             }
+
+            if (((bool) jo ["deleteInvocationMessage"]) == false)
+                await arg.DeleteAsync ();
         }
     }
 }
