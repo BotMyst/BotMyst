@@ -1,4 +1,4 @@
-$primary-color: #222
+$primary-color: #141414
 $accent-color: #ee720d
 
 =transition()
@@ -8,9 +8,38 @@ $accent-color: #ee720d
     -o-transition: all 200ms ease-in-out
     transition: all 200ms ease-in-out
 
+hr
+    border-top: 1px solid #5e5e5e
+
+a
+    color: $accent-color
+    text-decoration: none
+
+    &:hover
+        color: $accent-color
+        text-decoration: underline
+
+
+.button
+    color: white
+    border-color: white
+
+    &:hover
+        color: white
+        border-color: white
+        text-decoration: none
+
 .button-primary
     background-color: $accent-color !important
     border-color: $accent-color !important
+    -webkit-box-shadow: 0 0 10px 1px #000000
+    box-shadow: 0 0 10px 1px #000000
+    margin-right: 10px
+    +transition()
+
+    &:hover
+        -webkit-box-shadow: 0 0 50px 1px #000000
+        box-shadow: 0 0 50px 1px #000000
 
 .sub-header
     font-weight: bold
@@ -29,8 +58,8 @@ $accent-color: #ee720d
 .tooltip-text
     visibility: hidden
     width: 250px
-    background-color: $primary-color
-    color: white
+    background-color: white
+    color: $primary-color
     text-align: center
     padding: 5px 0
     border-radius: 4px
@@ -54,7 +83,8 @@ $accent-color: #ee720d
     color: $accent-color
 
 body
-    background: white
+    background: $primary-color
+    color: white
 
 #navigation
     ul
@@ -73,7 +103,7 @@ body
                 color: black
                 margin-right: 35px
                 line-height: 6.5rem
-                color: $primary-color
+                color: white
                 
                 &:hover
                     color: $accent-color
@@ -102,10 +132,9 @@ body
     height: 3rem
     padding: 5px
     margin-bottom: 20px
-    border-bottom: 1px solid #E1E1E1
 
     a
-        color: $primary-color
+        color: white
         height: 3rem
 
         &:link
@@ -182,6 +211,9 @@ body
 
             .button
                 border: none
+
+                &:hover
+                    color: $accent-color
 
 #footer
     position: fixed
