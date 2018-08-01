@@ -20,6 +20,10 @@ a:hover {
   border-color: white;
   text-decoration: none;
 }
+.button:focus {
+  color: white;
+  border-color: white;
+}
 
 .button-primary {
   background-color: #ee720d !important;
@@ -347,15 +351,46 @@ body {
   cursor: pointer;
 }
 
-.popup {
+.popup-container {
   position: absolute;
-  top: 0;
+  top: 25%;
   left: 0;
   right: 0;
+  width: 50%;
   margin-left: auto;
   margin-right: auto;
-  width: 30%;
-  background: white;
+}
+.popup-container .popup {
+  position: relative;
+  background: #222222;
+  -webkit-box-shadow: 0 0 50px 1px #000000;
+  box-shadow: 0 0 50px 1px #000000;
+  padding: 20px;
+  border-radius: 4px;
+}
+.popup-container .popup .popup-title {
+  margin-bottom: 0;
+  font-size: 2rem;
+}
+.popup-container .popup .sub-p {
+  opacity: 0.6;
+  font-size: 1.3rem;
+}
+.popup-container .popup .popup-close {
+  float: right;
+  margin-bottom: -10px;
+}
+.popup-container .popup .popup-content ul {
+  list-style: none;
+}
+.popup-container .popup .popup-content ul a {
+  border-radius: 4px;
+  border: 1px solid white;
+  color: white;
+  padding: 2px 10px;
+}
+.popup-container .popup .popup-content ul a:hover {
+  text-decoration: none;
 }
 
 /*# sourceMappingURL=index.css.map */
