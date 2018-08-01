@@ -1,4 +1,5 @@
 $primary-color: #141414
+$secondary-color: #222222
 $accent-color: #ee720d
 
 =transition()
@@ -258,9 +259,9 @@ body
     font-size: 20px
     height: 1em
     width: 2em
-    background: white
+    background: $secondary-color
     border-radius: 4px
-    border: 1px solid #222
+    border: 1px solid $primary-color
 
 .switch input:checked ~ div
     background: $accent-color
@@ -273,7 +274,7 @@ body
     top: 0.15em
     bottom: 0.15em
     border-radius: 4px
-    background: #222
+    background: white
     -webkit-transition: all 300ms
     -moz-transition: all 300ms
     transition: all 300ms
@@ -287,7 +288,7 @@ body
 .role-list
     width: 100%
     height: 42px
-    background: $primary-color
+    background: $secondary-color
     border-radius: 4px
     color: white
     padding-right: 10px
@@ -302,7 +303,7 @@ body
             line-height: 42px
             margin-right: 10px
             border-radius: 4px
-            border: 1px solid $primary-color
+            border: 1px solid white
             padding: 2px 10px
 
             .remove
@@ -335,3 +336,13 @@ body
 
         &:hover
             cursor: pointer
+
+.popup
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    margin-left: auto
+    margin-right: auto
+    width: 30%
+    background: white
