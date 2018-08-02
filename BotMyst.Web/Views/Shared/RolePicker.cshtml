@@ -13,7 +13,12 @@
                     {
                         roleColor = Color.White;
                     }
-                    <li><a href="#" style="border-color: rgb(@roleColor.R, @roleColor.G, @roleColor.B)">@role.Name</a></li>
+                    <li><a asp-controller="CommandSettings"
+                           asp-action="AddRoleToRoleList"
+                           asp-route-guildId="@Model.GuildId"
+                           asp-route-commandId="@Model.CommandId"
+                           asp-route-optionName="@Model.OptionName"
+                           asp-route-roleName="@role.Name" style="border-color: rgb(@roleColor.R, @roleColor.G, @roleColor.B)">@role.Name</a></li>
                 }
             </ul>
         </div>

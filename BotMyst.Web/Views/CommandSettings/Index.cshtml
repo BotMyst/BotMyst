@@ -79,12 +79,14 @@
                 <ul>
                     @foreach (var role in roles)
                     {
+                        var roleColor = Color.FromArgb (role.Color);
+                        if (role.Color == 0)
                         {
-                            var roleColor = Color.FromArgb (role.Color);
+                            roleColor = Color.White;
                         }
-                        <li style="border: 1px solid rgb(roleColor.R, roleColor.G, roleColor.B)">
+                        <li style="border: 1px solid rgb(@roleColor.R, @roleColor.G, @roleColor.B)">
                             <div class="remove">
-                                <img style="border: 1px solid rgb(roleColor.R, roleColor.G, roleColor.B)" src="img/x-icon.svg" />
+                                <img style="border: 1px solid rgb(@roleColor.R, @roleColor.G, @roleColor.B)" src="img/x-icon.svg" />
                             </div>
                             <div class="role-name">@role.Name</div>
                         </li>
