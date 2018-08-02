@@ -356,6 +356,15 @@ body {
   cursor: pointer;
 }
 
+#rolePicker {
+  opacity: 0;
+  -webkit-transition: all 200ms ease-in-out;
+  -moz-transition: all 200ms ease-in-out;
+  -ms-transition: all 200ms ease-in-out;
+  -o-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}
+
 .popup-container {
   position: absolute;
   top: 25%;
@@ -364,6 +373,11 @@ body {
   width: 50%;
   margin-left: auto;
   margin-right: auto;
+  -webkit-transition: all 200ms ease-in-out;
+  -moz-transition: all 200ms ease-in-out;
+  -ms-transition: all 200ms ease-in-out;
+  -o-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 .popup-container .popup {
   position: relative;
@@ -396,6 +410,10 @@ body {
 }
 .popup-container .popup .popup-content ul a:hover {
   text-decoration: none;
+}
+
+.visible {
+  opacity: 1 !important;
 }
 
 /*# sourceMappingURL=index.css.map */
