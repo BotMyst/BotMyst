@@ -1,6 +1,7 @@
 $primary-color: #141414
 $secondary-color: #222222
 $accent-color: #ee720d
+$lighter-color: #777777
 
 =transition()
     -webkit-transition: all 200ms ease-in-out
@@ -22,7 +23,7 @@ a
 
 .button
     color: white
-    border-color: #777777
+    border-color: $lighter-color
     +transition()
 
     &:hover
@@ -307,7 +308,7 @@ body
             line-height: 42px
             margin-right: 10px
             border-radius: 4px
-            border: 1px solid white
+            border: 1px solid $lighter-color
             padding: 2px 10px
 
             .remove
@@ -334,12 +335,14 @@ body
         font-size: 22px
         line-height: 20px
         padding: 2px 10px
-        border: 1px solid white
+        border: 1px solid $lighter-color
         border-radius: 4px
         margin-top: 8px
+        +transition()
 
         &:hover
             cursor: pointer
+            border-color: white
 
 #rolePicker
     opacity: 0
