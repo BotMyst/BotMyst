@@ -127,8 +127,10 @@ namespace BotMyst.Web.Controllers
                     optionProp = prop;
             }
 
-            string currentRoles = (string) optionProp.GetValue (options, null);
-            string newRoles = $"{currentRoles},{roleName}";
+            string currentRoles = ((string) optionProp.GetValue (options, null)).Trim ();
+            List<string> allRoles = currentRoles.Split (',').ToList ();
+            allRoles.Add (roleName);
+            string newRoles = string.Join (',', allRoles);
             optionProp.SetValue (options, newRoles);
 
             await _moduleOptionsContext.SaveChangesAsync ();

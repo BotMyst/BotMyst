@@ -101,6 +101,33 @@ namespace BotMyst.Bot
             if (((bool) jo ["deleteInvocationMessage"]) == true)
                 await arg.DeleteAsync ();
 
+            string [] whitelistRoles = ((string) jo ["roleWhitelist"]).Split (",");
+
+            SocketGuildUser guildUser = (SocketGuildUser) context.User;
+
+            bool canRun = false;
+
+            foreach (var role in guildUser.Roles)
+            {
+                if (string.IsNullOrEmpty ((string) jo ["roleWhitelist"]) ||
+                    whitelistRoles.Contains (role.Name) ||
+                    whitelistRoles.Length == 0 ||
+                    whitelistRoles.Contains ("@everyone"))
+                {
+                    canRun = true;
+                }
+            }
+
+            if (canRun == false)
+            {
+                EmbedBuilder eb = new EmbedBuilder();
+                eb.WithTitle("ERROR: Insufficient permission");
+                eb.WithDescription ("You don't have the permission to use this command.");
+                eb.WithColor(Color.Orange);
+                await context.Channel.SendMessageAsync(string.Empty, false, eb);
+                return;
+            }
+
             IResult result = await commandService.ExecuteAsync(context, argPos, services);
             if (result.IsSuccess == false)
             {
