@@ -95,5 +95,10 @@ namespace BotMyst.Web.Controllers
 
             return RedirectToAction ("Index", new { guildId = guildId, commandId = commandId });
         }
+
+        public async Task<ActionResult> DisplayRolePicker (string guildId, string commandId, string optionName)
+        {
+            return PartialView ("RolePicker");
+        }
     }
 }

@@ -82,7 +82,12 @@
                         {
                             var roleColor = Color.FromArgb (role.Color);
                         }
-                        <li style="border: 1px solid rgb(roleColor.R, roleColor.G, roleColor.B)"><div class="remove"><img style="border: 1px solid rgb(roleColor.R, roleColor.G, roleColor.B)" src="img/x-icon.svg" /></div><div class="role-name">Admin</div></li>
+                        <li style="border: 1px solid rgb(roleColor.R, roleColor.G, roleColor.B)">
+                            <div class="remove">
+                                <img style="border: 1px solid rgb(roleColor.R, roleColor.G, roleColor.B)" src="img/x-icon.svg" />
+                            </div>
+                            <div class="role-name">Admin</div>
+                        </li>
                     }
                     @if (roles.Length == 0)
                     {
@@ -90,7 +95,13 @@
                     }
                 </ul>
 
-                <div class="plus">
+                <!-- <div class="plus"
+                     onclick="location.href='@Url.Action("DisplayRolePicker", "CommandSettings", new { guildId = Model.Guild.Id, commandId = Model.CommandDescription.Id, optionName = cmd.Name })'">
+                    +
+                </div> -->
+
+                <div class="plus"
+                     onclick="doSomething('@Model.Guild.Id', '@Model.CommandDescription.Id', '@cmd.Name')">
                     +
                 </div>
             </div>
@@ -100,25 +111,8 @@
     }
 }
 
-<div class="popup-container">
-    <div class="popup role-popup">
-        <h6 class="popup-title sub-header">Select a role</h6>
-        <p class="sub-p">For: Role Whitelist</p>
-        <div class="popup-content">
-            <ul>
-                <li><a href="#" style="border-color: rgb(231, 76, 60)">Server Admin</a></li>
-                <li><a href="#" style="border-color: rgb(230, 126, 34)">Moderator</a></li>
-                <li><a href="#" style="border-color: rgb(0, 128, 129)">Supporter</a></li>
-                <li><a href="#" style="border-color: rgb(155, 89, 182)">Guru</a></li>
-                <li><a href="#">@@everyone</a></li>
-            </ul>
-        </div>
-        <div class="popup-close">
-            <a class="button" href="#">CLOSE</a>
-        </div>
+<div id="rolePicker">
 
-        <div style="clear:both"></div>
-    </div>
 </div>
 
 </section>

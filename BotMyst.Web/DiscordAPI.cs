@@ -54,7 +54,6 @@ namespace BotMyst.Web
         {
             httpClient.DefaultRequestHeaders.Clear ();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue ("Bot", Startup.Configuration ["Discord:BotToken"]);  
-            System.Console.WriteLine(Startup.Configuration ["BotToken"]);          
             httpClient.DefaultRequestHeaders.Accept.Clear ();
             httpClient.DefaultRequestHeaders.Accept.Add (new MediaTypeWithQualityHeaderValue ("application/json"));
             httpClient.DefaultRequestHeaders.Connection.Clear ();
