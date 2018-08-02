@@ -15,3 +15,16 @@ function closeRolePicker ()
         $('#rolePicker').empty ();
     }, 200);
 }
+
+$(document).mouseup (function (e)
+{
+    var container = $('.popup');
+
+    if ($('#rolePicker').is (':empty') === false)
+    {
+        if (!container.is (e.target) && container.has (e.target).length === 0)
+        {
+            closeRolePicker ();
+        }
+    }
+});
