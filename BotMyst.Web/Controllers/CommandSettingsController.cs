@@ -98,7 +98,17 @@ namespace BotMyst.Web.Controllers
 
         public async Task<ActionResult> DisplayRolePicker (string guildId, string commandId, string optionName)
         {
-            return PartialView ("RolePicker");
+            RolePickerModel model = new RolePickerModel
+            {
+                GuildId = guildId,
+                CommandId = commandId,
+                OptionName = optionName
+            };
+
+            DiscordAPI api = new DiscordAPI ();
+            model.Roles = (await api.GetGuildRolesAsync (guildId)).ToArray ();
+
+            return PartialView ("RolePicker", model);
         }
     }
 }

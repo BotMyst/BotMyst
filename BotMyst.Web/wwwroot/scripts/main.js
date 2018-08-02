@@ -1,4 +1,4 @@
-function doSomething (guildId, commandId, commandName)
+function doSomething (guildId, commandId, optionName)
 {
-    $('#rolePicker').load ('CommandSettings/DisplayRolePicker', { guildId: guildId, commandId: commandId, commandName: commandName });
+    $('#rolePicker').load ('CommandSettings/DisplayRolePicker', { guildId: guildId, commandId: commandId, optionName: optionName });
 }
