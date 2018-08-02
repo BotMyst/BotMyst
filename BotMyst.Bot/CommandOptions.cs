@@ -19,7 +19,7 @@ namespace BotMyst.Bot
         public bool DeleteInvocationMessage { get; set; } = false;
 
         [RoleList]
-        [CommandOptionName ("Role Whitelist")]
+        [CommandOptionName ("Role whitelist")]
         [CommandOptionSummary ("List of roles that can use the command.")]
         public string RoleWhitelist { get; set; } = "";
 

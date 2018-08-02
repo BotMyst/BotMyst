@@ -1,0 +1,31 @@
+@model RolePickerModel
+
+<div class="popup-container">
+    <div class="popup role-popup">
+        <h6 class="popup-title sub-header">Select a role</h6>
+        <p class="sub-p">For: @Model.OptionName</p>
+        <div class="popup-content">
+            <ul>
+                @foreach (var role in Model.Roles)
+                {
+                    var roleColor = Color.FromArgb (role.Color);
+                    if (role.Color == 0)
+                    {
+                        roleColor = Color.White;
+                    }
+                    <li><a asp-controller="CommandSettings"
+                           asp-action="AddRoleToRoleList"
+                           asp-route-guildId="@Model.GuildId"
+                           asp-route-commandId="@Model.CommandId"
+                           asp-route-optionName="@Model.OptionName"
+                           asp-route-roleName="@role.Name" style="border-color: rgb(@roleColor.R, @roleColor.G, @roleColor.B)">@role.Name</a></li>
+                }
+            </ul>
+        </div>
+        <div class="popup-close">
+            <a class="button" onclick="closeRolePicker()">CLOSE</a>
+        </div>
+
+        <div style="clear:both"></div>
+    </div>
+</div>

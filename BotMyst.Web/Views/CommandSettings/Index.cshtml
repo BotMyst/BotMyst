@@ -65,6 +65,62 @@
             </div>
         </div>
     }
+    else if (cmd.OptionType == "RoleListAttribute")
+    {
+        <div class="option toggle-option">
+            <p class="sub-header option-name">@cmd.Name</p>
+            <p class="sub-p">@cmd.Summary</p>
+
+            @{
+                var roles = Helper.GetRolesFromString (Model.Guild, (string) cmd.Value);
+            }
+
+            <div class="role-list">
+                <ul>
+                    @foreach (var role in roles)
+                    {
+                        var roleColor = Color.FromArgb (role.Color);
+                        if (role.Color == 0)
+                        {
+                            roleColor = Color.White;
+                        }
+                        <li style="border: 1px solid rgb(@roleColor.R, @roleColor.G, @roleColor.B)">
+                            <a class="remove"
+                               asp-controller="CommandSettings"
+                               asp-action="RemoveRoleFromRoleList",
+                               asp-route-guildId="@Model.Guild.Id"
+                               asp-route-commandId="@Model.CommandDescription.Id"
+                               asp-route-optionName="@cmd.Name"
+                               asp-route-roleName="@role.Name">
+                                <img style="border: 1px solid rgb(@roleColor.R, @roleColor.G, @roleColor.B)" src="img/x-icon.svg" />
+                            </a>
+                            <div class="role-name">@role.Name</div>
+                        </li>
+                    }
+                    @if (roles.Length == 0)
+                    {
+                        <li>...</li>
+                    }
+                </ul>
+
+                <!-- <div class="plus"
+                     onclick="location.href='@Url.Action("DisplayRolePicker", "CommandSettings", new { guildId = Model.Guild.Id, commandId = Model.CommandDescription.Id, optionName = cmd.Name })'">
+                    +
+                </div> -->
+
+                <div class="plus"
+                     onclick="displayRolePicker('@Model.Guild.Id', '@Model.CommandDescription.Id', '@cmd.Name')">
+                    +
+                </div>
+            </div>
+        </div>
+
+        <div style="clear:both"></div>
+    }
 }
+
+<div id="rolePicker">
+
+</div>
 
 </section>
