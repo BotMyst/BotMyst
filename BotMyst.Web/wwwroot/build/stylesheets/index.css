@@ -331,6 +331,7 @@ body {
 }
 .role-list ul li .remove:hover {
   cursor: pointer;
+  text-decoration: none;
 }
 .role-list ul li .remove img {
   margin-bottom: -2px;

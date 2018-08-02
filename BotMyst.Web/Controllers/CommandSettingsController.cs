@@ -135,5 +135,32 @@ namespace BotMyst.Web.Controllers
 
             return RedirectToAction ("Index", new { guildId = guildId, commandId = commandId });
         }
+
+        public async Task<ActionResult> RemoveRoleFromRoleList (string guildId, string commandId, string optionName, string roleName)
+        {
+            var description = _modulesContext.CommandDescriptions.First (c => c.Id == int.Parse (commandId));
+            var options = ApiHelpers.GetCommandOptions (_moduleOptionsContext, description.CommandOptionsType, ulong.Parse (guildId));
+
+            var properties = options.GetType ().GetProperties ();
+
+            PropertyInfo optionProp = null;
+
+            foreach (var prop in properties)
+            {
+                var attr = (CommandOptionNameAttribute) prop.GetCustomAttribute (typeof (CommandOptionNameAttribute));
+                if (attr != null && attr.Name == optionName)
+                    optionProp = prop;
+            }
+
+            string currentRoles = (string) optionProp.GetValue (options, null);
+            List<string> allRoles = currentRoles.Split (',').ToList ();
+            allRoles.Remove (roleName);
+            string newRoles = string.Join (',', allRoles);
+            optionProp.SetValue (options, newRoles);
+
+            await _moduleOptionsContext.SaveChangesAsync ();
+
+            return RedirectToAction ("Index", new { guildId = guildId, commandId = commandId });
+        }
     }
 }
