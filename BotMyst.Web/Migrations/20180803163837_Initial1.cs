@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BotMyst.Web.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +12,7 @@ namespace BotMyst.Web.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -26,12 +25,12 @@ namespace BotMyst.Web.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Command = table.Column<string>(nullable: true),
-                    CommandOptionsType = table.Column<string>(nullable: true),
-                    ModuleDescriptionId = table.Column<int>(nullable: false),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Name = table.Column<string>(nullable: true),
-                    Summary = table.Column<string>(nullable: true)
+                    Command = table.Column<string>(nullable: true),
+                    Summary = table.Column<string>(nullable: true),
+                    CommandOptionsType = table.Column<string>(nullable: true),
+                    ModuleDescriptionId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

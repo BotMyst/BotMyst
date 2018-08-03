@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BotMyst.Web.Migrations
 {
     [DbContext(typeof(ModulesContext))]
-    [Migration("20180724141956_Postgres")]
-    partial class Postgres
+    [Migration("20180803163837_Initial1")]
+    partial class Initial1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
