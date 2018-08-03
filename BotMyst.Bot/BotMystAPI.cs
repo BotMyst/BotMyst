@@ -49,6 +49,9 @@ namespace BotMyst.Bot
 
             foreach (var m in commands.Modules)
             {
+                if (m.Name == "Module")
+                    continue;
+
                 ModuleDescriptionModel model = new ModuleDescriptionModel
                 {
                     Name = m.Name,
