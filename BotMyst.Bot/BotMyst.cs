@@ -102,6 +102,7 @@ namespace BotMyst.Bot
                 await arg.DeleteAsync ();
 
             string [] whitelistRoles = ((string) jo ["roleWhitelist"]).Split (",");
+            string [] blacklistRoles = ((string) jo ["roleBlacklist"]).Split (",");
 
             SocketGuildUser guildUser = (SocketGuildUser) context.User;
 
@@ -115,6 +116,16 @@ namespace BotMyst.Bot
                     whitelistRoles.Contains ("@everyone"))
                 {
                     canRun = true;
+                }
+            }
+
+            foreach (var role in guildUser.Roles)
+            {
+                if (blacklistRoles.Contains (role.Name) ||
+                    blacklistRoles.Length == 0 ||
+                    blacklistRoles.Contains ("@everyone"))
+                {
+                    canRun = false;
                 }
             }
 
