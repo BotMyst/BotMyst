@@ -55,13 +55,34 @@ namespace BotMyst.Web.Controllers
         [Route ("sendmoduledata")]
         public async Task SendModuleData ([FromBody] Models.ModuleDescriptionModel[] modules)
         {
-            // TODO: Don't remove it each time as the ID changes
-            foreach (var s in modulesContext.Modules)
-                modulesContext.Remove (s);
-
-            foreach (var m in modules)
+            foreach (var module in modules)
             {
-                await modulesContext.AddAsync (m);
+                if (modulesContext.Modules.Any (m => m.Name == module.Name))
+                {
+                    var dbModule = await modulesContext.Modules.FirstAsync (m => m.Name == module.Name);
+
+                    var query = from c in modulesContext.CommandDescriptions
+                                where (c.ModuleDescriptionId == dbModule.Id)
+                                select c;
+
+                    foreach (var command in module.CommandDescriptions)
+                    {
+                        if (query.Any (c => c.Name == command.Name))
+                        {
+                            var dbCommand = await query.FirstAsync (c => c.Name == command.Name);
+                            command.Id = dbCommand.Id;
+                            dbCommand = command;
+                        }
+                        else
+                        {
+                            await modulesContext.AddAsync (command);
+                        }
+                    }
+                }
+                else
+                {
+                    await modulesContext.AddAsync (module);
+                }
             }
 
             await modulesContext.SaveChangesAsync ();

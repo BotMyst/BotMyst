@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
 
 namespace BotMyst.Web.Migrations.ModuleOptions
 {
-    public partial class InitialMigration2 : Migration
+    public partial class Initial2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,15 +10,14 @@ namespace BotMyst.Web.Migrations.ModuleOptions
                 name: "LmgtfyOptions",
                 columns: table => new
                 {
-                    GuildId = table.Column<ulong>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ChannelBlacklist = table.Column<string>(nullable: true),
-                    ChannelWhitelist = table.Column<string>(nullable: true),
-                    DeleteInvocationMessage = table.Column<bool>(nullable: false),
-                    Dm = table.Column<bool>(nullable: false),
+                    GuildId = table.Column<decimal>(nullable: false),
                     Enabled = table.Column<bool>(nullable: false),
+                    Dm = table.Column<bool>(nullable: false),
+                    DeleteInvocationMessage = table.Column<bool>(nullable: false),
+                    RoleWhitelist = table.Column<string>(nullable: true),
                     RoleBlacklist = table.Column<string>(nullable: true),
-                    RoleWhitelist = table.Column<string>(nullable: true)
+                    ChannelWhitelist = table.Column<string>(nullable: true),
+                    ChannelBlacklist = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -31,15 +28,14 @@ namespace BotMyst.Web.Migrations.ModuleOptions
                 name: "UserInfoOptions",
                 columns: table => new
                 {
-                    GuildId = table.Column<ulong>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ChannelBlacklist = table.Column<string>(nullable: true),
-                    ChannelWhitelist = table.Column<string>(nullable: true),
-                    DeleteInvocationMessage = table.Column<bool>(nullable: false),
-                    Dm = table.Column<bool>(nullable: false),
+                    GuildId = table.Column<decimal>(nullable: false),
                     Enabled = table.Column<bool>(nullable: false),
+                    Dm = table.Column<bool>(nullable: false),
+                    DeleteInvocationMessage = table.Column<bool>(nullable: false),
+                    RoleWhitelist = table.Column<string>(nullable: true),
                     RoleBlacklist = table.Column<string>(nullable: true),
-                    RoleWhitelist = table.Column<string>(nullable: true)
+                    ChannelWhitelist = table.Column<string>(nullable: true),
+                    ChannelBlacklist = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
