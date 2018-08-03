@@ -59,11 +59,17 @@ namespace BotMyst.Bot.Commands.Utility
 
             emb.Author = author;
 
-            emb.ThumbnailUrl = $"https://cdn.discordapp.com/avatars/{user.Id}/{user.AvatarId}.png";
+            if (string.IsNullOrEmpty (user.AvatarId))
+                emb.ThumbnailUrl = $"https://discordapp.com/assets/dd4dbc0016779df1378e7812eabaa04d.png";
+            else
+                emb.ThumbnailUrl = $"https://cdn.discordapp.com/avatars/{user.Id}/{user.AvatarId}.png";
 
             EmbedFooterBuilder footer = new EmbedFooterBuilder();
             footer.Text = $"User info requested by {Context.User.Username}";
-            footer.IconUrl = $"https://cdn.discordapp.com/avatars/{Context.User.Id}/{Context.User.AvatarId}.png";
+            if (string.IsNullOrEmpty (Context.User.AvatarId))
+                footer.IconUrl = $"https://discordapp.com/assets/dd4dbc0016779df1378e7812eabaa04d.png";
+            else
+                footer.IconUrl = $"https://cdn.discordapp.com/avatars/{Context.User.Id}/{Context.User.AvatarId}.png";
             emb.Footer = footer;
 
             emb.Description = $"User information for {user.Username}#{user.Discriminator} | {user.Id}";
