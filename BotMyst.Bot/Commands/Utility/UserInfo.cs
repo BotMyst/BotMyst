@@ -100,7 +100,7 @@ namespace BotMyst.Bot.Commands.Utility
                 }
             }
 
-            await ReplyAsync("", false, emb.Build());
+            await SendMessage<UserInfoOptions> ("", false, emb.Build());
         }
 
         private string GetUserPermissions (IGuildUser user)
