@@ -9,13 +9,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 
 using BotMyst.Bot.Helpers;
-using Newtonsoft.Json.Linq;
 
 namespace BotMyst.Bot
 {
@@ -68,7 +68,7 @@ namespace BotMyst.Bot
 
         private Task Log (LogMessage arg)
         {
-            System.Console.WriteLine(arg);
+            Console.WriteLine(arg);
             return Task.CompletedTask;
         }
 
@@ -85,49 +85,34 @@ namespace BotMyst.Bot
             if (message == null) return;
             int argPos = 0;
 
-            if ((message.HasStringPrefix(Configuration["prefix"], ref argPos) || message.HasMentionPrefix(client.CurrentUser, ref argPos)) == false) return;
+            if ((message.HasStringPrefix (Configuration["prefix"], ref argPos) || message.HasMentionPrefix (client.CurrentUser, ref argPos)) == false) return;
 
-            CommandContext context = new CommandContext(client, message);
-            CommandInfo executedCommand = commandService.Search(context, argPos).Commands[0].Command;
+            CommandContext context = new CommandContext (client, message);
+            CommandInfo executedCommand = commandService.Search (context, argPos).Commands [0].Command;
 
-            CommandOptionsAttribute at = (CommandOptionsAttribute) executedCommand.Attributes.First(a => a.GetType() == typeof(CommandOptionsAttribute));
+            CommandOptionsAttribute at = (CommandOptionsAttribute) executedCommand.Attributes.First (a => a.GetType () == typeof (CommandOptionsAttribute));
             var optionsJson = BotMystAPI.GetOptions (at.CommandOptionsType, context.Guild.Id);
-            var options = JsonConvert.DeserializeObject (optionsJson);
-            JObject jo = options as JObject;
+            var options = JsonConvert.DeserializeObject (optionsJson) as JObject;
+
             // The command is disabled
-            if (((bool) jo ["enabled"]) == false)
+            if (((bool) options ["enabled"]) == false)
                 return;
 
-            if (((bool) jo ["deleteInvocationMessage"]) == true)
+            // Delete the invocation message
+            if (((bool) options ["deleteInvocationMessage"]) == true)
                 await arg.DeleteAsync ();
 
-            string [] whitelistRoles = ((string) jo ["roleWhitelist"]).Split (",");
-            string [] blacklistRoles = ((string) jo ["roleBlacklist"]).Split (",");
+            string [] whitelistRoles = null;
+            string [] blacklistRoles = null;
+
+            if (string.IsNullOrEmpty ((string) options ["roleWhitelist"]) == false)
+                whitelistRoles = ((string) options ["roleWhitelist"]).Trim ().Split (",");
+            if (string.IsNullOrEmpty ((string) options ["roleBlacklist"]) == false)
+                blacklistRoles = ((string) options ["roleBlacklist"]).Trim ().Split (",");
 
             SocketGuildUser guildUser = (SocketGuildUser) context.User;
 
-            bool canRun = false;
-
-            foreach (var role in guildUser.Roles)
-            {
-                if (string.IsNullOrEmpty ((string) jo ["roleWhitelist"]) ||
-                    whitelistRoles.Contains (role.Name) ||
-                    whitelistRoles.Length == 0 ||
-                    whitelistRoles.Contains ("@everyone"))
-                {
-                    canRun = true;
-                }
-            }
-
-            foreach (var role in guildUser.Roles)
-            {
-                if (blacklistRoles.Contains (role.Name) ||
-                    blacklistRoles.Length == 0 ||
-                    blacklistRoles.Contains ("@everyone"))
-                {
-                    canRun = false;
-                }
-            }
+            bool canRun = DiscordHelpers.CheckWhitelistBlacklistRoles (guildUser, whitelistRoles, blacklistRoles);
 
             if (canRun == false)
             {
