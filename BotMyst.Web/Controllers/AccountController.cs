@@ -1,14 +1,12 @@
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication;
 
 namespace BotMyst.Web.Controllers
 {
     public class AccountController : Controller
     {
         public IActionResult Login ()
-        {
-            return Challenge (new AuthenticationProperties { RedirectUri = "/Dashboard/Index" } );
-        }
+            => Challenge (new AuthenticationProperties { RedirectUri = "/Dashboard/Index" } );
 
         public IActionResult Logout ()
         {
