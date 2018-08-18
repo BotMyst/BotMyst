@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using Discord;
 using Discord.Commands;
 
+using BotMyst.Bot.Models;
+using BotMyst.Bot.Helpers;
 using BotMyst.Bot.Options.Utility;
 
 namespace BotMyst.Bot.Commands.Utility
@@ -17,40 +19,21 @@ namespace BotMyst.Bot.Commands.Utility
         [CommandOptions (typeof (UserInfoOptions))]
         public async Task UserInfo ([Remainder] IGuildUser user)
         {
+            var options = GetOptions<UserInfoOptions> ();
+
             EmbedBuilder emb = new EmbedBuilder();
+
+            string userRoles = DiscordHelpers.GetListOfUsersRoles (user);
 
             // Find user's highest role so the embed will be coloured with the role's colour
 
-            IReadOnlyCollection<ulong> roleIds = user.RoleIds;
-
-            string userRoles = "";
-
-            IRole highestRole = null;
-            foreach (ulong id in roleIds)
-            {
-                IRole role = Context.Guild.GetRole(id);
-                if (role.Name == "@everyone")
-                    continue;
-
-                userRoles += $"{role.Name}, ";
-
-                if (highestRole == null)
-                {
-                    highestRole = role;
-                }
-                else if (role.Position > highestRole.Position)
-                {
-                    highestRole = role;
-                }
-            }
-
-            if (string.IsNullOrEmpty(userRoles) == false)
-                userRoles = userRoles.Remove(userRoles.Length - 2, 2);
+            IRole highestRole = DiscordHelpers.GetUsersHigherstRole (user);
 
             if (highestRole != null)
                 emb.Color = highestRole.Color;
 
-            EmbedAuthorBuilder author = new EmbedAuthorBuilder();
+            // Display if the user is a bot or a webhook
+            EmbedAuthorBuilder author = new EmbedAuthorBuilder ();
             author.Name = user.Username;
             if (user.IsBot)
                 author.Name += " (Bot)";
@@ -59,6 +42,7 @@ namespace BotMyst.Bot.Commands.Utility
 
             emb.Author = author;
 
+            // If the user has a default avatar
             if (string.IsNullOrEmpty (user.AvatarId))
                 emb.ThumbnailUrl = $"https://discordapp.com/assets/dd4dbc0016779df1378e7812eabaa04d.png";
             else
@@ -66,6 +50,7 @@ namespace BotMyst.Bot.Commands.Utility
 
             EmbedFooterBuilder footer = new EmbedFooterBuilder();
             footer.Text = $"User info requested by {Context.User.Username}";
+            // If the user has a default avatar
             if (string.IsNullOrEmpty (Context.User.AvatarId))
                 footer.IconUrl = $"https://discordapp.com/assets/dd4dbc0016779df1378e7812eabaa04d.png";
             else
@@ -78,9 +63,11 @@ namespace BotMyst.Bot.Commands.Utility
 
             emb.AddField("Joined server at", ((DateTimeOffset)user.JoinedAt).ToString("dd MMM yyyy, HH:mm"));
 
+            // Display the list of all of user's roles
             if (string.IsNullOrEmpty(userRoles) == false)
                 emb.AddField("Role(s)", userRoles);
 
+            // Display the list of all of user's permissions
             string userPermissions = GetUserPermissions (user);
 
             if (string.IsNullOrEmpty (userPermissions) == false)
@@ -100,9 +87,12 @@ namespace BotMyst.Bot.Commands.Utility
                 }
             }
 
-            await SendMessage<UserInfoOptions> ("", false, emb.Build());
+            await SendMessage (options, "", false, emb.Build());
         }
 
+        /// <summary>
+        /// Get a list of user's permissions in a nicely formatted string.
+        /// </summary>
         private string GetUserPermissions (IGuildUser user)
         {
             string permissions = "";

@@ -13,8 +13,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using BotMyst.Bot;
 using BotMyst.Web.Models;
-using BotMyst.Bot.Options.Utility;
 using BotMyst.Web.Helpers;
+using BotMyst.Bot.Options.Utility;
 
 namespace BotMyst.Web.Controllers
 {
@@ -35,6 +35,7 @@ namespace BotMyst.Web.Controllers
         [Route ("generateoptions")]
         public async Task GenerateOptions (ulong guildId)
         {
+            // (#58) TODO: Make it so this isn't so ugly...
             if (moduleOptionsContext.LmgtfyOptions.Any (a => a.GuildId == guildId) == false)
                 moduleOptionsContext.LmgtfyOptions.Add (new LmgtfyOptions { GuildId = guildId });
 

@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Discord;
 using Discord.Commands;
 
+using BotMyst.Bot.Models;
 using BotMyst.Bot.Options.Utility;
 
 namespace BotMyst.Bot.Commands.Utility
@@ -18,6 +19,8 @@ namespace BotMyst.Bot.Commands.Utility
         [CommandOptions (typeof (LmgtfyOptions))]
         public async Task Lmgtfy ([Remainder] string search)
         {
+            var options = GetOptions<LmgtfyOptions> ();
+
             string url = $"http://lmgtfy.com/?q={HttpUtility.UrlEncode (search)}";
 
             EmbedBuilder eb = new EmbedBuilder ();
@@ -26,7 +29,7 @@ namespace BotMyst.Bot.Commands.Utility
 
             eb.Build ();
 
-            await SendMessage<LmgtfyOptions> (string.Empty, false, eb);
+            await SendMessage (options, string.Empty, false, eb);
         }
     }
 }

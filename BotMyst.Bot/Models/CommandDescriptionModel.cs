@@ -1,4 +1,4 @@
-namespace BotMyst.Bot
+namespace BotMyst.Bot.Models
 {
     public class CommandDescriptionModel
     {

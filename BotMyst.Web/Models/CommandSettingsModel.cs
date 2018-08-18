@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Collections.Generic;
 
 using BotMyst.Bot;
+using BotMyst.Bot.Models;
 
 namespace BotMyst.Web.Models
 {

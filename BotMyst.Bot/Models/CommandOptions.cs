@@ -1,6 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace BotMyst.Bot
+using BotMyst.Bot.Models.DisplayAttributes;
+
+namespace BotMyst.Bot.Models
 {
     public abstract class CommandOptions
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BotMyst.Bot
+namespace BotMyst.Bot.Models
 {
     public class ModuleDescriptionModel
     {
