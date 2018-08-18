@@ -112,7 +112,7 @@ namespace BotMyst.Bot
 
             SocketGuildUser guildUser = (SocketGuildUser) context.User;
 
-            bool canRun = DiscordHelpers.CheckWhitelistBlacklistRoles (guildUser, whitelistRoles, blacklistRoles);
+            bool canRun = BotMystHelpers.CheckWhitelistBlacklistRoles (guildUser, whitelistRoles, blacklistRoles);
 
             if (canRun == false)
             {
