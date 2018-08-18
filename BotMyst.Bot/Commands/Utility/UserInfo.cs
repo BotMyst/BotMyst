@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Discord;
 using Discord.Commands;
 
+using BotMyst.Bot.Models;
 using BotMyst.Bot.Helpers;
 using BotMyst.Bot.Options.Utility;
 

@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 
+using BotMyst.Bot.Models;
+
 namespace BotMyst.Bot
 {
     public class Module : ModuleBase

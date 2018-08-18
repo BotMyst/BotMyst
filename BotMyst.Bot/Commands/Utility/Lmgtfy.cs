@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Discord;
 using Discord.Commands;
 
+using BotMyst.Bot.Models;
 using BotMyst.Bot.Options.Utility;
 
 namespace BotMyst.Bot.Commands.Utility

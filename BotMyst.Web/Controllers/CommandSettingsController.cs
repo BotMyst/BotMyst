@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 using BotMyst.Bot;
 using BotMyst.Web.Models;
+using BotMyst.Bot.Models;
 using BotMyst.Web.Helpers;
+using BotMyst.Bot.Models.DisplayAttributes;
 
 namespace BotMyst.Web.Controllers
 {
@@ -45,7 +47,7 @@ namespace BotMyst.Web.Controllers
 
                 CommandOptionNameAttribute nameAttribute = (CommandOptionNameAttribute) attributes.First (a => a.GetType () == typeof (CommandOptionNameAttribute));
                 CommandOptionSummaryAttribute summaryAttribute = (CommandOptionSummaryAttribute) attributes.First (a => a.GetType () == typeof (CommandOptionSummaryAttribute));
-                DisaplayAttribute displayAttribute = (DisaplayAttribute) attributes.First (a => a.GetType ().IsSubclassOf (typeof (DisaplayAttribute)));
+                DisplayAttribute displayAttribute = (DisplayAttribute) attributes.First (a => a.GetType ().IsSubclassOf (typeof (DisplayAttribute)));
 
                 CommandOptionDescriptionModel commandDesc = new CommandOptionDescriptionModel
                 {

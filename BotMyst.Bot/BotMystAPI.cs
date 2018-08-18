@@ -8,6 +8,8 @@ using Discord.Commands;
 
 using RestSharp;
 
+using BotMyst.Bot.Models;
+
 namespace BotMyst.Bot
 {
     public static class BotMystAPI

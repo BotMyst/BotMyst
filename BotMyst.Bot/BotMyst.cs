@@ -15,6 +15,7 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 
+using BotMyst.Bot.Models;
 using BotMyst.Bot.Helpers;
 
 namespace BotMyst.Bot
