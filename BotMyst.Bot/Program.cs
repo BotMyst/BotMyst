@@ -9,8 +9,6 @@ namespace BotMyst.Bot
         {
             BotMyst bot = new BotMyst ();
             await bot.Start ();
-            
-            await Task.Delay (-1);
         }
     }
 }
