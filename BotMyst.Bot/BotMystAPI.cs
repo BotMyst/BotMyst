@@ -1,8 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Discord.Commands;
+using System.Collections.Generic;
+
 using Newtonsoft.Json;
+
+using Discord.Commands;
 
 using RestSharp;
 
@@ -10,13 +12,13 @@ namespace BotMyst.Bot
 {
     public static class BotMystAPI
     {
-        private const string ApiUrl = "http://localhost:5000/";
+        private static readonly string ApiUrl = BotMyst.Configuration ["BotMystApiUrl"];
 
         public static void GenerateOptions (ulong guildId)
         {
             RestClient client = new RestClient (ApiUrl);
 
-            RestRequest request = new RestRequest ($"api/generateoptions?guildId={guildId}", Method.POST);
+            RestRequest request = new RestRequest ($"generateoptions?guildId={guildId}", Method.POST);
             request.AddHeader ("Authorization", $"Bearer {BotMyst.Configuration ["BotMystApiToken"]}");
             
             IRestResponse response = client.Execute (request);
@@ -26,7 +28,7 @@ namespace BotMyst.Bot
         {
             RestClient client = new RestClient(ApiUrl);
 
-            RestRequest request = new RestRequest($"api/getcommandoptions?commandOptionsType={commandOptionsType.Name}&guildId={guildId}", Method.GET);
+            RestRequest request = new RestRequest($"getcommandoptions?commandOptionsType={commandOptionsType.Name}&guildId={guildId}", Method.GET);
             request.AddHeader("Authorization", $"Bearer {BotMyst.Configuration["BotMystApiToken"]}");
 
             IRestResponse response = client.Execute(request);
@@ -80,7 +82,7 @@ namespace BotMyst.Bot
 
             RestClient client = new RestClient (ApiUrl);
 
-            RestRequest request = new RestRequest ($"api/sendmoduledata", Method.POST);
+            RestRequest request = new RestRequest ($"sendmoduledata", Method.POST);
             request.AddHeader ("Authorization", $"Bearer {BotMyst.Configuration ["BotMystApiToken"]}");
             request.AddJsonBody (modules.ToArray ());
 
