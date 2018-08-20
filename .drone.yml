@@ -7,9 +7,4 @@ pipeline:
   notify:
     image: appleboy/drone-discord
     secrets: [ discord_webhook_id, discord_webhook_token ]
-    message: |
-      {{ #success build.status }}
-        build {{ build.number }} succeeded.
-      {{ else }}
-        build {{ build.number }} failed.
-      {{ /success }}
+    message: {{ build.number }} - {{ build.status }}
