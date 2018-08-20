@@ -1,0 +1,25 @@
+@model PartialOptionModel
+
+<div class="option toggle-option">
+    <p class="sub-header option-name">@Model.Option.Name</p>
+    <p class="sub-p">@Model.Option.Summary</p>
+
+    @{
+        var toggleEnabled = (bool) Model.Option.Value ? "checked" : "";
+    }
+
+    <div>
+        <form asp-controller="CommandSettings"
+              asp-action="ToggleValue"
+              method="POST"
+              asp-route-guildId="@Model.GuildId"
+              asp-route-commandId="@Model.CommandId"
+              asp-route-optionName="@Model.Option.Name"
+              asp-route-optionSummary="@Model.Option.Summary"
+              asp-route-optionType="@Model.Option.OptionType"
+              asp-route-optionValue="@Model.Option.Value">
+            <label class="switch"><input type="checkbox" @toggleEnabled onchange="this.form.submit()" />    <div></div>
+            </label>
+        </form>
+    </div>
+</div>
