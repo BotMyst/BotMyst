@@ -7,4 +7,4 @@ pipeline:
   discord:
     image: appleboy/drone-discord
     secrets: [ discord_webhook_id, discord_webhook_token ]
-    message: {{ build.number }} - {{ build.status }}
+    message: "CIMyst Push..."
