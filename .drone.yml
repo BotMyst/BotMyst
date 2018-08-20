@@ -1,3 +1,15 @@
-image: microsoft/dotnet
-script:
-  - dotnet build
+pipeline:
+  build:
+    image: microsoft/dotnet
+    commands:
+      - dotnet build
+
+  notify:
+    image: appleboy/drone-discord
+    secrets: [ discord_webhook_id, discord_webhook_token ]
+    message: |
+      {{ #success build.status }}
+        build {{ build.number }} succeeded.
+      {{ else }}
+        build {{ build.number }} failed.
+      {{ /success }}
