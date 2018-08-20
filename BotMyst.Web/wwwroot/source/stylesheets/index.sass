@@ -264,9 +264,13 @@ body
     font-size: 20px
     height: 1em
     width: 2em
-    background: $secondary-color
+    background: $primary-color
     border-radius: 4px
-    border: 1px solid $primary-color
+    border: 1px solid $lighter-color
+    +transition ()
+
+    &:hover
+        border: 1px solid white
 
 .switch input:checked ~ div
     background: $accent-color

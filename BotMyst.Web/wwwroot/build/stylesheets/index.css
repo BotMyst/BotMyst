@@ -273,9 +273,17 @@ body {
   font-size: 20px;
   height: 1em;
   width: 2em;
-  background: #222222;
+  background: #141414;
   border-radius: 4px;
-  border: 1px solid #141414;
+  border: 1px solid #777777;
+  -webkit-transition: all 200ms ease-in-out;
+  -moz-transition: all 200ms ease-in-out;
+  -ms-transition: all 200ms ease-in-out;
+  -o-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}
+.switch:hover {
+  border: 1px solid white;
 }
 
 .switch input:checked ~ div {
