@@ -35,14 +35,13 @@
 <p class="command-summary">@Model.CommandDescription.Summary</p>
 
 <div class="command-enabled">
-    @if (Model.CommandOptions.Enabled)
-    {
-        <button class="button enabled" onclick="location.href='@Url.Action("ToggleCommand", "CommandSettings", new { guildId = Model.Guild.Id, commandId = Model.CommandDescription.Id })'">Enabled</button>
+    @{
+        bool enabled = Model.CommandOptions.Enabled;
+        string enabledClass = enabled ? "enabled" : "disabled";
+        string enabledText = enabled ? "Enabled" : "Disabled";
     }
-    else
-    {
-        <button class="button disabled" onclick="location.href='@Url.Action("ToggleCommand", "CommandSettings", new { guildId = Model.Guild.Id, commandId = Model.CommandDescription.Id })'">Disabled</button>
-    }
+
+    <button class="button @enabledClass" onclick="location.href='@Url.Action("ToggleCommand", "CommandSettings", new { guildId = Model.Guild.Id, commandId = Model.CommandDescription.Id })'">@enabledText</button>
 </div>
 
 <hr>
@@ -51,71 +50,21 @@
 {
     @if (cmd.OptionType == "ToggleAttribute")
     {
-        <div class="option toggle-option">
-            <p class="sub-header option-name">@cmd.Name</p>
-            <p class="sub-p">@cmd.Summary</p>
-
-            @{
-                var toggleEnabled = (bool) cmd.Value ? "checked" : "";
-            }
-
-            <div>
-                <label class="switch"><input type="checkbox" @toggleEnabled onchange="location.href='@Url.Action("ToggleValue", "CommandSettings", new { guildId = Model.Guild.Id, commandId = Model.CommandDescription.Id, optionName = cmd.Name, currentValue = (bool) cmd.Value})'" />    <div></div>
-                </label>
-            </div>
-        </div>
+        @await Html.PartialAsync("OptionTypes/ToggleOption", new PartialOptionModel
+                                                             {
+                                                                Option = @cmd,
+                                                                GuildId = Model.Guild.Id,
+                                                                CommandId = Model.CommandDescription.Id
+                                                             });
     }
     else if (cmd.OptionType == "RoleListAttribute")
     {
-        <div class="option toggle-option">
-            <p class="sub-header option-name">@cmd.Name</p>
-            <p class="sub-p">@cmd.Summary</p>
-
-            @{
-                var roles = Helper.GetRolesFromString (Model.Guild, (string) cmd.Value);
-            }
-
-            <div class="role-list">
-                <ul>
-                    @foreach (var role in roles)
-                    {
-                        var roleColor = Color.FromArgb (role.Color);
-                        if (role.Color == 0)
-                        {
-                            roleColor = Color.White;
-                        }
-                        <li style="border: 1px solid rgb(@roleColor.R, @roleColor.G, @roleColor.B)">
-                            <a class="remove"
-                               asp-controller="CommandSettings"
-                               asp-action="RemoveRoleFromRoleList",
-                               asp-route-guildId="@Model.Guild.Id"
-                               asp-route-commandId="@Model.CommandDescription.Id"
-                               asp-route-optionName="@cmd.Name"
-                               asp-route-roleName="@role.Name">
-                                <img style="border: 1px solid rgb(@roleColor.R, @roleColor.G, @roleColor.B)" src="img/x-icon.svg" />
-                            </a>
-                            <div class="role-name">@role.Name</div>
-                        </li>
-                    }
-                    @if (roles.Length == 0)
-                    {
-                        <li>...</li>
-                    }
-                </ul>
-
-                <!-- <div class="plus"
-                     onclick="location.href='@Url.Action("DisplayRolePicker", "CommandSettings", new { guildId = Model.Guild.Id, commandId = Model.CommandDescription.Id, optionName = cmd.Name })'">
-                    +
-                </div> -->
-
-                <div class="plus"
-                     onclick="displayRolePicker('@Model.Guild.Id', '@Model.CommandDescription.Id', '@cmd.Name')">
-                    +
-                </div>
-            </div>
-        </div>
-
-        <div style="clear:both"></div>
+        @await Html.PartialAsync("OptionTypes/RoleListOption", new PartialOptionModel
+                                                               {
+                                                                   Option = @cmd,
+                                                                   GuildId = Model.Guild.Id,
+                                                                   CommandId = Model.CommandDescription.Id
+                                                               });
     }
 }
 

@@ -1,0 +1,46 @@
+@model PartialOptionModel
+
+<div class="option toggle-option">
+    <p class="sub-header option-name">@Model.Option.Name</p>
+    <p class="sub-p">@Model.Option.Summary</p>
+
+    @{
+        var roles = await Helper.GetRolesFromString (ulong.Parse (Model.GuildId), (string) Model.Option.Value);
+    }
+
+    <div class="role-list">
+        <ul>
+            @foreach (var role in roles)
+            {
+                var roleColor = Color.FromArgb (role.Color);
+                if (role.Color == 0)
+                {
+                    roleColor = Color.White;
+                }
+                <li style="border: 1px solid rgb(@roleColor.R, @roleColor.G, @roleColor.B)">
+                    <a class="remove"
+                        asp-controller="CommandSettings"
+                        asp-action="RemoveRoleFromRoleList",
+                        asp-route-guildId="@Model.GuildId"
+                        asp-route-commandId="@Model.CommandId"
+                        asp-route-optionName="@Model.Option.Name"
+                        asp-route-roleName="@role.Name">
+                        <img style="border: 1px solid rgb(@roleColor.R, @roleColor.G, @roleColor.B)" src="img/x-icon.svg" />
+                    </a>
+                    <div class="role-name">@role.Name</div>
+                </li>
+            }
+            @if (roles.Length == 0)
+            {
+                <li>...</li>
+            }
+        </ul>
+
+        <div class="plus"
+                onclick="displayRolePicker('@Model.GuildId', '@Model.CommandId', '@Model.Option.Name')">
+            +
+        </div>
+    </div>
+</div>
+
+<div style="clear:both"></div>

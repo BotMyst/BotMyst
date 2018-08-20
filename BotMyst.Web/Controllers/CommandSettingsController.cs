@@ -75,9 +75,14 @@ namespace BotMyst.Web.Controllers
             return RedirectToAction ("Index", new { guildId = guildId, commandId = commandId });
         }
 
-        public async Task<ActionResult> ToggleValue (string guildId, string commandId, string optionName, bool currentValue)
+        public async Task<IActionResult> ToggleValue (string guildId,
+                                                     int commandId,
+                                                     string optionName,
+                                                     string optionSummary,
+                                                     string optionType,
+                                                     bool optionValue)
         {
-            var description = _modulesContext.CommandDescriptions.First (c => c.Id == int.Parse (commandId));
+            var description = _modulesContext.CommandDescriptions.First (c => c.Id == commandId);
             var options = ApiHelpers.GetCommandOptions (_moduleOptionsContext, description.CommandOptionsType, ulong.Parse (guildId));
 
             var properties = options.GetType ().GetProperties ();
@@ -91,7 +96,7 @@ namespace BotMyst.Web.Controllers
                     optionProp = prop;
             }
 
-            optionProp.SetValue (options, !currentValue);
+            optionProp.SetValue (options, !optionValue);
 
             await _moduleOptionsContext.SaveChangesAsync ();
 
