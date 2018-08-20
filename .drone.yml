@@ -1,7 +1,7 @@
 pipeline:
   build:
     image: microsoft/dotnet
-    commands:
+    script:
       - dotnet build
 
   notify:
