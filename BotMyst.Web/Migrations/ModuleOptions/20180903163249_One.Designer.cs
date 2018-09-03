@@ -4,27 +4,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BotMyst.Web.Migrations.ModuleOptions
 {
     [DbContext(typeof(ModuleOptionsContext))]
-    [Migration("20180803163854_Initial2")]
-    partial class Initial2
+    [Migration("20180903163249_One")]
+    partial class One
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("ProductVersion", "2.1.2-rtm-30932");
 
             modelBuilder.Entity("BotMyst.Bot.Options.Utility.LmgtfyOptions", b =>
                 {
-                    b.Property<decimal>("GuildId")
-                        .ValueGeneratedOnAdd()
-                        .HasConversion(new ValueConverter<decimal, decimal>(v => default(decimal), v => default(decimal), new ConverterMappingHints(precision: 20, scale: 0)));
+                    b.Property<ulong>("GuildId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ChannelBlacklist");
 
@@ -47,9 +43,8 @@ namespace BotMyst.Web.Migrations.ModuleOptions
 
             modelBuilder.Entity("BotMyst.Bot.Options.Utility.UserInfoOptions", b =>
                 {
-                    b.Property<decimal>("GuildId")
-                        .ValueGeneratedOnAdd()
-                        .HasConversion(new ValueConverter<decimal, decimal>(v => default(decimal), v => default(decimal), new ConverterMappingHints(precision: 20, scale: 0)));
+                    b.Property<ulong>("GuildId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ChannelBlacklist");
 

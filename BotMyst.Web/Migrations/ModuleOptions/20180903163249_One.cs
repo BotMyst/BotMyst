@@ -2,7 +2,7 @@
 
 namespace BotMyst.Web.Migrations.ModuleOptions
 {
-    public partial class Initial2 : Migration
+    public partial class One : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,7 +10,8 @@ namespace BotMyst.Web.Migrations.ModuleOptions
                 name: "LmgtfyOptions",
                 columns: table => new
                 {
-                    GuildId = table.Column<decimal>(nullable: false),
+                    GuildId = table.Column<ulong>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Enabled = table.Column<bool>(nullable: false),
                     Dm = table.Column<bool>(nullable: false),
                     DeleteInvocationMessage = table.Column<bool>(nullable: false),
@@ -28,7 +29,8 @@ namespace BotMyst.Web.Migrations.ModuleOptions
                 name: "UserInfoOptions",
                 columns: table => new
                 {
-                    GuildId = table.Column<decimal>(nullable: false),
+                    GuildId = table.Column<ulong>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Enabled = table.Column<bool>(nullable: false),
                     Dm = table.Column<bool>(nullable: false),
                     DeleteInvocationMessage = table.Column<bool>(nullable: false),
