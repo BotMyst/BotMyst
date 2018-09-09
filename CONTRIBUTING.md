@@ -12,7 +12,7 @@ Go to the OAuth2 section and add a new redirect which should point to `http://lo
 
 ## Required dependencies
 
-All you need to have install to run BotMyst is .Net Core 2.1. You can get it from here: https://dotnet.github.io/
+All you need to have installed to run BotMyst is .Net Core 2.1. You can get it from here: https://dotnet.github.io/
 
 ## Clone the repository
 
