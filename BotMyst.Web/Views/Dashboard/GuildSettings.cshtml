@@ -47,6 +47,8 @@ else
 
         foreach (var command in module.CommandDescriptions)
         {
+            string enabledText = command.Enabled ? "Enabled" : "Disabled";
+            string enabledClass = command.Enabled ? "module-enabled" : "module-disabled";
             <div class="row bar module">
                 <a class="twelve-columns" asp-controller="CommandSettings" asp-action="Index" asp-route-guildId="@Model.Guild.Id" asp-route-commandId="@command.Id">
                     <div class="module-name">
@@ -55,8 +57,8 @@ else
                     <div class="module-description">
                         <p>@command.Summary</p>
                     </div>
-                    <div class="module-enabled">
-                        <button class="button enabled">Enabled</button>
+                    <div class="@enabledClass">
+                        <button class="button enabled">@enabledText</button>
                     </div>
                 </a>
             </div>

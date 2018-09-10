@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
-
+using BotMyst.Bot.Models;
+using BotMyst.Web.Helpers;
 using BotMyst.Web.Models;
 
 namespace BotMyst.Web
@@ -15,6 +16,12 @@ namespace BotMyst.Web
             DiscordRoleModel [] allRoles = guild.Roles;
             DiscordRoleModel [] res = allRoles.Where (r => sep.Contains (r.Name)).ToArray ();
             return res;
+        }
+
+        public static bool CheckIfCommandEnabled (ModuleOptionsContext moduleOptionsContext, string commandOptionsType, ulong guildId)
+        {
+            CommandOptions options = ApiHelpers.GetCommandOptions (moduleOptionsContext, commandOptionsType, guildId);
+            return options.Enabled;
         }
     }
 }

@@ -227,6 +227,13 @@ body {
 #dashboard .module .module-enabled .button:hover {
   color: #ee720d;
 }
+#dashboard .module .module-disabled {
+  float: right;
+}
+#dashboard .module .module-disabled .button {
+  border: none;
+  color: #777777;
+}
 
 #footer {
   position: fixed;

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BotMyst.Web.Models
 {
@@ -10,6 +11,9 @@ namespace BotMyst.Web.Models
         public string Command { get; set; }
         public string Summary { get; set; }
         public string CommandOptionsType { get; set; }
+
+        [NotMapped]
+        public bool Enabled { get; set; }
 
         public int ModuleDescriptionId { get; set; }
         public ModuleDescriptionModel ModuleDescription { get; set; }
