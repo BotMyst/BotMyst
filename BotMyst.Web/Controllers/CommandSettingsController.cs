@@ -138,6 +138,13 @@ namespace BotMyst.Web.Controllers
             List<string> allRoles = currentRoles.Split (',').ToList ();
             allRoles.Add (roleName);
             string newRoles = string.Join (',', allRoles);
+            if (newRoles.Length > 0)
+            {
+                if (newRoles [0] == ',')
+                    newRoles = newRoles.Remove (0, 1);
+                if (newRoles [newRoles.Length - 1] == ',')
+                    newRoles = newRoles.Remove (newRoles.Length - 2, 1);
+            }
             optionProp.SetValue (options, newRoles);
 
             await _moduleOptionsContext.SaveChangesAsync ();
@@ -165,6 +172,13 @@ namespace BotMyst.Web.Controllers
             List<string> allRoles = currentRoles.Split (',').ToList ();
             allRoles.Remove (roleName);
             string newRoles = string.Join (',', allRoles);
+            if (newRoles.Length > 0)
+            {
+                if (newRoles [0] == ',')
+                    newRoles = newRoles.Remove (0, 1);
+                if (newRoles [newRoles.Length - 1] == ',')
+                    newRoles = newRoles.Remove (newRoles.Length - 2, 1);
+            }
             optionProp.SetValue (options, newRoles);
 
             await _moduleOptionsContext.SaveChangesAsync ();
