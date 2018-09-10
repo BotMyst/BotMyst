@@ -12,10 +12,12 @@ namespace BotMyst.Web.Controllers
     public class DashboardController : Controller
     {
         private ModulesContext _modulesContext;
+        private ModuleOptionsContext _moduleOptionsContext;
 
-        public DashboardController (ModulesContext modulesContext)
+        public DashboardController (ModulesContext modulesContext, ModuleOptionsContext moduleOptionsContext)
         {
             _modulesContext = modulesContext;
+            _moduleOptionsContext = moduleOptionsContext;
         }
 
         public async Task<IActionResult> Index ()
@@ -43,6 +45,11 @@ namespace BotMyst.Web.Controllers
             foreach (var m in _modulesContext.Modules)
             {
                 m.CommandDescriptions = new List<CommandDescriptionModel> (_modulesContext.CommandDescriptions.Where (d => d.ModuleDescriptionId == m.Id));
+
+                foreach (var c in m.CommandDescriptions)
+                {
+                    c.Enabled = Helper.CheckIfCommandEnabled (_moduleOptionsContext, c.CommandOptionsType, ulong.Parse (id));
+                }
 
                 model.Modules.Add (m);
             }
