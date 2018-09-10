@@ -90,12 +90,12 @@ Create an `appsettings.json` file in the `BotMyst/BotMyst.Bot` directory and pas
 {
     "prefix": ">",
     "discordToken": "",
-    "BotMystApiUrl": "http://localhost:500/",
+    "BotMystApiUrl": "http://localhost:5000/api/",
     "BotMystApiToken": ""
 }
 ```
 
-The `prefix` field is the bot prefix for running commands. `discordToken` is the bot token key from your Discord Application Bot. `BotMystApiUrl` is the url to the website. `BotMystApiToken` is the token you generated earlier.
+The `prefix` field is the bot prefix for running commands. `discordToken` is the bot token key from your Discord Application Bot. `BotMystApiUrl` is the url to the website's api, this is the address with the `/api/` sub route. `BotMystApiToken` is the token you generated earlier.
 
 ## Running database migrations
 
