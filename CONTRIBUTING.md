@@ -60,7 +60,7 @@ Create an `appsettings.json` file in the `BotMyst/BotMyst.Web` directory and pas
 }
 ```
 
-The `Jwt` object is used for setting up the BotMyst website API. The `Key` field is a password of sorts, it will use that key to generate an API key you can use so `BotMyst.Bot` can access the API. The `Issuer` field should be set to the address of the website, since this is a local instance it's set to `localhost`.
+The `Jwt` object is used for setting up the BotMyst website API. The `Key` field is a password of sorts, it will use that key to generate an API key you can use so `BotMyst.Bot` can access the API. Your `Key` must be 16 characters or longer to generate an API key. The `Issuer` field should be set to the address of the website, since this is a local instance it's set to `localhost`.
 
 The `Discord` object is used for storing the credentials of your [Discord application](#creating-a-discord-app). All fields here are self explanatory.
 
