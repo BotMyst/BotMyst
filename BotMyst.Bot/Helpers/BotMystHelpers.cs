@@ -1,5 +1,6 @@
+using System;
 using System.Linq;
-
+using Discord;
 using Discord.WebSocket;
 
 namespace BotMyst.Bot.Helpers
@@ -40,6 +41,35 @@ namespace BotMyst.Bot.Helpers
                 foreach (var role in user.Roles)
                     if (blacklistRoles.Contains (role.Name))
                         canRun = false;
+            }
+
+            return canRun;
+        }
+
+        public static bool CheckWhitelistBlacklistChannels (string channelName, string [] whitelistChannels, string [] blacklistChannels)
+        {
+            bool canRun = false;
+
+            if (whitelistChannels == null ||
+                whitelistChannels.Length == 0)
+            {
+                canRun = true;
+            }
+            else
+            {
+                if (whitelistChannels.Contains (channelName))
+                    canRun = true;
+            }
+
+            if (blacklistChannels == null ||
+                blacklistChannels.Length == 0)
+            {
+                canRun = true;   
+            }
+            else
+            {
+                if (blacklistChannels.Contains (channelName))
+                    canRun = false;
             }
 
             return canRun;

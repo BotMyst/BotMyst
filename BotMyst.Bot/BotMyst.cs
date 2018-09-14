@@ -106,14 +106,23 @@ namespace BotMyst.Bot
             string [] whitelistRoles = null;
             string [] blacklistRoles = null;
 
+            string [] whitelistChannels = null;
+            string [] blacklistChannels = null;
+
             if (string.IsNullOrEmpty ((string) options ["roleWhitelist"]) == false)
                 whitelistRoles = ((string) options ["roleWhitelist"]).Trim ().Split (",");
             if (string.IsNullOrEmpty ((string) options ["roleBlacklist"]) == false)
                 blacklistRoles = ((string) options ["roleBlacklist"]).Trim ().Split (",");
 
+            if (string.IsNullOrEmpty ((string) options ["channelWhitelist"]) == false)
+                whitelistChannels = ((string) options ["channelWhitelist"]).Trim ().Split (",");
+            if (string.IsNullOrEmpty ((string) options ["channelBlacklist"]) == false)
+                blacklistChannels = ((string) options ["channelBlacklist"]).Trim ().Split (",");
+
             SocketGuildUser guildUser = (SocketGuildUser) context.User;
 
             bool canRun = BotMystHelpers.CheckWhitelistBlacklistRoles (guildUser, whitelistRoles, blacklistRoles);
+            canRun = BotMystHelpers.CheckWhitelistBlacklistChannels (context.Channel.Name, whitelistChannels, blacklistChannels);
 
             if (canRun == false)
             {
