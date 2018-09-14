@@ -91,5 +91,26 @@ namespace BotMyst.Web
                 return null;
             }
         }
+
+        public async Task<List<DiscordChannelModel>> GetGuildChannelsAsync (string guildId)
+        {
+            httpClient.DefaultRequestHeaders.Clear ();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue ("Bot", Startup.Configuration ["Discord:BotToken"]);  
+            httpClient.DefaultRequestHeaders.Accept.Clear ();
+            httpClient.DefaultRequestHeaders.Accept.Add (new MediaTypeWithQualityHeaderValue ("application/json"));
+            httpClient.DefaultRequestHeaders.Connection.Clear ();
+            httpClient.DefaultRequestHeaders.Connection.Add ("GET");
+
+            HttpResponseMessage response = await httpClient.GetAsync ($"guilds/{guildId}/channels");
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync ();
+                return JsonConvert.DeserializeObject<List<DiscordChannelModel>> (json);
+            }
+            else
+            {
+                return null;
+            }
+        } 
     }
 }

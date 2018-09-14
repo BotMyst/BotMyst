@@ -4,10 +4,10 @@ using Newtonsoft.Json;
 
 namespace BotMyst.Web.Models
 {
-    public class DiscordChannelModel
+    public class DiscordChannelModel : IDiscordNameable
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public ulong Id { get; set; }
 
         [JsonProperty("type")]
         public long Type { get; set; }
