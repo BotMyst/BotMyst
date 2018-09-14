@@ -2,10 +2,10 @@ using Newtonsoft.Json;
 
 namespace BotMyst.Web.Models
 {
-    public class DiscordRoleModel
+    public class DiscordRoleModel : IDiscordNameable
     {
         [JsonProperty ("id")]
-        public string Id { get; set; }
+        public ulong Id { get; set; }
         [JsonProperty ("name")]
         public string Name { get; set; }
         [JsonProperty ("color")]
