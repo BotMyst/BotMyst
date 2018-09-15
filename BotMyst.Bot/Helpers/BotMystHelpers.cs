@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Discord;
 using Discord.WebSocket;
+using Newtonsoft.Json;
 
 namespace BotMyst.Bot.Helpers
 {
@@ -73,6 +76,15 @@ namespace BotMyst.Bot.Helpers
             }
 
             return canRun;
+        }
+
+        //Need to add error handling on this and move it to a different spot if needed. 
+        public static string GetApiKey(string key)
+        {
+            string api = File.ReadAllText("ApiKeys.json");
+            var data = JsonConvert.DeserializeObject<dynamic>(api);
+            Dictionary<string, string> keys = data.ToObject<Dictionary<string, string>>();
+            return keys[key];
         }
     }
 }
