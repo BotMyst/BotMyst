@@ -39,6 +39,30 @@ namespace BotMyst.Web.Migrations.ModuleOptions
                     b.ToTable("AvatarOptions");
                 });
 
+            modelBuilder.Entity("BotMyst.Bot.Options.Utility.DictionaryOptions", b =>
+                {
+                    b.Property<ulong>("GuildId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ChannelBlacklist");
+
+                    b.Property<string>("ChannelWhitelist");
+
+                    b.Property<bool>("DeleteInvocationMessage");
+
+                    b.Property<bool>("Dm");
+
+                    b.Property<bool>("Enabled");
+
+                    b.Property<string>("RoleBlacklist");
+
+                    b.Property<string>("RoleWhitelist");
+
+                    b.HasKey("GuildId");
+
+                    b.ToTable("DictionaryOptions");
+                });
+
             modelBuilder.Entity("BotMyst.Bot.Options.Utility.LmgtfyOptions", b =>
                 {
                     b.Property<ulong>("GuildId")

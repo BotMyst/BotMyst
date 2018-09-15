@@ -10,6 +10,7 @@ namespace BotMyst.Web.Models
         public DbSet<LmgtfyOptions> LmgtfyOptions { get; set; }
         public DbSet<UserInfoOptions> UserInfoOptions { get; set; }
         public DbSet<AvatarOptions> AvatarOptions { get; set; }
+        public DbSet<DictionaryOptions> DictionaryOptions { get; set; }
     
         public ModuleOptionsContext (DbContextOptions<ModuleOptionsContext> options) : base(options) { }
 
