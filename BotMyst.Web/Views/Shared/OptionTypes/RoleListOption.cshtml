@@ -5,10 +5,10 @@
     <p class="sub-p">@Model.Option.Summary</p>
 
     @{
-        var roles = await Helper.GetRolesFromString (ulong.Parse (Model.GuildId), (string) Model.Option.Value);
+        var roles = await Helper.GetDiscordObjectsFromString<DiscordRoleModel> (ulong.Parse (Model.GuildId), (string) Model.Option.Value);
     }
 
-    <div class="role-list">
+    <div class="blob-list">
         <ul>
             @foreach (var role in roles)
             {
@@ -18,16 +18,17 @@
                     roleColor = Color.White;
                 }
                 <li style="border: 1px solid rgb(@roleColor.R, @roleColor.G, @roleColor.B)">
-                    <a class="remove"
+                    <a  class="blob-remove"
                         asp-controller="CommandSettings"
-                        asp-action="RemoveRoleFromRoleList",
+                        asp-action="RemoveItemFromBlobList",
                         asp-route-guildId="@Model.GuildId"
                         asp-route-commandId="@Model.CommandId"
                         asp-route-optionName="@Model.Option.Name"
-                        asp-route-roleName="@role.Name">
+                        asp-route-item="@role.Name"
+                        asp-route-blobType="RolePicker">
                         <img style="border: 1px solid rgb(@roleColor.R, @roleColor.G, @roleColor.B)" src="img/x-icon.svg" />
                     </a>
-                    <div class="role-name">@role.Name</div>
+                    <div class="blob-text">@role.Name</div>
                 </li>
             }
             @if (roles.Length == 0)
@@ -36,8 +37,8 @@
             }
         </ul>
 
-        <div class="plus"
-                onclick="displayRolePicker('@Model.GuildId', '@Model.CommandId', '@Model.Option.Name')">
+        <div class="blob-add"
+                onclick="displayBlobPicker('@Model.GuildId', '@Model.CommandId', '@Model.Option.Name', 'RolePicker')">
             +
         </div>
     </div>

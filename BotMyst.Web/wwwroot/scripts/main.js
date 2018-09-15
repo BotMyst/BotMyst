@@ -1,30 +1,36 @@
-function displayRolePicker (guildId, commandId, optionName)
+function displayBlobPicker (guildId, commandId, optionName, blobType)
 {
-    $('#rolePicker').load ('CommandSettings/DisplayRolePicker', { guildId: guildId, commandId: commandId, optionName: optionName });
+    $('#' + blobType).load ('CommandSettings/DisplayBlobPicker', { guildId: guildId, commandId: commandId, optionName: optionName, blobType: blobType });
     setTimeout (function ()
     {
-        $('#rolePicker').addClass ('visible');
+        $('#' + blobType).addClass ('visible');
     }, 200);
 }
 
-function closeRolePicker ()
+function closeBlobPicker (blobType)
 {
-    $('#rolePicker').removeClass ('visible');
-    setTimeout (function ()
+    $('#' + blobType).removeClass ('visible');
+    setTimeout(function ()
     {
-        $('#rolePicker').empty ();
+        $('#' + blobType).empty ();    
     }, 200);
+}
+
+function checkMouseup (container, e, blobType)
+{
+    if ($('#' + blobType).is (':empty') === false)
+    {
+        if (!container.is (e.target) && container.has (e.target).length === 0)
+        {
+            closeBlobPicker (blobType);
+        }
+    }
 }
 
 $(document).mouseup (function (e)
 {
     var container = $('.popup');
 
-    if ($('#rolePicker').is (':empty') === false)
-    {
-        if (!container.is (e.target) && container.has (e.target).length === 0)
-        {
-            closeRolePicker ();
-        }
-    }
+    checkMouseup (container, e, 'RolePicker');
+    checkMouseup (container, e, 'ChannelPicker');
 });

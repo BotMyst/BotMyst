@@ -11,6 +11,7 @@ using BotMyst.Web.Models;
 using BotMyst.Bot.Models;
 using BotMyst.Web.Helpers;
 using BotMyst.Bot.Models.DisplayAttributes;
+using Discord;
 
 namespace BotMyst.Web.Controllers
 {
@@ -103,9 +104,9 @@ namespace BotMyst.Web.Controllers
             return RedirectToAction ("Index", new { guildId = guildId, commandId = commandId });
         }
 
-        public async Task<ActionResult> DisplayRolePicker (string guildId, string commandId, string optionName)
+        public async Task<ActionResult> DisplayBlobPicker (string guildId, string commandId, string optionName, string blobType)
         {
-            RolePickerModel model = new RolePickerModel
+            BlobPickerModel model = new BlobPickerModel
             {
                 GuildId = guildId,
                 CommandId = commandId,
@@ -113,12 +114,26 @@ namespace BotMyst.Web.Controllers
             };
 
             DiscordAPI api = new DiscordAPI ();
-            model.Roles = (await api.GetGuildRolesAsync (guildId)).ToArray ();
 
-            return PartialView ("RolePicker", model);
+            switch (blobType)
+            {
+                case "RolePicker":
+                {
+                    model.Items = (await api.GetGuildRolesAsync (guildId)).ToArray ();
+                    return PartialView ("RolePicker", model);
+                }
+
+                case "ChannelPicker":
+                {
+                    model.Items = (await api.GetGuildChannelsAsync (guildId)).Where (c => c.Type == (long) ChannelType.Text).ToArray ();
+                    return PartialView ("ChannelPicker", model);
+                }
+            }
+
+            throw new Exception ($"{blobType} is not a valid blob type.");
         }
 
-        public async Task<ActionResult> AddRoleToRoleList (string guildId, string commandId, string optionName, string roleName)
+        public async Task<ActionResult> AddItemToBlobList (string guildId, string commandId, string optionName, string item, string blobType)
         {
             var description = _modulesContext.CommandDescriptions.First (c => c.Id == int.Parse (commandId));
             var options = ApiHelpers.GetCommandOptions (_moduleOptionsContext, description.CommandOptionsType, ulong.Parse (guildId));
@@ -134,25 +149,25 @@ namespace BotMyst.Web.Controllers
                     optionProp = prop;
             }
 
-            string currentRoles = ((string) optionProp.GetValue (options, null)).Trim ();
-            List<string> allRoles = currentRoles.Split (',').ToList ();
-            allRoles.Add (roleName);
-            string newRoles = string.Join (',', allRoles);
-            if (newRoles.Length > 0)
+            string currentItems = ((string) optionProp.GetValue (options, null)).Trim ();
+            List<string> allItems = currentItems.Split (',').ToList ();
+            allItems.Add (item);
+            string newItems = string.Join (',', allItems);
+            if (newItems.Length > 0)
             {
-                if (newRoles [0] == ',')
-                    newRoles = newRoles.Remove (0, 1);
-                if (newRoles [newRoles.Length - 1] == ',')
-                    newRoles = newRoles.Remove (newRoles.Length - 2, 1);
+                if (newItems [0] == ',')
+                    newItems = newItems.Remove (0, 1);
+                if (newItems [newItems.Length - 1] == ',')
+                    newItems = newItems.Remove (newItems.Length - 2, 1);
             }
-            optionProp.SetValue (options, newRoles);
+            optionProp.SetValue (options, newItems);
 
             await _moduleOptionsContext.SaveChangesAsync ();
 
             return RedirectToAction ("Index", new { guildId = guildId, commandId = commandId });
         }
 
-        public async Task<ActionResult> RemoveRoleFromRoleList (string guildId, string commandId, string optionName, string roleName)
+        public async Task<ActionResult> RemoveItemFromBlobList (string guildId, string commandId, string optionName, string item, string blobType)
         {
             var description = _modulesContext.CommandDescriptions.First (c => c.Id == int.Parse (commandId));
             var options = ApiHelpers.GetCommandOptions (_moduleOptionsContext, description.CommandOptionsType, ulong.Parse (guildId));
@@ -168,18 +183,18 @@ namespace BotMyst.Web.Controllers
                     optionProp = prop;
             }
 
-            string currentRoles = (string) optionProp.GetValue (options, null);
-            List<string> allRoles = currentRoles.Split (',').ToList ();
-            allRoles.Remove (roleName);
-            string newRoles = string.Join (',', allRoles);
-            if (newRoles.Length > 0)
+            string currentItems = (string) optionProp.GetValue (options, null);
+            List<string> allItems = currentItems.Split (',').ToList ();
+            allItems.Remove (item);
+            string newItems = string.Join (',', allItems);
+            if (newItems.Length > 0)
             {
-                if (newRoles [0] == ',')
-                    newRoles = newRoles.Remove (0, 1);
-                if (newRoles [newRoles.Length - 1] == ',')
-                    newRoles = newRoles.Remove (newRoles.Length - 2, 1);
+                if (newItems [0] == ',')
+                    newItems = newItems.Remove (0, 1);
+                if (newItems [newItems.Length - 1] == ',')
+                    newItems = newItems.Remove (newItems.Length - 2, 1);
             }
-            optionProp.SetValue (options, newRoles);
+            optionProp.SetValue (options, newItems);
 
             await _moduleOptionsContext.SaveChangesAsync ();
 

@@ -66,9 +66,22 @@
                                                                    CommandId = Model.CommandDescription.Id
                                                                });
     }
+    else if (cmd.OptionType == "ChannelListAttribute")
+    {
+        @await Html.PartialAsync("OptionTypes/ChannelListOption", new PartialOptionModel
+                                                                   {
+                                                                       Option = @cmd,
+                                                                       GuildId = Model.Guild.Id,
+                                                                       CommandId = Model.CommandDescription.Id
+                                                                   });
+    }
 }
 
-<div id="rolePicker">
+<div id="RolePicker">
+
+</div>
+
+<div id="ChannelPicker">
 
 </div>
 

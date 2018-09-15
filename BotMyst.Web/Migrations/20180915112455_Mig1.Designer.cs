@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BotMyst.Web.Migrations
 {
     [DbContext(typeof(ModulesContext))]
-    [Migration("20180903163227_One")]
-    partial class One
+    [Migration("20180915112455_Mig1")]
+    partial class Mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
