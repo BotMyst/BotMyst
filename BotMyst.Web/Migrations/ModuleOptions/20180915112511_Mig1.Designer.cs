@@ -8,14 +8,38 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BotMyst.Web.Migrations.ModuleOptions
 {
     [DbContext(typeof(ModuleOptionsContext))]
-    [Migration("20180911005502_Migration1")]
-    partial class Migration1
+    [Migration("20180915112511_Mig1")]
+    partial class Mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.2-rtm-30932");
+
+            modelBuilder.Entity("BotMyst.Bot.Options.Utility.AvatarOptions", b =>
+                {
+                    b.Property<ulong>("GuildId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ChannelBlacklist");
+
+                    b.Property<string>("ChannelWhitelist");
+
+                    b.Property<bool>("DeleteInvocationMessage");
+
+                    b.Property<bool>("Dm");
+
+                    b.Property<bool>("Enabled");
+
+                    b.Property<string>("RoleBlacklist");
+
+                    b.Property<string>("RoleWhitelist");
+
+                    b.HasKey("GuildId");
+
+                    b.ToTable("AvatarOptions");
+                });
 
             modelBuilder.Entity("BotMyst.Bot.Options.Utility.LmgtfyOptions", b =>
                 {
