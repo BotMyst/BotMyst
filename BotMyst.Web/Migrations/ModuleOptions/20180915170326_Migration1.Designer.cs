@@ -2,14 +2,16 @@
 using BotMyst.Web.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BotMyst.Web.Migrations.ModuleOptions
 {
     [DbContext(typeof(ModuleOptionsContext))]
-    partial class ModuleOptionsContextModelSnapshot : ModelSnapshot
+    [Migration("20180915170326_Migration1")]
+    partial class Migration1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
