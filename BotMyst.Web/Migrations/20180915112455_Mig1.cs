@@ -2,7 +2,7 @@
 
 namespace BotMyst.Web.Migrations
 {
-    public partial class One : Migration
+    public partial class Mig1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
