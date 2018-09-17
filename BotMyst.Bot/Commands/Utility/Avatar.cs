@@ -18,7 +18,7 @@ namespace BotMyst.Bot.Commands.Utility
         {
             var options = GetOptions<AvatarOptions> ();
 
-            string avatarUrl = user.GetAvatarUrl (ImageFormat.Auto, 512);
+            string avatarUrl = user.GetAvatarUrl (ImageFormat.Auto, 256);
 
             string displayName = !string.IsNullOrEmpty (user.Nickname) ? user.Nickname : user.Username;
 
