@@ -15,6 +15,7 @@ css
 *.user
 *.userosscache
 *.sln.docstates
+Migrations/
 
 # Build results
 [Dd]ebug/

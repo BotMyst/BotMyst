@@ -45,6 +45,9 @@ namespace BotMyst.Web.Controllers
             if (moduleOptionsContext.AvatarOptions.Any (a => a.GuildId == guildId) == false)
                 moduleOptionsContext.AvatarOptions.Add (new AvatarOptions { GuildId = guildId });
 
+            if (moduleOptionsContext.DictionaryOptions.Any (a => a.GuildId == guildId) == false)
+                moduleOptionsContext.DictionaryOptions.Add (new DictionaryOptions { GuildId = guildId });  
+
             await moduleOptionsContext.SaveChangesAsync ();
         }
 

@@ -13,7 +13,7 @@ namespace BotMyst.Web.Migrations.ModuleOptions
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.2-rtm-30932");
+                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065");
 
             modelBuilder.Entity("BotMyst.Bot.Options.Utility.AvatarOptions", b =>
                 {
@@ -37,6 +37,30 @@ namespace BotMyst.Web.Migrations.ModuleOptions
                     b.HasKey("GuildId");
 
                     b.ToTable("AvatarOptions");
+                });
+
+            modelBuilder.Entity("BotMyst.Bot.Options.Utility.DictionaryOptions", b =>
+                {
+                    b.Property<ulong>("GuildId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ChannelBlacklist");
+
+                    b.Property<string>("ChannelWhitelist");
+
+                    b.Property<bool>("DeleteInvocationMessage");
+
+                    b.Property<bool>("Dm");
+
+                    b.Property<bool>("Enabled");
+
+                    b.Property<string>("RoleBlacklist");
+
+                    b.Property<string>("RoleWhitelist");
+
+                    b.HasKey("GuildId");
+
+                    b.ToTable("DictionaryOptions");
                 });
 
             modelBuilder.Entity("BotMyst.Bot.Options.Utility.LmgtfyOptions", b =>

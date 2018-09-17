@@ -97,6 +97,18 @@ Create an `appsettings.json` file in the `BotMyst/BotMyst.Bot` directory and pas
 
 The `prefix` field is the bot prefix for running commands. `discordToken` is the bot token key from your Discord Application Bot. `BotMystApiUrl` is the url to the website's api, this is the address with the `/api/` sub route. `BotMystApiToken` is the token you generated earlier.
 
+### Configuring `ApiKeys`
+
+Creatreate an `ApiKeys.json` file in the `BotMyst/BotMyst.Bot` directory and paste this in:
+
+```json
+{
+    "Dictionary": ""
+}
+```
+
+The `Dictionary` field is the key for the Dictionary API we use. you can visit https://www.wordsapi.com/ to generate a new key.
+
 ## Running database migrations
 
 BotMyst uses SQlite for databases. You need to run database migrations.

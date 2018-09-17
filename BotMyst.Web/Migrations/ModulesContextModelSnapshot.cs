@@ -13,7 +13,7 @@ namespace BotMyst.Web.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.2-rtm-30932");
+                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065");
 
             modelBuilder.Entity("BotMyst.Web.Models.CommandDescriptionModel", b =>
                 {
