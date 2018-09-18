@@ -1,0 +1,14 @@
+/media/codemyst/Files/Work/Discord/BotMyst/BotMyst.Web/bin/Debug/netcoreapp2.1/BotMyst.Web.deps.json
+/media/codemyst/Files/Work/Discord/BotMyst/BotMyst.Web/bin/Debug/netcoreapp2.1/BotMyst.Web.runtimeconfig.json
+/media/codemyst/Files/Work/Discord/BotMyst/BotMyst.Web/bin/Debug/netcoreapp2.1/BotMyst.Web.runtimeconfig.dev.json
+/media/codemyst/Files/Work/Discord/BotMyst/BotMyst.Web/bin/Debug/netcoreapp2.1/BotMyst.Web.dll
+/media/codemyst/Files/Work/Discord/BotMyst/BotMyst.Web/bin/Debug/netcoreapp2.1/BotMyst.Web.pdb
+/media/codemyst/Files/Work/Discord/BotMyst/BotMyst.Web/obj/Debug/netcoreapp2.1/BotMyst.Web.csprojAssemblyReference.cache
+/media/codemyst/Files/Work/Discord/BotMyst/BotMyst.Web/obj/Debug/netcoreapp2.1/BotMyst.Web.csproj.CoreCompileInputs.cache
+/media/codemyst/Files/Work/Discord/BotMyst/BotMyst.Web/obj/Debug/netcoreapp2.1/BotMyst.Web.RazorAssemblyInfo.cache
+/media/codemyst/Files/Work/Discord/BotMyst/BotMyst.Web/obj/Debug/netcoreapp2.1/BotMyst.Web.RazorAssemblyInfo.cs
+/media/codemyst/Files/Work/Discord/BotMyst/BotMyst.Web/obj/Debug/netcoreapp2.1/BotMyst.Web.AssemblyInfoInputs.cache
+/media/codemyst/Files/Work/Discord/BotMyst/BotMyst.Web/obj/Debug/netcoreapp2.1/BotMyst.Web.AssemblyInfo.cs
+/media/codemyst/Files/Work/Discord/BotMyst/BotMyst.Web/obj/Debug/netcoreapp2.1/BotMyst.Web.RazorTargetAssemblyInfo.cache
+/media/codemyst/Files/Work/Discord/BotMyst/BotMyst.Web/obj/Debug/netcoreapp2.1/BotMyst.Web.dll
+/media/codemyst/Files/Work/Discord/BotMyst/BotMyst.Web/obj/Debug/netcoreapp2.1/BotMyst.Web.pdb
