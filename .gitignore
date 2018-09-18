@@ -1,2 +1,6 @@
 bin/
 obj/
+
+# SCSS
+.sass-cache
+*.css.map

@@ -1,0 +1,24 @@
+body {
+  background: #141414;
+  font-family: "Raleway", sans-serif; }
+
+#navigation {
+  text-align: center;
+  padding: 10px 0px; }
+  #navigation ul {
+    list-style: none; }
+    #navigation ul li {
+      display: inline;
+      margin: 5px 30px; }
+      #navigation ul li a {
+        text-decoration: none;
+        color: #ffffff;
+        -webkit-transition: all 150ms ease-in-out;
+        -moz-transition: all 150ms ease-in-out;
+        -ms-transition: all 150ms ease-in-out;
+        -o-transition: all 150ms ease-in-out;
+        transition: all 150ms ease-in-out; }
+        #navigation ul li a:hover {
+          color: #ee720d; }
+
+/*# sourceMappingURL=index.css.map */
