@@ -1,5 +1,6 @@
 @import "variables";
 @import "mixins";
+@import "navigation";
 
 body
 {
@@ -7,31 +8,7 @@ body
     font-family: $font-stack;
 }
 
-#navigation
+a:active
 {
-    text-align: center;
-    padding: 10px 0px;
-
-    ul
-    {
-        list-style: none;
-
-        li
-        {
-            display: inline;
-            margin: 5px 30px;
-
-            a
-            {
-                text-decoration: none;
-                color: $color-white;
-                @include default-transition ();
-
-                &:hover
-                {
-                    color: $color-range;
-                }
-            }
-        }
-    }
+    color: $color-nanolightlight;
 }

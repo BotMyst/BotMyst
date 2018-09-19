@@ -1,0 +1,104 @@
+header
+{
+    nav
+    {
+        margin-top: 1.5rem;
+        padding: 0 1rem;
+        background-color: $color-nanolight;
+        border-radius: 0.3rem;
+        -webkit-box-shadow: 0 0 5px 2px rgba(0,0,0,0.2);
+        box-shadow: 0 0 5px 2px rgba(0,0,0,0.2);
+        @include default-transition();
+        
+        .logo
+        {
+            display: inline;
+
+            img
+            {
+                padding: 0 0.5rem;
+                margin-top: 0.8rem;
+                width: 25px;
+            }
+        }
+
+        .menuToggle
+        {
+            float: right;
+            padding: 0.25rem 0.5rem;
+            padding-top: 0.8rem;
+            color: $color-white;
+            font-weight: bold;
+            text-decoration: none;
+            letter-spacing: 0.1rem;
+            @include default-transition();
+
+            i
+            {
+                margin-left: 0.75rem;
+            }
+
+            &:hover
+            {
+                color: $color-range;
+            }
+        }
+
+        ul
+        {
+            list-style-type: none;
+            padding-left: 0.75rem;
+            margin-bottom: 0;
+            display: none;
+
+            li
+            {
+                a
+                {
+                    color: $color-white;
+                    text-decoration: none;
+                    letter-spacing: 0.1rem;
+                    @include default-transition();
+
+                    &:hover
+                    {
+                        color: $color-range;
+                    }
+                }
+            }
+        }
+
+        .navigationActive
+        {
+            display: block;
+        }
+    }
+}
+
+@media all and (min-width: 600px)
+{
+    header
+    {
+        nav
+        {
+            .menuToggle
+            {
+                display: none;
+            }
+
+            ul
+            {
+                display: block;
+                float: right;
+                padding: 0 1rem;
+                padding-top: 0.8rem;
+
+                li
+                {
+                    display: inline-block;
+                    margin-left: 2rem;
+                }
+            }
+        }
+    }
+}

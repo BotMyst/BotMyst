@@ -1,12 +1,19 @@
-<div class="row" id="navigation">
-    <div class="twelve columns">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <!-- TODO: Add invite -->
-            <li><a href="/">Invite</a></li>
-            <li><a asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
-            <li><a href="https://github.com/CodeMyst/BotMyst/issues" target="_blank">Report bugs</a></li>
-            <li><a href="https://github.com/CodeMyst/BotMyst/" target="_blank">GitHub</a></li>
-        </ul>
-    </div>
-</div>
+<header>
+    <nav class="row">
+        <div class="twelve columns">
+            <div class="logo">
+                <img src="~/img/logo.png" />
+            </div>
+
+            <a href="#" class="menuToggle" onclick="toggleNavigation()">MENU<i class="fa fa-bars"></i></a>
+
+            <ul>
+                <li><a href="/">Home</a></li>
+                <!-- TODO: Set a proper invite link -->
+                <li><a href="/">Invite</a></li>
+                <li><a href="/Dashboard">Dashboard</a></li>
+                <li><a href="https://github.com/CodeMyst/BotMyst" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
