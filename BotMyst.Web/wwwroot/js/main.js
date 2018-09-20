@@ -1,14 +1,15 @@
+var navigationActiveClassName = "navigationActive";
+
 function toggleNavigation ()
 {
-    var nav = document.getElementsByTagName ("nav") [0];
-    var ul = nav.getElementsByTagName ("ul") [0];
+    var nav = document.getElementById ("navigation");
 
-    if (ul.classList.contains ("navigationActive"))
+    if (nav.classList.contains (navigationActiveClassName))
     {
-        ul.classList.remove ("navigationActive");
+        nav.classList.remove (navigationActiveClassName);
     }
     else
     {
-        ul.classList.add ("navigationActive");
+        nav.classList.add (navigationActiveClassName);
     }
 }

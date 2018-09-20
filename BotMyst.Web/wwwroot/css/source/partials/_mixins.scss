@@ -1,9 +1,16 @@
-@mixin default-transition ()
+@mixin default-transition()
 {
-    @include transition (150ms);
+    @include transition(150ms);
 }
 
-@mixin transition ($duration)
+
+@mixin default-shadow()
+{
+    -webkit-box-shadow: 0 0 5px 2px rgba(0,0,0,0.2);
+    box-shadow: 0 0 5px 2px rgba(0,0,0,0.2);
+}
+
+@mixin transition($duration)
 {
     -webkit-transition: all $duration ease-in-out;
     -moz-transition: all $duration ease-in-out;

@@ -1,6 +1,12 @@
-@import "variables";
-@import "mixins";
-@import "navigation";
+@import "partials/variables";
+@import "partials/mixins";
+
+@import "partials/controls/button";
+
+@import "partials/navigation";
+
+@import "partials/pages/home";
+
 
 body
 {

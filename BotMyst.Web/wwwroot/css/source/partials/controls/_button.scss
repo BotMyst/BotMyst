@@ -1,0 +1,25 @@
+.button
+{
+    border-radius: 0.3rem;
+    font-size: 1.25rem;
+    background-color: $color-nanolight;
+    border: none;
+    color: $color-white;
+    @include default-shadow();
+
+    &:focus, &:hover
+    {
+        color: $color-white;
+    }
+}
+
+.button.button-primary
+{
+    background-color: $color-range;
+    border: none;
+
+    &:focus, &:hover
+    {
+        background-color: $color-range;
+    }
+}
