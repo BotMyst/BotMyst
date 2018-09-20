@@ -23,6 +23,37 @@ header
                 padding: 0 0.5rem;
                 width: 35px;
             }
+
+            .avatar
+            {
+                width: 30px;
+                border-radius: 0.3rem;
+                padding-top: 0.5rem;
+                float: left;
+            }
+
+            .username
+            {
+                margin: 0;
+                padding-top: -1rem;
+                float: left;
+                line-height: 40px;
+                height: 40px;
+                color: $color-white;
+                letter-spacing: 0.1rem;
+
+                .logout
+                {
+                    letter-spacing: initial;
+                    font-size: 1.1rem;
+                
+                    a
+                    {
+                        color: $color-nanolightlight;
+                        text-decoration: none;
+                    }
+                }
+            }
         }
 
         .menuToggle

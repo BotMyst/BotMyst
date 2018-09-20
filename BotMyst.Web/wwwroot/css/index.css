@@ -37,6 +37,25 @@ header nav {
     header nav .logo img {
       padding: 0 0.5rem;
       width: 35px; }
+    header nav .logo .avatar {
+      width: 30px;
+      border-radius: 0.3rem;
+      padding-top: 0.5rem;
+      float: left; }
+    header nav .logo .username {
+      margin: 0;
+      padding-top: -1rem;
+      float: left;
+      line-height: 40px;
+      height: 40px;
+      color: #ffffff;
+      letter-spacing: 0.1rem; }
+      header nav .logo .username .logout {
+        letter-spacing: initial;
+        font-size: 1.1rem; }
+        header nav .logo .username .logout a {
+          color: #777777;
+          text-decoration: none; }
   header nav .menuToggle {
     float: right;
     padding: 0.25rem 0.5rem;

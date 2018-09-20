@@ -2,7 +2,20 @@
     <nav class="row" id="navigation">
         <div class="twelve columns">
             <div class="logo">
-                <img src="~/img/logo.svg" />
+                @if (User.Identity.IsAuthenticated)
+                {
+                    string userId = User.FindFirst (c => c.Type == ClaimTypes.NameIdentifier).Value;
+                    string username = User.FindFirst (c => c.Type == ClaimTypes.Name).Value;
+                    string avatarId = User.FindFirst (c => c.Type == "urn:discord:avatar").Value;
+                    string avatarUrl = $"https://cdn.discordapp.com/avatars/{userId}/{avatarId}.png";
+
+                    <img src="@avatarUrl" alt="Avatar" class="avatar">
+                    <p class="username">@username <span class="logout"><a asp-controller="Account" asp-action="Logout">(logout)</a></span></p>
+                }
+                else
+                {
+                    <img src="~/img/logo.svg" />
+                }
             </div>
 
             <a href="#" class="menuToggle" onclick="toggleNavigation()">MENU<i class="fa fa-bars"></i></a>

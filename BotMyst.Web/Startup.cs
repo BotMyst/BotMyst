@@ -41,7 +41,14 @@ namespace BotMyst.Web
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = "Discord";
             })
-            .AddCookie ()
+            .AddCookie (options =>
+            {
+                options.Cookie = new CookieBuilder ()
+                {
+                    Name = "Discord",
+                    Expiration = new TimeSpan (2, 0, 0, 0)
+                };
+            })
             .AddOAuth ("Discord", options =>
             {
                 options.ClientId = configuration ["Discord:ClientId"];

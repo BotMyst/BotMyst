@@ -7,5 +7,11 @@ namespace BotMyst.Web.Controllers
     {
         public IActionResult Login () =>
             Challenge (new AuthenticationProperties () { RedirectUri = "/Dashboard" });
+
+        public IActionResult Logout ()
+        {
+            Response.Cookies.Delete ("Discord");
+            return RedirectToAction ("Index", "Home");
+        }
     }
 }
