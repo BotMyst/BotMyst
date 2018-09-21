@@ -1,12 +1,13 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 
 namespace BotMyst.Bot
 {
     public class Program
     {
-        public static void Main (string [] args)
+        public static async Task Main ()
         {
-            Console.WriteLine ("Hello World!");
+            using (BotMyst bot = new BotMyst ())
+                await bot.Run ();
         }
     }
 }
