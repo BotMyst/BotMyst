@@ -15,6 +15,34 @@
   .button.button-primary:focus, .button.button-primary:hover {
     background-color: #ee720d; }
 
+.guild {
+  background-color: #222222;
+  border-radius: 0.3rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2); }
+  .guild a {
+    color: #ffffff; }
+  .guild .guildIcon {
+    float: left;
+    height: 40px;
+    margin-right: 1.5rem; }
+    .guild .guildIcon img {
+      width: 40px;
+      border-radius: 0.3rem; }
+    .guild .guildIcon .checkmark {
+      width: 15px;
+      position: absolute;
+      margin-top: -1.75rem;
+      margin-left: 3rem; }
+  .guild .guildName {
+    float: left; }
+    .guild .guildName p {
+      margin: 0;
+      letter-spacing: 0.1rem;
+      line-height: 40px; }
+
 header {
   padding-bottom: 7.5rem; }
   header nav {
@@ -37,7 +65,7 @@ header {
     header nav .logo {
       display: inline-block; }
       header nav .logo img {
-        padding: 0 0.5rem;
+        padding-right: 0.5rem;
         width: 35px; }
       header nav .logo .avatar {
         width: 30px;
@@ -137,5 +165,10 @@ body {
 
 a:active {
   color: #777777; }
+
+h6 {
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-weight: normal; }
 
 /*# sourceMappingURL=index.css.map */

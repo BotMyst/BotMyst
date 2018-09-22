@@ -1,7 +1,31 @@
 @model List<BotMystGuild>
 
-@foreach (BotMystGuild g in Model)
-{
-    <p>@g.Guild.Name</p>
-    <p>@g.HasBotMyst</p>
-}
+<section id="serverList">
+
+    <h6>Your servers:</h6>
+
+    @foreach (BotMystGuild guild in Model)
+    {
+        <div class="row guild">
+            <a href="" class="twelve columns">
+                <div class="guildIcon">
+                    @{
+                        string guildIconUrl = $"https://cdn.discordapp.com/icons/{guild.Guild.Id}/{guild.Guild.Icon}.png";
+                    }
+                    <img src="@guildIconUrl" />
+                    @if (guild.HasBotMyst)
+                    {
+                        <img class="checkmark tooltip" src="~/img/checkmark.svg">
+                        <!-- <div class="tooltip-text">
+                            BotMyst is in the <strong>@guild.Guild.Name</strong> server
+                        </div> -->
+                    }
+                </div>
+                <div class="guildName">
+                    <p>@guild.Guild.Name</p>
+                </div>
+            </a>
+        </div>
+    }
+
+</section>

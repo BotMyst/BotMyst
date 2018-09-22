@@ -1,0 +1,48 @@
+.guild
+{
+    background-color: $color-nanolight;
+    border-radius: 0.3rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    @include default-shadow();
+
+    a
+    {
+        color: $color-white;
+    }
+
+    .guildIcon
+    {
+        float: left;
+        height: 40px;
+        margin-right: 1.5rem;
+
+        img
+        {
+            width: 40px;
+            border-radius: 0.3rem;
+        }
+
+        .checkmark
+        {
+            width: 15px;
+            position: absolute;
+            margin-top: -1.75rem;
+            margin-left: 3rem;
+            // margin-left: -1.25rem;
+            // margin-bottom: -0.5rem;
+        }
+    }
+
+    .guildName
+    {
+        float: left;
+
+        p
+        {
+            margin: 0;
+            letter-spacing: 0.1rem;
+            line-height: 40px;
+        }
+    }
+}
