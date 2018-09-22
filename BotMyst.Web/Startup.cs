@@ -1,31 +1,32 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using System.Security.Claims;
+using System.Net.Http.Headers;
 using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication;
-using System.Security.Claims;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.OAuth;
-using System.Net.Http;
-using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 using Newtonsoft.Json.Linq;
 
 namespace BotMyst.Web
 {
     public class Startup
     {
-        private IConfiguration configuration;
+        public static IConfiguration Configuration { get; private set; }
 
         public Startup ()
         {
-            configuration = new ConfigurationBuilder ()
+            Configuration = new ConfigurationBuilder ()
                 .SetBasePath (Directory.GetCurrentDirectory ())
                 .AddJsonFile ("appsettings.json")
                 .Build ();
@@ -51,8 +52,8 @@ namespace BotMyst.Web
             })
             .AddOAuth ("Discord", options =>
             {
-                options.ClientId = configuration ["Discord:ClientId"];
-                options.ClientSecret = configuration ["Discord:ClientSecret"];
+                options.ClientId = Configuration ["Discord:ClientId"];
+                options.ClientSecret = Configuration ["Discord:ClientSecret"];
                 options.CallbackPath = new PathString ("/discord");
 
                 options.AuthorizationEndpoint = "https://discordapp.com/api/oauth2/authorize";
@@ -64,6 +65,8 @@ namespace BotMyst.Web
                 options.ClaimActions.MapJsonKey ("urn:discord:discriminator", "discriminator", ClaimValueTypes.UInteger32);
                 options.ClaimActions.MapJsonKey ("urn:discord:avatar", "avatar", ClaimValueTypes.String);
                 options.ClaimActions.MapJsonKey ("urn:discord:verified", "verified", ClaimValueTypes.Boolean);
+
+                options.SaveTokens = true;
 
                 options.Events = new OAuthEvents
                 {

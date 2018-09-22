@@ -1,0 +1,7 @@
+@model List<BotMystGuild>
+
+@foreach (BotMystGuild g in Model)
+{
+    <p>@g.Guild.Name</p>
+    <p>@g.HasBotMyst</p>
+}
