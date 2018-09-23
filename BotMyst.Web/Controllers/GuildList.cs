@@ -6,7 +6,7 @@ using BotMyst.Web.Discord;
 
 namespace BotMyst.Web.Controllers
 {
-    public class DashboardController : Controller
+    public class GuildList : Controller
     {
         public async Task<IActionResult> Index ()
         {
