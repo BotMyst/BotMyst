@@ -7,3 +7,6 @@ obj/
 
 # appsettings
 appsettings.json
+
+# Databases
+Databases/

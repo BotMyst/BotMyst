@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,8 @@ using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 using Newtonsoft.Json.Linq;
+
+using BotMyst.Web.DatabaseContexts;
 
 namespace BotMyst.Web
 {
@@ -34,6 +37,8 @@ namespace BotMyst.Web
 
         public void ConfigureServices (IServiceCollection services)
         {
+            services.AddDbContext<ModuleDescriptionsContext> (options => options.UseSqlite (Configuration.GetConnectionString ("ModuleDescriptions")));
+
             services.AddMvc ();
 
             services.AddAuthentication (options =>
