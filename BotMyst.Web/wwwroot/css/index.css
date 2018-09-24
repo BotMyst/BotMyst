@@ -163,8 +163,18 @@ body {
   font-family: "Raleway", sans-serif;
   color: #ffffff; }
 
-a:active {
-  color: #777777; }
+a {
+  color: #ee720d;
+  text-decoration: none;
+  -webkit-transition: all 150ms ease-in-out;
+  -moz-transition: all 150ms ease-in-out;
+  -ms-transition: all 150ms ease-in-out;
+  -o-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out; }
+  a:active {
+    color: #777777; }
+  a:hover {
+    color: #ffffff; }
 
 h6 {
   text-transform: uppercase;

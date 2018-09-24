@@ -16,9 +16,21 @@ body
     color: $color-white;
 }
 
-a:active
+a
 {
-    color: $color-nanolightlight;
+    color: $color-range;
+    text-decoration: none;
+    @include default-transition();
+
+    &:active
+    {
+        color: $color-nanolightlight;
+    }
+
+    &:hover
+    {
+        color: $color-white;
+    }
 }
 
 h6

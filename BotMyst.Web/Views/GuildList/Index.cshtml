@@ -7,7 +7,7 @@
     @foreach (BotMystGuild guild in Model)
     {
         <div class="row guild">
-            <a href="" class="twelve columns">
+            <a asp-controller="CommandList" asp-action="Index" asp-route-guildId="@guild.Guild.Id" class="twelve columns">
                 <div class="guildIcon">
                     @{
                         string guildIconUrl = $"https://cdn.discordapp.com/icons/{guild.Guild.Id}/{guild.Guild.Icon}.png";

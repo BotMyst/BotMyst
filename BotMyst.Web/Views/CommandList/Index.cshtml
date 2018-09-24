@@ -1,0 +1,7 @@
+@model BotMystGuild
+
+@if (Model.HasBotMyst == false)
+{
+    <!-- TODO: Add a proper invite link. -->
+    <p>BotMyst isn't on the <strong>@Model.Guild.Name</strong> server. You can add it by visiting <a href="#">this link</a>.</p>
+}
