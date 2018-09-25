@@ -1,11 +1,14 @@
 using System;
 using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 
 using Discord;
+using Discord.Commands;
 using Discord.WebSocket;
 
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BotMyst.Bot
 {
@@ -14,6 +17,8 @@ namespace BotMyst.Bot
         private IConfiguration configuration;
 
         private DiscordSocketClient client;
+        private IServiceProvider serviceProvider;
+        private CommandService commandService;
 
         public BotMyst ()
         {
@@ -28,6 +33,8 @@ namespace BotMyst.Bot
             Console.WriteLine ("BotMyst.Bot is starting...");
 
             client = new DiscordSocketClient ();
+            serviceProvider = new ServiceCollection ().BuildServiceProvider ();
+            commandService = new CommandService (new CommandServiceConfig { LogLevel = LogSeverity.Info, ThrowOnError = true });
 
             await client.LoginAsync (TokenType.Bot, configuration ["Discord:Token"]);
             await client.SetGameAsync ($"{configuration ["Bot:Prefix"]}help | botmyst.com", null, ActivityType.Watching);
@@ -35,7 +42,44 @@ namespace BotMyst.Bot
 
             client.Log += OnLog;
 
+            client.MessageReceived += HandleMessage;
+
+            await commandService.AddModulesAsync (Assembly.GetEntryAssembly ());
+
             await Task.Delay (-1);
+        }
+
+        private async Task HandleMessage (SocketMessage arg)
+        {
+            SocketUserMessage message = arg as SocketUserMessage;
+            if (message == null) return;
+            int argPos = 0;
+
+            if ((message.HasStringPrefix (configuration ["Bot:Prefix"], ref argPos) || message.HasMentionPrefix (client.CurrentUser, ref argPos)) == false) return;
+
+            CommandContext context = new CommandContext (client, message);
+            CommandInfo executedCommand = commandService.Search (context, argPos).Commands [0].Command;
+
+            IResult result = await commandService.ExecuteAsync(context, argPos, serviceProvider);
+            if (result.IsSuccess == false)
+            {
+                if (result.Error == CommandError.UnknownCommand) return;
+                if (result.Error == CommandError.BadArgCount)
+                {
+                    EmbedBuilder eb = new EmbedBuilder();
+                    eb.WithTitle("ERROR: Bad argument count");
+                    eb.WithColor(Color.Red);
+                    await context.Channel.SendMessageAsync(string.Empty, false, eb.Build ());
+                }
+                else
+                {
+                    EmbedBuilder eb = new EmbedBuilder();
+                    eb.WithTitle("Error");
+                    eb.WithDescription(result.ErrorReason);
+                    eb.WithColor(Color.Red);
+                    await context.Channel.SendMessageAsync(string.Empty, false, eb.Build ());
+                }
+            }
         }
 
         /// <summary>
