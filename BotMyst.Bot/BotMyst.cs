@@ -33,7 +33,18 @@ namespace BotMyst.Bot
             await client.SetGameAsync ($"{configuration ["Bot:Prefix"]}help | botmyst.com", null, ActivityType.Watching);
             await client.StartAsync ();
 
+            client.Log += OnLog;
+
             await Task.Delay (-1);
+        }
+
+        /// <summary>
+        /// Logs Discord.Net messages.
+        /// </summary>
+        private Task OnLog (LogMessage arg)
+        {
+            Console.WriteLine ($"[{DateTime.UtcNow}\t{arg.Source}:{arg.Severity}]\t{arg.Message}");
+            return Task.CompletedTask;
         }
 
         private bool disposedValue = false;
