@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +20,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 using Newtonsoft.Json.Linq;
 
+using BotMyst.Web.Authentication;
 using BotMyst.Web.DatabaseContexts;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace BotMyst.Web
 {
@@ -46,6 +49,11 @@ namespace BotMyst.Web
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = "Discord";
+            })
+            .AddJwtBearer (options =>
+            {
+                options.Authority = Configuration ["Auth0:Domain"];
+                options.Audience = Configuration ["Auth0:ApiIdentifier"];
             })
             .AddCookie (options =>
             {
@@ -94,6 +102,13 @@ namespace BotMyst.Web
                 options.Scope.Add ("guilds");
                 options.Scope.Add ("email");
             });
+
+            services.AddAuthorization (options =>
+            {
+                options.AddPolicy ("master", policy => policy.Requirements.Add (new HasScopeRequirement ("master", Configuration ["Auth0:Domain"])));
+            });
+
+            services.AddSingleton<IAuthorizationHandler, HasScopeHandler> ();
         }
 
         public void Configure (IApplicationBuilder app, IHostingEnvironment env)
