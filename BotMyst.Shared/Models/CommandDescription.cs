@@ -1,4 +1,4 @@
-namespace BotMyst.Web.Models
+namespace BotMyst.Shared.Models
 {
     public class CommandDescription
     {
