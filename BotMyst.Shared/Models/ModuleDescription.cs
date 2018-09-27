@@ -7,6 +7,6 @@ namespace BotMyst.Shared.Models
         public int ID { get; set; }
         public string Name { get; set; }
 
-        public ICollection<CommandDescription> CommandDescriptions { get; set; }
+        public List<CommandDescription> CommandDescriptions { get; set; }
     }
 }

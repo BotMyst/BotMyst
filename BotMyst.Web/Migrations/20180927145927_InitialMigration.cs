@@ -2,7 +2,7 @@
 
 namespace BotMyst.Web.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,7 +20,7 @@ namespace BotMyst.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CommandDescription",
+                name: "CommandDescriptions",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
@@ -31,9 +31,9 @@ namespace BotMyst.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CommandDescription", x => x.ID);
+                    table.PrimaryKey("PK_CommandDescriptions", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_CommandDescription_ModuleDescriptions_ModuleDescriptionID",
+                        name: "FK_CommandDescriptions_ModuleDescriptions_ModuleDescriptionID",
                         column: x => x.ModuleDescriptionID,
                         principalTable: "ModuleDescriptions",
                         principalColumn: "ID",
@@ -41,15 +41,15 @@ namespace BotMyst.Web.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CommandDescription_ModuleDescriptionID",
-                table: "CommandDescription",
+                name: "IX_CommandDescriptions_ModuleDescriptionID",
+                table: "CommandDescriptions",
                 column: "ModuleDescriptionID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CommandDescription");
+                name: "CommandDescriptions");
 
             migrationBuilder.DropTable(
                 name: "ModuleDescriptions");

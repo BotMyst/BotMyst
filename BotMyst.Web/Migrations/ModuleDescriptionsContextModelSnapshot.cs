@@ -15,7 +15,7 @@ namespace BotMyst.Web.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.3-rtm-32065");
 
-            modelBuilder.Entity("BotMyst.Web.Models.CommandDescription", b =>
+            modelBuilder.Entity("BotMyst.Shared.Models.CommandDescription", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
@@ -30,10 +30,10 @@ namespace BotMyst.Web.Migrations
 
                     b.HasIndex("ModuleDescriptionID");
 
-                    b.ToTable("CommandDescription");
+                    b.ToTable("CommandDescriptions");
                 });
 
-            modelBuilder.Entity("BotMyst.Web.Models.ModuleDescription", b =>
+            modelBuilder.Entity("BotMyst.Shared.Models.ModuleDescription", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
@@ -45,9 +45,9 @@ namespace BotMyst.Web.Migrations
                     b.ToTable("ModuleDescriptions");
                 });
 
-            modelBuilder.Entity("BotMyst.Web.Models.CommandDescription", b =>
+            modelBuilder.Entity("BotMyst.Shared.Models.CommandDescription", b =>
                 {
-                    b.HasOne("BotMyst.Web.Models.ModuleDescription", "ModuleDescription")
+                    b.HasOne("BotMyst.Shared.Models.ModuleDescription", "ModuleDescription")
                         .WithMany("CommandDescriptions")
                         .HasForeignKey("ModuleDescriptionID")
                         .OnDelete(DeleteBehavior.Cascade);

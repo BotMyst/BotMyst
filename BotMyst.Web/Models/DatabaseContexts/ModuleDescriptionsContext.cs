@@ -12,5 +12,6 @@ namespace BotMyst.Web.DatabaseContexts
         }
 
         public DbSet<ModuleDescription> ModuleDescriptions { get; set; }
+        public DbSet<CommandDescription> CommandDescriptions { get; set; }
     }
 }
