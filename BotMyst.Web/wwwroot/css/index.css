@@ -19,6 +19,30 @@
   background-color: #ee720d;
 }
 
+#currentGuild {
+  margin-top: 0rem;
+  margin-bottom: 2rem;
+  border-radius: 0.3rem;
+  max-height: 40px;
+  overflow: hidden;
+}
+#currentGuild .logo {
+  display: inline-block;
+  height: 40px;
+}
+#currentGuild .logo img {
+  border-radius: 0.3rem;
+  width: 30px;
+  padding-top: 0.5rem;
+  margin-right: 0.5rem;
+  float: left;
+}
+#currentGuild .logo p {
+  line-height: 40px;
+  float: left;
+  letter-spacing: 0.1rem;
+}
+
 .guild {
   margin-bottom: 1rem;
   padding: 1rem;
@@ -187,6 +211,7 @@ header nav.navigationActive ul {
   font-size: 1.75rem;
   margin-top: -2rem;
   font-weight: 300;
+  letter-spacing: 0.1rem;
 }
 
 @media all and (min-width: 600px) {

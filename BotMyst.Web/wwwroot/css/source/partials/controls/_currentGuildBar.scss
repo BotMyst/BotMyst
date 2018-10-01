@@ -1,0 +1,30 @@
+#currentGuild
+{
+    margin-top: 0rem;
+    margin-bottom: 2rem;
+    border-radius: 0.3rem;
+    max-height: 40px;
+    overflow: hidden;
+
+    .logo
+    {
+        display: inline-block;
+        height: 40px;
+
+        img
+        {
+            border-radius: 0.3rem;
+            width: 30px;
+            padding-top: 0.5rem;
+            margin-right: 0.5rem;
+            float: left;
+        }
+
+        p
+        {
+            line-height: 40px;
+            float: left;
+            letter-spacing: 0.1rem;
+        }
+    }
+}
