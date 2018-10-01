@@ -45,8 +45,8 @@ namespace BotMyst.Web.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
+                    if (ModelState.IsValid)
+                    {
                     // Try to find a ModuleDescription that already exists with the same name
                     ModuleDescription localModuleDescription = await moduleDescriptionsContext.ModuleDescriptions.SingleOrDefaultAsync (m => m.Name == moduleDescription.Name);
 

@@ -5,163 +5,200 @@
   border: none;
   color: #ffffff;
   -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2); }
-  .button:focus, .button:hover {
-    color: #ffffff; }
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
+}
+.button:focus, .button:hover {
+  color: #ffffff;
+}
 
 .button.button-primary {
   background-color: #ee720d;
-  border: none; }
-  .button.button-primary:focus, .button.button-primary:hover {
-    background-color: #ee720d; }
+  border: none;
+}
+.button.button-primary:focus, .button.button-primary:hover {
+  background-color: #ee720d;
+}
 
 .guild {
-  background-color: #222222;
-  border-radius: 0.3rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   padding: 1rem;
-  -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2); }
-  .guild a {
-    color: #ffffff; }
-  .guild .guildIcon {
-    float: left;
-    height: 40px;
-    margin-right: 1.5rem; }
-    .guild .guildIcon img {
-      width: 40px;
-      border-radius: 0.3rem; }
-    .guild .guildIcon .checkmark {
-      width: 15px;
-      position: absolute;
-      margin-top: -1.75rem;
-      margin-left: 3rem; }
-  .guild .guildName {
-    float: left; }
-    .guild .guildName p {
-      margin: 0;
-      letter-spacing: 0.1rem;
-      line-height: 40px; }
+  padding-left: 0;
+}
+.guild a {
+  color: #ffffff;
+}
+.guild .guildIcon {
+  float: left;
+  height: 40px;
+  margin-right: 1.5rem;
+}
+.guild .guildIcon img {
+  width: 40px;
+  border-radius: 0.3rem;
+}
+.guild .guildIcon .checkmark {
+  width: 15px;
+  position: absolute;
+  margin-top: -1.75rem;
+  margin-left: 3rem;
+}
+.guild .guildName {
+  float: left;
+}
+.guild .guildName p {
+  margin: 0;
+  letter-spacing: 0.1rem;
+  line-height: 40px;
+}
 
 header {
-  padding-bottom: 7.5rem; }
-  header nav {
-    position: absolute;
-    right: 0;
-    left: 0;
-    margin-top: 1.5rem;
-    padding: 0 1rem;
-    background-color: #222222;
-    border-radius: 0.3rem;
-    max-height: 40px;
-    overflow: hidden;
-    -webkit-transition: all 150ms ease-in-out;
-    -moz-transition: all 150ms ease-in-out;
-    -ms-transition: all 150ms ease-in-out;
-    -o-transition: all 150ms ease-in-out;
-    transition: all 150ms ease-in-out;
-    -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2); }
-    header nav .logo {
-      display: inline-block; }
-      header nav .logo img {
-        padding-right: 0.5rem;
-        width: 35px; }
-      header nav .logo .avatar {
-        width: 30px;
-        border-radius: 0.3rem;
-        padding-top: 0.5rem;
-        float: left; }
-      header nav .logo .username {
-        margin: 0;
-        padding-top: -1rem;
-        float: left;
-        line-height: 40px;
-        height: 40px;
-        color: #ffffff;
-        letter-spacing: 0.1rem; }
-        header nav .logo .username .logout {
-          letter-spacing: initial;
-          font-size: 1.1rem; }
-          header nav .logo .username .logout a {
-            color: #777777;
-            text-decoration: none; }
-    header nav .menuToggle {
-      float: right;
-      padding: 0.25rem 0.5rem;
-      padding-top: 0.8rem;
-      color: #ffffff;
-      font-weight: bold;
-      text-decoration: none;
-      letter-spacing: 0.1rem;
-      -webkit-transition: all 150ms ease-in-out;
-      -moz-transition: all 150ms ease-in-out;
-      -ms-transition: all 150ms ease-in-out;
-      -o-transition: all 150ms ease-in-out;
-      transition: all 150ms ease-in-out; }
-      header nav .menuToggle i {
-        margin-left: 0.75rem; }
-      header nav .menuToggle:hover {
-        color: #ee720d; }
-    header nav ul {
-      list-style-type: none;
-      padding-left: 0.75rem;
-      margin-bottom: 0;
-      display: none; }
-      header nav ul li a {
-        color: #ffffff;
-        text-decoration: none;
-        letter-spacing: 0.1rem;
-        -webkit-transition: all 150ms ease-in-out;
-        -moz-transition: all 150ms ease-in-out;
-        -ms-transition: all 150ms ease-in-out;
-        -o-transition: all 150ms ease-in-out;
-        transition: all 150ms ease-in-out; }
-        header nav ul li a:hover {
-          color: #ee720d; }
-  header nav.navigationActive {
-    max-height: 200px; }
-    header nav.navigationActive ul {
-      display: block; }
+  padding-bottom: 7.5rem;
+}
+header nav {
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin-top: 1.5rem;
+  padding: 0 1rem;
+  background-color: #222222;
+  border-radius: 0.3rem;
+  max-height: 40px;
+  overflow: hidden;
+  -webkit-transition: all 150ms ease-in-out;
+  -moz-transition: all 150ms ease-in-out;
+  -ms-transition: all 150ms ease-in-out;
+  -o-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
+}
+header nav .logo {
+  display: inline-block;
+}
+header nav .logo img {
+  padding-right: 0.5rem;
+  width: 35px;
+}
+header nav .logo .avatar {
+  width: 30px;
+  border-radius: 0.3rem;
+  padding-top: 0.5rem;
+  float: left;
+}
+header nav .logo .username {
+  margin: 0;
+  padding-top: -1rem;
+  float: left;
+  line-height: 40px;
+  height: 40px;
+  color: #ffffff;
+  letter-spacing: 0.1rem;
+}
+header nav .logo .username .logout {
+  letter-spacing: initial;
+  font-size: 1.1rem;
+}
+header nav .logo .username .logout a {
+  color: #777777;
+  text-decoration: none;
+}
+header nav .menuToggle {
+  float: right;
+  padding: 0.25rem 0.5rem;
+  padding-top: 0.8rem;
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  letter-spacing: 0.1rem;
+  -webkit-transition: all 150ms ease-in-out;
+  -moz-transition: all 150ms ease-in-out;
+  -ms-transition: all 150ms ease-in-out;
+  -o-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+}
+header nav .menuToggle i {
+  margin-left: 0.75rem;
+}
+header nav .menuToggle:hover {
+  color: #ee720d;
+}
+header nav ul {
+  list-style-type: none;
+  padding-left: 0.75rem;
+  margin-bottom: 0;
+  display: none;
+}
+header nav ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: 0.1rem;
+  -webkit-transition: all 150ms ease-in-out;
+  -moz-transition: all 150ms ease-in-out;
+  -ms-transition: all 150ms ease-in-out;
+  -o-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+}
+header nav ul li a:hover {
+  color: #ee720d;
+}
+header nav.navigationActive {
+  max-height: 200px;
+}
+header nav.navigationActive ul {
+  display: block;
+}
 
 @media all and (min-width: 600px) {
   header nav .menuToggle {
-    display: none; }
+    display: none;
+  }
   header nav ul {
     display: block;
     float: right;
     padding: 0 1rem;
-    padding-top: 0.8rem; }
-    header nav ul li {
-      display: inline-block;
-      margin-left: 2rem; } }
+    padding-top: 0.8rem;
+  }
+  header nav ul li {
+    display: inline-block;
+    margin-left: 2rem;
+  }
+}
 #home {
-  padding-top: 5vh; }
-  #home .landing {
-    text-align: center; }
-    #home .landing .logo {
-      margin: 0 auto; }
-      #home .landing .logo img {
-        width: 30rem; }
-    #home .landing h1 {
-      color: #ee720d;
-      font-weight: bold;
-      letter-spacing: 0.2rem;
-      text-transform: uppercase;
-      margin-top: -10rem; }
-    #home .landing h2 {
-      color: #ffffff;
-      font-size: 1.75rem;
-      margin-top: -2rem;
-      font-weight: 300; }
+  padding-top: 5vh;
+}
+#home .landing {
+  text-align: center;
+}
+#home .landing .logo {
+  margin: 0 auto;
+}
+#home .landing .logo img {
+  width: 30rem;
+}
+#home .landing h1 {
+  color: #ee720d;
+  font-weight: bold;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  margin-top: -10rem;
+}
+#home .landing h2 {
+  color: #ffffff;
+  font-size: 1.75rem;
+  margin-top: -2rem;
+  font-weight: 300;
+}
 
 @media all and (min-width: 600px) {
   #home .landing h2 {
-    font-size: 2rem; } }
+    font-size: 2rem;
+  }
+}
 body {
   background: #141414;
   font-family: "Raleway", sans-serif;
-  color: #ffffff; }
+  color: #ffffff;
+}
 
 a {
   color: #ee720d;
@@ -170,15 +207,19 @@ a {
   -moz-transition: all 150ms ease-in-out;
   -ms-transition: all 150ms ease-in-out;
   -o-transition: all 150ms ease-in-out;
-  transition: all 150ms ease-in-out; }
-  a:active {
-    color: #777777; }
-  a:hover {
-    color: #ffffff; }
+  transition: all 150ms ease-in-out;
+}
+a:active {
+  color: #777777;
+}
+a:hover {
+  color: #ffffff;
+}
 
 h6 {
   text-transform: uppercase;
   letter-spacing: 0.1rem;
-  font-weight: normal; }
+  font-weight: normal;
+}
 
 /*# sourceMappingURL=index.css.map */

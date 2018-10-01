@@ -1,10 +1,11 @@
 .guild
 {
-    background-color: $color-nanolight;
-    border-radius: 0.3rem;
-    margin-bottom: 2rem;
+    // background-color: $color-nanolight;
+    // border-radius: 0.3rem;
+    margin-bottom: 1rem;
     padding: 1rem;
-    @include default-shadow();
+    padding-left: 0;
+    // @include default-shadow();
 
     a
     {
