@@ -14,7 +14,7 @@ namespace BotMyst.Bot
 {
     public class BotMyst : IDisposable
     {
-        private IConfiguration configuration;
+        public static IConfiguration Configuration { get; private set; }
 
         private DiscordSocketClient client;
         private IServiceProvider serviceProvider;
@@ -22,7 +22,7 @@ namespace BotMyst.Bot
 
         public BotMyst ()
         {
-            configuration = new ConfigurationBuilder ()
+            Configuration = new ConfigurationBuilder ()
                 .SetBasePath (Directory.GetCurrentDirectory ())
                 .AddJsonFile ("appsettings.json")
                 .Build ();
@@ -36,11 +36,12 @@ namespace BotMyst.Bot
             serviceProvider = new ServiceCollection ().BuildServiceProvider ();
             commandService = new CommandService (new CommandServiceConfig { LogLevel = LogSeverity.Info, ThrowOnError = true });
 
-            await client.LoginAsync (TokenType.Bot, configuration ["Discord:Token"]);
-            await client.SetGameAsync ($"{configuration ["Bot:Prefix"]}help | botmyst.com", null, ActivityType.Watching);
+            await client.LoginAsync (TokenType.Bot, Configuration ["Discord:Token"]);
+            await client.SetGameAsync ($"{Configuration ["Bot:Prefix"]}help | botmyst.com", null, ActivityType.Watching);
             await client.StartAsync ();
 
             client.Log += OnLog;
+            client.Ready += OnReady;
 
             client.MessageReceived += HandleMessage;
 
@@ -55,7 +56,7 @@ namespace BotMyst.Bot
             if (message == null) return;
             int argPos = 0;
 
-            if ((message.HasStringPrefix (configuration ["Bot:Prefix"], ref argPos) || message.HasMentionPrefix (client.CurrentUser, ref argPos)) == false) return;
+            if ((message.HasStringPrefix (Configuration ["Bot:Prefix"], ref argPos) || message.HasMentionPrefix (client.CurrentUser, ref argPos)) == false) return;
 
             CommandContext context = new CommandContext (client, message);
             CommandInfo executedCommand = commandService.Search (context, argPos).Commands [0].Command;
@@ -88,7 +89,13 @@ namespace BotMyst.Bot
         private Task OnLog (LogMessage arg)
         {
             Console.WriteLine ($"[{DateTime.UtcNow}\t{arg.Source}:{arg.Severity}]\t{arg.Message}");
+            
             return Task.CompletedTask;
+        }
+
+        private async Task OnReady ()
+        {
+            await BotMystAPI.GenerateModuleDescriptions (commandService);
         }
 
         private bool disposedValue = false;

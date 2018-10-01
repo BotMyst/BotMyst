@@ -10,3 +10,7 @@ appsettings.json
 
 # Databases
 Databases/
+
+# SSL certificates
+*.pfx
+certificate.json

@@ -25,7 +25,7 @@ Go to the OAuth2 section and add a new redirect which should point to `http://lo
 
 You also need to enable the bot user in your Discord app so you can get a bot token
 
-## Building
+## Building the project
 
 ```sh
 git clone https://github.com/CodeMyst/BotMyst.git
