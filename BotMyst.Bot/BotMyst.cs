@@ -41,11 +41,12 @@ namespace BotMyst.Bot
             await client.StartAsync ();
 
             client.Log += OnLog;
-            client.Ready += OnReady;
 
             client.MessageReceived += HandleMessage;
 
             await commandService.AddModulesAsync (Assembly.GetEntryAssembly ());
+
+            await BotMystAPI.GenerateModuleDescriptions (commandService);
 
             await Task.Delay (-1);
         }
@@ -91,11 +92,6 @@ namespace BotMyst.Bot
             Console.WriteLine ($"[{DateTime.UtcNow}\t{arg.Source}:{arg.Severity}]\t{arg.Message}");
             
             return Task.CompletedTask;
-        }
-
-        private async Task OnReady ()
-        {
-            await BotMystAPI.GenerateModuleDescriptions (commandService);
         }
 
         private bool disposedValue = false;

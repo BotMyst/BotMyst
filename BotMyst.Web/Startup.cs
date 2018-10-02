@@ -17,13 +17,12 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using Newtonsoft.Json.Linq;
 
 using BotMyst.Web.Authentication;
 using BotMyst.Web.DatabaseContexts;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BotMyst.Web
 {
@@ -43,19 +42,7 @@ namespace BotMyst.Web
         {
             services.AddDbContext<ModuleDescriptionsContext> (options => options.UseSqlite (Configuration.GetConnectionString ("ModuleDescriptions")));
 
-            services.AddMvc (options =>
-            {
-                options.SslPort = 5001;
-                options.Filters.Add (new RequireHttpsAttribute ());
-            });
-
-            services.AddAntiforgery (options =>
-            {
-                options.Cookie.Name = "_af";
-                options.Cookie.HttpOnly = true;
-                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-                options.HeaderName = "X-XSFR-TOKEN";
-            });
+            services.AddMvc ();
 
             services.AddAuthentication (options =>
             {
@@ -128,7 +115,7 @@ namespace BotMyst.Web
         {
             if (env.IsDevelopment ())
                 app.UseDeveloperExceptionPage ();
-            
+
             app.UseStaticFiles ();
 
             app.UseAuthentication ();

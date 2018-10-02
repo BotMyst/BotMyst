@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +9,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using BotMyst.Shared.Models;
 using BotMyst.Web.DatabaseContexts;
-using System.Collections.Generic;
 
 namespace BotMyst.Web.Controllers
 {

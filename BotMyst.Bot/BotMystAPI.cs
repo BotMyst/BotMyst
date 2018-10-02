@@ -1,12 +1,15 @@
 using System;
 using System.Net;
+using System.Text;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using System.Net.Http.Headers;
 using System.Collections.Generic;
 
 using Discord.Commands;
 
-using RestSharp;
+using Newtonsoft.Json;
 
 using BotMyst.Shared.Models;
 
@@ -42,20 +45,21 @@ namespace BotMyst.Bot
                 modules.Add (moduleDescription);
             }
 
-            RestClient restClient = new RestClient (ApiUrl);
-
-            RestRequest restRequest = new RestRequest ("moduledescriptions", Method.POST);
-            restRequest.AddHeader ("Authorization", $"Bearer {BotMyst.Configuration ["BotMystApi:AccessToken"]}");
-            
             foreach (ModuleDescription module in modules)
-            {
-                restRequest.AddJsonBody (module);
+                await PostObject ("moduledescriptions", module);
+        }
 
-                IRestResponse restResponse = await restClient.ExecuteTaskAsync (restRequest);
-                
-                if (restResponse.StatusCode != HttpStatusCode.OK)
-                    Console.WriteLine ($"[{DateTime.UtcNow}\tBotMystAPI:UnsuccessfulRequest]\t{restResponse.StatusCode.ToString ()}");
-            }
+        private static async Task PostObject (string requestUri, object @object)
+        {
+            HttpClient httpClient = new HttpClient ();
+
+            httpClient.BaseAddress = new Uri (ApiUrl);
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue ("Bearer", BotMyst.Configuration ["BotMystApi:AccessToken"]);  
+
+            StringContent stringContent = new StringContent (JsonConvert.SerializeObject (@object), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await httpClient.PostAsync (requestUri, stringContent);  
+            response.EnsureSuccessStatusCode ();
         }
     }
 }
