@@ -11,10 +11,13 @@
         @await Html.PartialAsync("CurrentGuildBar", Model.BotMystGuild.Guild)
 
         <div class="commandSearch">
-            <input type="text" name="commandSearch" placeholder="Search commands..." />
+            <form asp-action="Index" method="GET">
+                <input type="text" name="commandSearch" placeholder="Search commands..." value="@ViewData["CurrentFilter"]" />
+                <input type="hidden" name="guildId" value="@Model.BotMystGuild.Guild.Id" />
+            </form>
         </div>
 
-        <h6>All commands:</h6>
+        <h6>Commands:</h6>
 
         foreach (ModuleDescription moduleDescription in Model.ModuleDescriptions)
         {

@@ -234,4 +234,7 @@ input[type=text] {
     outline: none;
     border: none; }
 
+form {
+  margin: 0; }
+
 /*# sourceMappingURL=index.css.map */
