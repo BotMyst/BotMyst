@@ -10,11 +10,23 @@
     {
         @await Html.PartialAsync("CurrentGuildBar", Model.BotMystGuild.Guild)
 
-        <h6>Available commands:</h6>
+        <div class="commandSearch">
+            <input type="text" name="commandSearch" placeholder="Search commands..." />
+        </div>
+
+        <h6>All commands:</h6>
 
         foreach (ModuleDescription moduleDescription in Model.ModuleDescriptions)
         {
-            
+            <p class="moduleName">@moduleDescription.Name</p>
+
+            foreach (CommandDescription commandDescription in moduleDescription.CommandDescriptions)
+            {
+                <a href="#" class="command">
+                    <p class="commandName">@commandDescription.Command <img src="~/img/checkmark.svg" /></p>
+                    <p class="commandSummary">@commandDescription.Summary</p>
+                </a>
+            }
         }
     }
 </section>

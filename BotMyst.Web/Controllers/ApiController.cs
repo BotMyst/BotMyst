@@ -45,8 +45,8 @@ namespace BotMyst.Web.Controllers
         {
             try
             {
-                    if (ModelState.IsValid)
-                    {
+                if (ModelState.IsValid)
+                {
                     // Try to find a ModuleDescription that already exists with the same name
                     ModuleDescription localModuleDescription = await moduleDescriptionsContext.ModuleDescriptions.SingleOrDefaultAsync (m => m.Name == moduleDescription.Name);
 
@@ -74,6 +74,7 @@ namespace BotMyst.Web.Controllers
                             if (!localCommandDescriptions.Any (c => c.Command == moduleDescription.CommandDescriptions [i].Command))
                             {
                                 localModuleDescription.CommandDescriptions.Add (moduleDescription.CommandDescriptions [i]);
+                                break;
                             }
                             // If there already is a CommandDescription and the Summary doesn't match (the only thing that can be different), update it
                             else if (localCommandDescriptions [i].Summary != moduleDescription.CommandDescriptions [i].Summary)

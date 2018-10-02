@@ -8,6 +8,7 @@
 @import "partials/navigation";
 
 @import "partials/pages/home";
+@import "partials/pages/commandList";
 
 
 body
@@ -39,4 +40,18 @@ h6
     text-transform: uppercase;
     letter-spacing: 0.1rem;
     font-weight: normal;
+}
+
+input[type=text]
+{
+    background-color: $color-nanolight;
+    border: none;
+    border-radius: 0.3rem;
+    color: $color-white;
+
+    &:focus
+    {
+        outline: none;
+        border: none;
+    }
 }
