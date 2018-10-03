@@ -30,6 +30,8 @@ namespace BotMyst.Web.Controllers
             BotMystGuild guild = await DiscordAPI.GetBotMystGuildAsync (guildId, HttpContext);
             model.BotMystGuild = guild;
 
+            if (guild.Guild == null) return NotFound ();
+
             foreach (ModuleDescription module in moduleDescriptionsContext.ModuleDescriptions)
             {
                 ModuleDescription moduleDescriptionCopy = new ModuleDescription
