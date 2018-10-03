@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using BotMyst.Web.Models;
 using BotMyst.Web.Discord;
 using BotMyst.Shared.Models;
-using BotMyst.Web.DatabaseContexts;
+using BotMyst.Web.Models.DatabaseContexts;
 
 namespace BotMyst.Web.Controllers
 {

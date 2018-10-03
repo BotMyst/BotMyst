@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using BotMyst.Shared.Models;
-using BotMyst.Web.DatabaseContexts;
+using BotMyst.Web.Models.DatabaseContexts;
 
 namespace BotMyst.Web.Controllers
 {

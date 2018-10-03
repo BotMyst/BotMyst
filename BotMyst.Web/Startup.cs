@@ -22,7 +22,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Newtonsoft.Json.Linq;
 
 using BotMyst.Web.Authentication;
-using BotMyst.Web.DatabaseContexts;
+using BotMyst.Web.Models.DatabaseContexts;
 
 namespace BotMyst.Web
 {
@@ -41,6 +41,7 @@ namespace BotMyst.Web
         public void ConfigureServices (IServiceCollection services)
         {
             services.AddDbContext<ModuleDescriptionsContext> (options => options.UseSqlite (Configuration.GetConnectionString ("ModuleDescriptions")));
+            services.AddDbContext<CommandOptionsContext> (options => options.UseSqlite (Configuration.GetConnectionString ("CommandOptions")));
 
             services.AddMvc ();
 
