@@ -1,4 +1,6 @@
+using System;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
@@ -7,8 +9,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
+using BotMyst.Web.Helpers;
 using BotMyst.Shared.Models;
 using BotMyst.Web.Models.DatabaseContexts;
+using BotMyst.Shared.Models.CommandOptions;
 
 namespace BotMyst.Web.Controllers
 {
@@ -18,10 +22,16 @@ namespace BotMyst.Web.Controllers
         private const string AuthenticationScheme = JwtBearerDefaults.AuthenticationScheme;
 
         private ModuleDescriptionsContext moduleDescriptionsContext;
+        private CommandOptionsContext commandOptionsContext;
 
-        public ApiController (ModuleDescriptionsContext moduleDescriptionsContext)
+        private IEnumerable<Type> commandOptionsTypes;
+
+        public ApiController (ModuleDescriptionsContext moduleDescriptionsContext, CommandOptionsContext commandOptionsContext)
         {
             this.moduleDescriptionsContext = moduleDescriptionsContext;
+            this.commandOptionsContext = commandOptionsContext;
+
+            commandOptionsTypes = CommandHelper.GetCommandOptionsTypes ();
         }
 
         /// <summary>
@@ -33,6 +43,35 @@ namespace BotMyst.Web.Controllers
         public IActionResult ConfirmApi ()
         {
             return Ok ("BotMyst API works!");
+        }
+
+        [Authorize (AuthenticationSchemes = AuthenticationScheme)]
+        [Route ("commandoptions")]
+        [HttpPost]
+        public async Task<IActionResult> InitializeCommandOptions (ulong guildId)
+        {
+            foreach (Type commandOptionType in commandOptionsTypes)
+            {
+                object instance = Activator.CreateInstance (commandOptionType);
+                (instance as CommandOptions).GuildId = guildId;
+                commandOptionsContext.Add (instance);
+            }
+
+            await commandOptionsContext.SaveChangesAsync ();
+
+            return Ok ();
+        }
+
+        [Authorize (AuthenticationSchemes = AuthenticationScheme)]
+        [Route ("commandoptions")]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCommandOption (string commandOptionType, ulong guildId)
+        {
+            object option = await commandOptionsContext.FindAsync (commandOptionsTypes.First (t => t.Name == commandOptionType), guildId);
+            commandOptionsContext.Remove (option);
+            await commandOptionsContext.SaveChangesAsync ();
+
+            return Ok ();
         }
 
         /// <summary>
