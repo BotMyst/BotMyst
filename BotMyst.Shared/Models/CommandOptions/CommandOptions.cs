@@ -6,6 +6,6 @@ namespace BotMyst.Shared.Models.CommandOptions
     {
         [Key]
         public ulong GuildId { get; set; }
-        public bool Enabled { get; set; }
+        public bool Enabled { get; set; } = false;
     }
 }
