@@ -44,6 +44,8 @@ namespace BotMyst.Bot
 
             client.MessageReceived += HandleMessage;
 
+            client.JoinedGuild += OnJoinedGuild;
+
             await commandService.AddModulesAsync (Assembly.GetEntryAssembly ());
 
             await BotMystAPI.GenerateModuleDescriptions (commandService);
@@ -82,6 +84,12 @@ namespace BotMyst.Bot
                     await context.Channel.SendMessageAsync(string.Empty, false, eb.Build ());
                 }
             }
+        }
+
+        private Task OnJoinedGuild (SocketGuild arg)
+        {
+            BotMystAPI.InitializeCommandOptions (arg.Id).RunSynchronously ();
+            return Task.CompletedTask;
         }
 
         /// <summary>

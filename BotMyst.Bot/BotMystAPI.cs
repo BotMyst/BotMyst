@@ -49,6 +49,9 @@ namespace BotMyst.Bot
                 await PostObject ("moduledescriptions", module);
         }
 
+        public static async Task InitializeCommandOptions (ulong guildId) =>
+            await PostObject ($"commandoptions?guildId={guildId}", null);
+
         private static async Task PostObject (string requestUri, object @object)
         {
             HttpClient httpClient = new HttpClient ();
