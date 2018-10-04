@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BotMyst.Web.Migrations.CommandOptions
 {
     [DbContext(typeof(CommandOptionsContext))]
-    [Migration("20181003145300_CommandsEnabledByDefault")]
-    partial class CommandsEnabledByDefault
+    [Migration("20181004162450_RoleWhitelistBlacklist")]
+    partial class RoleWhitelistBlacklist
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,6 +24,10 @@ namespace BotMyst.Web.Migrations.CommandOptions
 
                     b.Property<bool>("Enabled");
 
+                    b.Property<string>("RoleBlacklist");
+
+                    b.Property<string>("RoleWhitelist");
+
                     b.HasKey("GuildId");
 
                     b.ToTable("ClearOptions");
@@ -35,6 +39,10 @@ namespace BotMyst.Web.Migrations.CommandOptions
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Enabled");
+
+                    b.Property<string>("RoleBlacklist");
+
+                    b.Property<string>("RoleWhitelist");
 
                     b.HasKey("GuildId");
 
@@ -49,6 +57,10 @@ namespace BotMyst.Web.Migrations.CommandOptions
                     b.Property<string>("DefaultSearchEngine");
 
                     b.Property<bool>("Enabled");
+
+                    b.Property<string>("RoleBlacklist");
+
+                    b.Property<string>("RoleWhitelist");
 
                     b.HasKey("GuildId");
 

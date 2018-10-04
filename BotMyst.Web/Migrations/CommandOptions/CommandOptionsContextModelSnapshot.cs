@@ -22,6 +22,10 @@ namespace BotMyst.Web.Migrations.CommandOptions
 
                     b.Property<bool>("Enabled");
 
+                    b.Property<string>("RoleBlacklist");
+
+                    b.Property<string>("RoleWhitelist");
+
                     b.HasKey("GuildId");
 
                     b.ToTable("ClearOptions");
@@ -33,6 +37,10 @@ namespace BotMyst.Web.Migrations.CommandOptions
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Enabled");
+
+                    b.Property<string>("RoleBlacklist");
+
+                    b.Property<string>("RoleWhitelist");
 
                     b.HasKey("GuildId");
 
@@ -47,6 +55,10 @@ namespace BotMyst.Web.Migrations.CommandOptions
                     b.Property<string>("DefaultSearchEngine");
 
                     b.Property<bool>("Enabled");
+
+                    b.Property<string>("RoleBlacklist");
+
+                    b.Property<string>("RoleWhitelist");
 
                     b.HasKey("GuildId");
 

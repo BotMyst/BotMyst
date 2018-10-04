@@ -2,7 +2,7 @@
 
 namespace BotMyst.Web.Migrations.CommandOptions
 {
-    public partial class BasicCommands : Migration
+    public partial class RoleWhitelistBlacklist : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,9 @@ namespace BotMyst.Web.Migrations.CommandOptions
                 {
                     GuildId = table.Column<ulong>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Enabled = table.Column<bool>(nullable: false)
+                    Enabled = table.Column<bool>(nullable: false),
+                    RoleWhitelist = table.Column<string>(nullable: true),
+                    RoleBlacklist = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -25,7 +27,9 @@ namespace BotMyst.Web.Migrations.CommandOptions
                 {
                     GuildId = table.Column<ulong>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Enabled = table.Column<bool>(nullable: false)
+                    Enabled = table.Column<bool>(nullable: false),
+                    RoleWhitelist = table.Column<string>(nullable: true),
+                    RoleBlacklist = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -38,7 +42,10 @@ namespace BotMyst.Web.Migrations.CommandOptions
                 {
                     GuildId = table.Column<ulong>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Enabled = table.Column<bool>(nullable: false)
+                    Enabled = table.Column<bool>(nullable: false),
+                    RoleWhitelist = table.Column<string>(nullable: true),
+                    RoleBlacklist = table.Column<string>(nullable: true),
+                    DefaultSearchEngine = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
