@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-
+using BotMyst.Shared.Models.CommandOptions;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
@@ -63,6 +63,11 @@ namespace BotMyst.Bot
 
             CommandContext context = new CommandContext (client, message);
             CommandInfo executedCommand = commandService.Search (context, argPos).Commands [0].Command;
+
+            CommandOptions options = await BotMystAPI.GetCommandOptions (context.Guild.Id, executedCommand.Name + "options");
+            
+            if (options.Enabled == false)
+                return;
 
             IResult result = await commandService.ExecuteAsync(context, argPos, serviceProvider);
             if (result.IsSuccess == false)

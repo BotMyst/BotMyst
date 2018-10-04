@@ -40,10 +40,14 @@ namespace BotMyst.Web.Controllers
         [Authorize (AuthenticationSchemes = AuthenticationScheme)]
         [Route ("confirmapi")]
         [HttpGet]
-        public IActionResult ConfirmApi ()
-        {
-            return Ok ("BotMyst API works!");
-        }
+        public IActionResult ConfirmApi () =>
+            Ok ("BotMyst API works!");
+
+        [Authorize (AuthenticationSchemes = AuthenticationScheme)]
+        [Route ("commandoptions")]
+        [HttpGet]
+        public async Task<IActionResult> GetCommandOption (ulong guildId, string commandOptionType) =>
+            Json ((CommandOptions) await commandOptionsContext.FindAsync (commandOptionsTypes.First (t => t.Name.ToLower () == commandOptionType), guildId));
 
         [Authorize (AuthenticationSchemes = AuthenticationScheme)]
         [Route ("commandoptions")]
@@ -65,7 +69,7 @@ namespace BotMyst.Web.Controllers
         [Authorize (AuthenticationSchemes = AuthenticationScheme)]
         [Route ("commandoptions")]
         [HttpDelete]
-        public async Task<IActionResult> DeleteCommandOption (string commandOptionType, ulong guildId)
+        public async Task<IActionResult> DeleteCommandOption (ulong guildId, string commandOptionType)
         {
             object option = await commandOptionsContext.FindAsync (commandOptionsTypes.First (t => t.Name == commandOptionType), guildId);
             commandOptionsContext.Remove (option);

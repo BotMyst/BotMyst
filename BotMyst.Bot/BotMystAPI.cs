@@ -12,6 +12,7 @@ using Discord.Commands;
 using Newtonsoft.Json;
 
 using BotMyst.Shared.Models;
+using BotMyst.Shared.Models.CommandOptions;
 
 namespace BotMyst.Bot
 {
@@ -52,6 +53,9 @@ namespace BotMyst.Bot
         public static async Task InitializeCommandOptions (ulong guildId) =>
             await PostObject ($"commandoptions?guildId={guildId}", null);
 
+        public static async Task<CommandOptions> GetCommandOptions (ulong guildId, string commandOptionType) =>
+            await GetObject<CommandOptions> ($"commandoptions?guildId={guildId}&commandOptionType={commandOptionType}");
+
         private static async Task PostObject (string requestUri, object @object)
         {
             HttpClient httpClient = new HttpClient ();
@@ -63,6 +67,19 @@ namespace BotMyst.Bot
 
             HttpResponseMessage response = await httpClient.PostAsync (requestUri, stringContent);  
             response.EnsureSuccessStatusCode ();
+        }
+
+        private static async Task<T> GetObject<T> (string requestUri)
+        {
+            HttpClient httpClient = new HttpClient ();
+
+            httpClient.BaseAddress = new Uri (ApiUrl);
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue ("Bearer", BotMyst.Configuration ["BotMystApi:AccessToken"]);  
+
+            HttpResponseMessage response = await httpClient.GetAsync (requestUri);  
+            response.EnsureSuccessStatusCode ();
+
+            return JsonConvert.DeserializeObject<T> (await response.Content.ReadAsStringAsync ());
         }
     }
 }
