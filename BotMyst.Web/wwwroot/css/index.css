@@ -203,9 +203,8 @@ header {
       width: 10px; }
 
 #commandOptions .commandDescription .commandName {
-  float: left; }
+  display: inline-block; }
 #commandOptions .commandDescription .commandSummary {
-  float: left;
   margin-top: 2rem; }
 #commandOptions .commandDescription .commandEnabled {
   float: right; }

@@ -11,7 +11,7 @@
                 string enabledText = enabled ? "Enabled" : "Disabled";
             }
 
-            <a href="#" class="@enabledText.ToLower() button">@enabledText</a>
+            <a asp-action="ToggleCommand" asp-route-guildId="@Model.BotMystGuild.Guild.Id" asp-route-commandId="@Model.CommandDescription.ID" class="@enabledText.ToLower() button">@enabledText</a>
         </div>
 
         <h6 class="commandName">@Model.CommandDescription.Command</h6>

@@ -45,5 +45,17 @@ namespace BotMyst.Web.Controllers
 
             return View (model);
         }
+
+        public async Task<IActionResult> ToggleCommand (ulong guildId, int commandId)
+        {
+            CommandDescription description = await moduleDescriptionsContext.CommandDescriptions.SingleOrDefaultAsync (c => c.ID == commandId);
+            CommandOptions options = (CommandOptions) await commandOptionsContext.FindAsync (commandOptionTypes.First (t => t.Name.ToLower () == description.Command.ToLower () + "options"), guildId);
+
+            options.Enabled = !options.Enabled;
+
+            await commandOptionsContext.SaveChangesAsync ();
+
+            return RedirectToAction ("Index", new { guildId = guildId, commandId = commandId });
+        }
     }
 }
