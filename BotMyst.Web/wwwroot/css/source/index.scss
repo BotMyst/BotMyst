@@ -9,6 +9,7 @@
 
 @import "partials/pages/home";
 @import "partials/pages/commandList";
+@import "partials/pages/commandOptions";
 
 
 body
@@ -59,4 +60,9 @@ input[type=text]
 form
 {
     margin: 0;
+}
+
+hr
+{
+    border-color: $color-nanolightlight;
 }

@@ -25,7 +25,7 @@
 
             foreach (CommandDescription commandDescription in moduleDescription.CommandDescriptions)
             {
-                <a href="#" class="command">
+                <a asp-controller="CommandOptions" asp-action="Index" asp-route-guildId="@Model.BotMystGuild.Guild.Id" asp-route-commandId="@commandDescription.ID" class="command">
                     <p class="commandName">@commandDescription.Command <img src="~/img/checkmark.svg" /></p>
                     <p class="commandSummary">@commandDescription.Summary</p>
                 </a>

@@ -202,6 +202,16 @@ header {
     #commandList .command .commandName img {
       width: 10px; }
 
+#commandOptions .commandDescription .commandName {
+  float: left; }
+#commandOptions .commandDescription .commandSummary {
+  float: left;
+  margin-top: 2rem; }
+#commandOptions .commandDescription .commandEnabled {
+  float: right; }
+  #commandOptions .commandDescription .commandEnabled .enabled {
+    color: #ee720d; }
+
 body {
   background: #141414;
   font-family: "Raleway", sans-serif;
@@ -236,5 +246,8 @@ input[type=text] {
 
 form {
   margin: 0; }
+
+hr {
+  border-color: #777777; }
 
 /*# sourceMappingURL=index.css.map */

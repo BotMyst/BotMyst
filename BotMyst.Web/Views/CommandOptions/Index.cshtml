@@ -1,0 +1,25 @@
+@model CommandOptionsModel
+
+<section id="commandOptions">
+    
+    @await Html.PartialAsync("CurrentGuildBar", Model.BotMystGuild.Guild)
+
+    <div class="commandDescription">
+        <div class="commandEnabled">
+            @{
+                bool enabled = Model.CommandOptions.Enabled;
+                string enabledText = enabled ? "Enabled" : "Disabled";
+            }
+
+            <a href="#" class="@enabledText.ToLower() button">@enabledText</a>
+        </div>
+
+        <h6 class="commandName">@Model.CommandDescription.Command</h6>
+        <p class="commandSummary">@Model.CommandDescription.Summary</p>
+    </div>
+
+    <div style="clear: both;"></div>
+
+</section>
+
+<hr />

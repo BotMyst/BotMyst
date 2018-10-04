@@ -1,0 +1,26 @@
+#commandOptions
+{
+    .commandDescription
+    {
+        .commandName
+        {
+            float: left;
+        }
+
+        .commandSummary
+        {
+            float: left;
+            margin-top: 2rem;
+        }
+
+        .commandEnabled
+        {
+            float: right;
+
+            .enabled
+            {
+                color: $color-range;
+            }
+        }
+    }
+}
