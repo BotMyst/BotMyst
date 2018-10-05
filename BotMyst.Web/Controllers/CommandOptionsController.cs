@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
@@ -12,6 +13,7 @@ using BotMyst.Web.Discord;
 using BotMyst.Shared.Models;
 using BotMyst.Web.Models.DatabaseContexts;
 using BotMyst.Shared.Models.CommandOptions;
+using System.Text.RegularExpressions;
 
 namespace BotMyst.Web.Controllers
 {
@@ -42,6 +44,32 @@ namespace BotMyst.Web.Controllers
             if (model.CommandDescription == null) return NotFound ();
 
             model.CommandOptions = (CommandOptions) await commandOptionsContext.FindAsync (commandOptionTypes.First (t => t.Name.ToLower () == model.CommandDescription.Command.ToLower () + "options"), guildId);
+
+            PropertyInfo [] commandOptionsProperties = model.CommandOptions.GetType ().GetProperties ();
+
+            model.Options = new List<OptionDescription> ();
+
+            foreach (PropertyInfo property in commandOptionsProperties)
+            {
+                if (property.Name == "GuildId" ||
+                    property.Name == "Enabled")
+                        continue;
+
+                OptionAttribute optionAttribute = (OptionAttribute) property.GetCustomAttribute (typeof (OptionAttribute));
+
+                if (optionAttribute == null)
+                    continue;
+            
+                OptionDescription optionDescription = new OptionDescription
+                {
+                    Name = Regex.Replace (property.Name, "(\\B[A-Z])", " $1"),
+                    Summary = optionAttribute.Summary,
+                    OptionType = optionAttribute.OptionType,
+                    Value = property.GetValue (model.CommandOptions, null)
+                };
+
+                model.Options.Add (optionDescription);
+            }
 
             return View (model);
         }

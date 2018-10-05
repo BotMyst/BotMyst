@@ -20,6 +20,14 @@
 
     <div style="clear: both;"></div>
 
-</section>
-
 <hr />
+
+    @foreach (OptionDescription option in Model.Options)
+    {
+        <p>@option.Name</p>
+        <p>@option.Summary</p>
+        <p>@option.OptionType.ToString()</p>
+        <hr />
+    }
+
+</section>
