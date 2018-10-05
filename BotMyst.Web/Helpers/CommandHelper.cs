@@ -12,7 +12,7 @@ namespace BotMyst.Web.Helpers
         public static IEnumerable<Type> GetCommandOptionsTypes ()
         {
             Assembly assembly = typeof (CommandOptions).Assembly;
-            return assembly.GetTypes ().Where (t => t.IsSubclassOf (typeof (CommandOptions)));
+            return assembly.GetTypes ().Where (t => t.IsSubclassOf (typeof (CommandOptions)) && t.Name != nameof (BaseCommandOptions));
         }
     }
 }

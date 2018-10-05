@@ -18,7 +18,7 @@ namespace BotMyst.Web.Models.DatabaseContexts
         protected override void OnModelCreating (ModelBuilder modelBuilder)
         {
             Assembly assembly = typeof (CommandOptions).Assembly;
-            List<Type> commandOptionTypes = assembly.GetTypes ().Where (t => t.IsSubclassOf (typeof (CommandOptions)) && t.Name != "BaseCommandOptions").ToList ();
+            List<Type> commandOptionTypes = assembly.GetTypes ().Where (t => t.IsSubclassOf (typeof (CommandOptions)) && t.Name != nameof (BaseCommandOptions)).ToList ();
 
             foreach (Type commandOptionType in commandOptionTypes)
             {
