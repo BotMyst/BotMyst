@@ -60,6 +60,40 @@
       letter-spacing: 0.1rem;
       line-height: 40px; }
 
+.blobList ul {
+  background-color: #222222;
+  border-radius: 0.3rem;
+  padding-top: 10px;
+  -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2); }
+  .blobList ul li {
+    display: inline-block;
+    border: 1px solid #ffffff;
+    border-radius: 0.3rem;
+    padding: 5px 10px;
+    margin-right: 10px;
+    margin-left: 10px; }
+    .blobList ul li .blobRemove {
+      float: left;
+      width: 7px;
+      border: 1px solid #ffffff;
+      padding: 2px;
+      border-radius: 100%;
+      margin-top: 3px;
+      margin-right: 5px; }
+    .blobList ul li .blobText {
+      float: left;
+      margin: 0;
+      color: #ffffff;
+      font-size: 1.3rem; }
+  .blobList ul .blobAdd .button {
+    width: 100%;
+    box-shadow: none;
+    background-color: #ee720d;
+    margin: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0; }
+
 header {
   padding-bottom: 7.5rem; }
   header nav {
@@ -210,6 +244,11 @@ header {
   float: right; }
   #commandOptions .commandDescription .commandEnabled .enabled {
     color: #ee720d; }
+#commandOptions .option .name {
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  margin-bottom: 1rem; }
 
 body {
   background: #141414;
