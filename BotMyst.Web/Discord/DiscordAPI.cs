@@ -106,7 +106,6 @@ namespace BotMyst.Web.Discord
             if (response.IsSuccessStatusCode)          
             {
                 string json = await response.Content.ReadAsStringAsync ();
-                System.Console.WriteLine(json);
                 result = JsonConvert.DeserializeObject<List<T>> (json);
             }
             response.EnsureSuccessStatusCode ();

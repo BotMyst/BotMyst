@@ -15,6 +15,7 @@ using BotMyst.Shared.Models;
 using BotMyst.Web.Models.DatabaseContexts;
 using BotMyst.Shared.Models.CommandOptions;
 using BotMyst.Shared.Models.CommandOptions.Utility;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BotMyst.Web.Controllers
 {
@@ -75,8 +76,10 @@ namespace BotMyst.Web.Controllers
             return View (model);
         }
 
-        public async Task<bool> ToggleCommand (ulong guildId, int commandId)
+        public async Task<IActionResult> ToggleCommand (ulong guildId, int commandId)
         {
+            if (await UserHelper.CanChangeOptionsAsync (User, HttpContext, guildId) == false) return Unauthorized ();
+
             CommandDescription description = await moduleDescriptionsContext.CommandDescriptions.SingleOrDefaultAsync (c => c.ID == commandId);
             CommandOptions options = (CommandOptions) await commandOptionsContext.FindAsync (commandOptionTypes.First (t => t.Name.ToLower () == description.Command.ToLower () + "options"), guildId);
 
@@ -84,7 +87,7 @@ namespace BotMyst.Web.Controllers
 
             await commandOptionsContext.SaveChangesAsync ();
 
-            return options.Enabled;
+            return Json (options.Enabled);
         }
     }
 }
