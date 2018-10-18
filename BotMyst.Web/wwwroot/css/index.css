@@ -94,6 +94,59 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0; }
 
+#blobPicker {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.4); }
+  #blobPicker .content {
+    background-color: #222222;
+    margin: 15% auto;
+    padding: 20px;
+    padding-bottom: 45px;
+    width: 80%;
+    border-radius: 0.3rem;
+    box-sizing: border-box;
+    animation-name: animatetop;
+    animation-duration: 400ms;
+    position: relative;
+    -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2); }
+    #blobPicker .content h6 {
+      font-weight: bold;
+      letter-spacing: 0.1rem;
+      font-size: 2rem; }
+    #blobPicker .content .close {
+      float: right;
+      background-color: transparent;
+      box-shadow: none;
+      padding: 0;
+      margin-bottom: 0; }
+      #blobPicker .content .close:hover, #blobPicker .content .close:focus {
+        cursor: pointer; }
+
+@media all and (min-width: 400px) {
+  #blobPicker .content {
+    width: 85%; } }
+@media all and (min-width: 600px) {
+  #blobPicker .content {
+    width: 60%; } }
+@media all and (min-width: 1200px) {
+  #blobPicker .content {
+    width: 40%; } }
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0; }
+  to {
+    top: 0;
+    opacity: 1; } }
 header {
   padding-bottom: 7.5rem; }
   header nav {

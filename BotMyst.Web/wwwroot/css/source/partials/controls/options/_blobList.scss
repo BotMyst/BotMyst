@@ -50,3 +50,101 @@
         }
     }
 }
+
+#blobPicker
+{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+
+    .content
+    {
+        background-color: $color-nanolight;
+        margin: 15% auto;
+        padding: 20px;
+        padding-bottom: 45px;
+        width: 80%;
+        border-radius: 0.3rem;
+        box-sizing: border-box;
+        animation-name: animatetop;
+        animation-duration: 400ms;
+        position: relative;
+        @include default-shadow();
+
+        h6
+        {
+            font-weight: bold;
+            letter-spacing: 0.1rem;
+            font-size: 2rem;
+        }
+
+        .close
+        {
+            float: right;
+            background-color: transparent;
+            box-shadow: none;
+            padding: 0;
+            margin-bottom: 0;
+
+            &:hover, &:focus
+            {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+@media all and (min-width: $break-small)
+{
+    #blobPicker
+    {
+        .content
+        {
+            width: 85%;
+        }
+    }
+}
+
+@media all and (min-width: $break-large)
+{
+    #blobPicker
+    {
+        .content
+        {
+            width: 60%;
+        }
+    }
+}
+
+@media all and (min-width: $break-larger)
+{
+    #blobPicker
+    {
+        .content
+        {
+            width: 40%;
+        }
+    }
+}
+
+@keyframes animatetop
+{
+    from
+    {
+        top: -300px;
+        opacity: 0;
+    }
+
+    to
+    {
+        top: 0;
+        opacity: 1;
+    }
+}
