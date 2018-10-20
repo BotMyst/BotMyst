@@ -38,10 +38,15 @@ function toggleCommand (guildId, commandId)
     });
 }
 
-function openBlobPicker ()
+function openRolePicker (guildId, commandId, optionName)
 {
     var blobPicker = document.getElementById ('blobPicker');
+    var title = blobPicker.getElementsByTagName ('h6') [0];
+    title.innerText = 'Select roles:';
+    var content = blobPicker.getElementsByClassName ('content') [0];
     var close = blobPicker.getElementsByClassName ('close') [0];
+    
+    content.innerHTML = 'Fetching roles...';
 
     blobPicker.style.display = 'block';
 
@@ -55,4 +60,25 @@ function openBlobPicker ()
         if (event.target == blobPicker)
             blobPicker.style.display = 'none';
     }
+
+    $.ajax
+    ({
+        url: "/Discord/AvailableRoles?guildId=" + guildId + "&commandId=" + commandId + "&optionName=" + optionName,
+        success: function (data)
+        {
+            content.innerHTML = '<ul class="roleList">\n</ul>';
+            var list = content.getElementsByTagName ('ul') [0];
+
+            for (var i = 0; i < data.length; i++)
+            {
+                var color = data [i].color.toString (16);
+                list.innerHTML += '\n' + '<li class="role">' + 
+                                            '<a href="#" style="border-color: #' + color + ';">' +
+                                                '<img style="border-color: #' + color + ';" class="roleAdd" src="/img/remove.svg" />' +
+                                                '<p>' + data [i].name + '</p>' +
+                                            '</a>' +
+                                         '</li>';
+            }
+        }
+    });
 }

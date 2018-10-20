@@ -105,7 +105,7 @@
   overflow: auto;
   background-color: black;
   background-color: rgba(0, 0, 0, 0.4); }
-  #blobPicker .content {
+  #blobPicker .modal {
     background-color: #222222;
     margin: 15% auto;
     padding: 20px;
@@ -118,27 +118,54 @@
     position: relative;
     -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2); }
-    #blobPicker .content h6 {
+    #blobPicker .modal h6 {
       font-weight: bold;
       letter-spacing: 0.1rem;
       font-size: 2rem; }
-    #blobPicker .content .close {
+    #blobPicker .modal .close {
       float: right;
       background-color: transparent;
       box-shadow: none;
       padding: 0;
       margin-bottom: 0; }
-      #blobPicker .content .close:hover, #blobPicker .content .close:focus {
+      #blobPicker .modal .close:hover, #blobPicker .modal .close:focus {
         cursor: pointer; }
 
+#blobPicker ul.roleList {
+  list-style-type: none; }
+  #blobPicker ul.roleList li.role {
+    display: inline-block;
+    margin-right: 10px;
+    margin-left: 10px; }
+    #blobPicker ul.roleList li.role .roleAdd {
+      float: left;
+      width: 5px;
+      border: 1px solid #ffffff;
+      padding: 3px;
+      border-radius: 100%;
+      margin-top: 4px;
+      margin-right: 5px;
+      transform: rotate(45deg); }
+    #blobPicker ul.roleList li.role a {
+      color: #ffffff;
+      text-decoration: none;
+      border: 1px solid #ffffff;
+      border-radius: 0.3rem;
+      display: inline-block;
+      padding: 5px 10px; }
+      #blobPicker ul.roleList li.role a p {
+        font-size: 1.3rem;
+        margin: 0;
+        float: left; }
+
 @media all and (min-width: 400px) {
-  #blobPicker .content {
+  #blobPicker .modal {
     width: 85%; } }
 @media all and (min-width: 600px) {
-  #blobPicker .content {
+  #blobPicker .modal {
     width: 60%; } }
 @media all and (min-width: 1200px) {
-  #blobPicker .content {
+  #blobPicker .modal {
     width: 40%; } }
 @keyframes animatetop {
   from {

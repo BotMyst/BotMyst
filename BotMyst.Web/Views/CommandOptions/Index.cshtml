@@ -68,7 +68,7 @@
                         </li>
 
                         <div class="blobAdd">
-                            <a onclick="openBlobPicker()" class="button">Add</a>
+                            <a onclick="openRolePicker('@Model.BotMystGuild.Guild.Id', '@Model.CommandDescription.ID', '@option.Name')" class="button">Add</a>
                         </div>
                     </ul>
                 </div>
@@ -79,9 +79,12 @@
 </section>
 
 <div id="blobPicker">
-    <div class="content">
+    <div class="modal">
         <h6>Blob picker</h6>
-        <p>Hello world!</p>
+
+        <div class="content">
+
+        </div>
 
         <span class="close button">Close</span>
     </div>

@@ -33,12 +33,8 @@ namespace BotMyst.Web.Discord
         /// <summary>
         /// Get a guild in which the current user is in.
         /// </summary>
-        public static async Task<DiscordGuild> GetUserGuildAsync (ulong guildId, HttpContext httpContext)
-        {
-            string token = await httpContext.GetTokenAsync (CookieAuthenticationDefaults.AuthenticationScheme, "access_token");
-        
-            return (await GetUserGuildsAsync (httpContext)).FirstOrDefault (g => g.Id == guildId);
-        }
+        public static async Task<DiscordGuild> GetUserGuildAsync (ulong guildId, HttpContext httpContext) =>
+            (await GetUserGuildsAsync (httpContext)).FirstOrDefault (g => g.Id == guildId);
 
         /// <summary>
         /// Returns a BotMyst guild which has a member which indicates whether BotMyst is in that guild.

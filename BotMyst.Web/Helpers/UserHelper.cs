@@ -16,9 +16,7 @@ namespace BotMyst.Web.Helpers
             if (user.Identity.IsAuthenticated == false) return false;
 
             DiscordGuild guild = await DiscordAPI.GetUserGuildAsync (guildId, httpContext);
-            BotMystGuild botMystGuild = await DiscordAPI.GetBotMystGuildAsync (guildId, httpContext);
             if (guild == null) return false;
-            if (botMystGuild.HasBotMyst == false) return false;
             if (guild.HasAdministratorPermission () == false) return false;
 
             return true;

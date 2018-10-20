@@ -64,7 +64,7 @@
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
 
-    .content
+    .modal
     {
         background-color: $color-nanolight;
         margin: 15% auto;
@@ -101,11 +101,55 @@
     }
 }
 
+#blobPicker
+{
+    ul.roleList
+    {
+        list-style-type: none;
+    
+        li.role
+        {
+            display: inline-block;
+            margin-right: 10px;
+            margin-left: 10px;
+
+            .roleAdd
+            {
+                float: left;
+                width: 5px;
+                border: 1px solid $color-white;
+                padding: 3px;
+                border-radius: 100%;
+                margin-top: 4px;
+                margin-right: 5px;
+                transform: rotate(45deg);
+            }
+
+            a
+            {
+                color: $color-white;
+                text-decoration: none;
+                border: 1px solid $color-white;
+                border-radius: 0.3rem;
+                display: inline-block;
+                padding: 5px 10px;
+
+                p
+                {
+                    font-size: 1.3rem;
+                    margin: 0;
+                    float: left;
+                }
+            }
+        }
+    }
+}
+
 @media all and (min-width: $break-small)
 {
     #blobPicker
     {
-        .content
+        .modal
         {
             width: 85%;
         }
@@ -116,7 +160,7 @@
 {
     #blobPicker
     {
-        .content
+        .modal
         {
             width: 60%;
         }
@@ -127,7 +171,7 @@
 {
     #blobPicker
     {
-        .content
+        .modal
         {
             width: 40%;
         }
