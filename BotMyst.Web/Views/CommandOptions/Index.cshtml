@@ -26,46 +26,34 @@
     {
         @if (option.OptionType.ToString() == "RoleList")
         {
+            IEnumerable<DiscordRole> roles = await ((string) option.Value).ToDiscordRolesAsync (Model.BotMystGuild.Guild.Id);
+
             <div class="option">
                 <p class="name">@option.Name</p>
                 <p class="summary">@option.Summary</p>
 
                 <div class="blobList">
                     <ul>
-                        <li style="border-color: rgb(231, 76, 60);">
-                            <a href="#">
-                                <img style="border-color: rgb(231, 76, 60);" class="blobRemove" src="~/img/remove.svg" />
-                                <p class="blobText">Admin</p>
-                            </a>
-                        </li>
-
-                        <li style="border-color: rgb(230, 126, 34);">
-                            <a href="#">
-                                <img style="border-color: rgb(230, 126, 34);" class="blobRemove" src="~/img/remove.svg" />
-                                <p class="blobText">Moderator</p>
-                            </a>
-                        </li>
-
-                        <li style="border-color: rgb(155, 89, 182);">
-                            <a href="#">
-                                <img style="border-color: rgb(155, 89, 182);" class="blobRemove" src="~/img/remove.svg" />
-                                <p class="blobText">Guru</p>
-                            </a>
-                        </li>
-
-                        <li style="border-color: rgb(0, 255, 255);">
-                            <a href="#">
-                                <img style="border-color: rgb(0, 255, 255);" class="blobRemove" src="~/img/remove.svg" />
-                                <p class="blobText">Bot</p>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#">
-                                <img class="blobRemove" src="~/img/remove.svg" />
-                                <p class="blobText">@@everyone</p>
-                            </a>
-                        </li>
+                        @if (roles == null)
+                        {
+                            <li>
+                                <a>
+                                    <p class="blobText">...</p>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            @foreach (DiscordRole role in roles)
+                            {
+                                <li style='border-color: #@role.Color.ToString("X");'>
+                                    <a href="#">
+                                        <img style='border-color: #@role.Color.ToString("X");' class="blobRemove" src="~/img/remove.svg" />
+                                        <p class="blobText">@role.Name</p>
+                                    </a>
+                                </li>
+                            }
+                        }
 
                         <div class="blobAdd">
                             <a onclick="openRolePicker('@Model.BotMystGuild.Guild.Id', '@Model.CommandDescription.ID', '@option.Name')" class="button">Add</a>
