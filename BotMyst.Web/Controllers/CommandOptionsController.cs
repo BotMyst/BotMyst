@@ -64,6 +64,7 @@ namespace BotMyst.Web.Controllers
             
                 OptionDescription optionDescription = new OptionDescription
                 {
+                    // Prettify the option name. Example: "RoleWhitelist" would become "Role Whitelist"
                     Name = Regex.Replace (property.Name, "(\\B[A-Z])", " $1"),
                     Summary = optionAttribute.Summary,
                     OptionType = optionAttribute.OptionType,
@@ -88,6 +89,18 @@ namespace BotMyst.Web.Controllers
             await commandOptionsContext.SaveChangesAsync ();
 
             return Json (options.Enabled);
+        }
+
+        public async Task<IActionResult> AddBlobToBlobList (ulong guildId, int commandId, string optionName, string blob)
+        {
+            if (await UserHelper.CanChangeOptionsAsync (User, HttpContext, guildId) == false) return Unauthorized ();
+
+            CommandDescription description = await moduleDescriptionsContext.CommandDescriptions.SingleOrDefaultAsync (c => c.ID == commandId);
+            BaseCommandOptions options = await CommandHelper.GetCommandOptionsAsync<BaseCommandOptions> (guildId, commandOptionsContext, description, commandOptionTypes);
+
+            await CommandHelper.AddItemToOptionStringList<BaseCommandOptions> (options, commandOptionsContext, optionName, blob);
+
+            return Ok ();
         }
     }
 }

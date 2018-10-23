@@ -42,7 +42,7 @@ function openRolePicker (guildId, commandId, optionName)
 {
     var blobPicker = document.getElementById ('blobPicker');
     var title = blobPicker.getElementsByTagName ('h6') [0];
-    title.innerText = 'Select roles:';
+    title.innerText = 'Select roles for: ' + optionName;
     var content = blobPicker.getElementsByClassName ('content') [0];
     var close = blobPicker.getElementsByClassName ('close') [0];
     
@@ -73,12 +73,24 @@ function openRolePicker (guildId, commandId, optionName)
             {
                 var color = data [i].color.toString (16);
                 list.innerHTML += '\n' + '<li class="role">' + 
-                                            '<a href="#" style="border-color: #' + color + ';">' +
+                                            `<a style="border-color: #${color};" onclick="addBlobToBlobList ('${guildId}', ${commandId}, '${optionName}', '${data [i].name}')">` +
                                                 '<img style="border-color: #' + color + ';" class="roleAdd" src="/img/remove.svg" />' +
                                                 '<p>' + data [i].name + '</p>' +
                                             '</a>' +
-                                         '</li>';
+                                            '</li>';
             }
+        }
+    });
+}
+
+function addBlobToBlobList (guildId, commandId, optionName, blob)
+{
+    $.ajax
+    ({
+        url: "CommandOptions/AddBlobToBlobList?guildId=" + guildId + "&commandId=" + commandId + "&optionName=" + optionName + "&blob=" + blob,
+        success: function ()
+        {
+            console.log ("success");
         }
     });
 }

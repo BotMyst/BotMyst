@@ -19,11 +19,29 @@ namespace BotMyst.Web.Helpers
         }
 
         public static async Task<T> GetCommandOptionsAsync<T> (ulong guildId,
-                                                                         CommandOptionsContext commandOptionsContext,
-                                                                         CommandDescription commandDescription,
-                                                                         IEnumerable<Type> commandOptionsTypes) where T : CommandOptions
+                                                               CommandOptionsContext commandOptionsContext,
+                                                               CommandDescription commandDescription,
+                                                               IEnumerable<Type> commandOptionsTypes) where T : CommandOptions
         {
             return (T) await commandOptionsContext.FindAsync (commandOptionsTypes.First (t => t.Name.ToLower () == commandDescription.Command.ToLower () + "options"), guildId);
+        }
+
+        /// <summary>
+        /// Adds an item to a string representing a list in a command option.
+        /// Example is RoleWhitelist (Staff,Admin,Bot).
+        /// </summary>
+        public static async Task AddItemToOptionStringList<T> (T options, CommandOptionsContext commandOptionsContext, string optionName, string value) where T : CommandOptions
+        {
+            PropertyInfo [] properties = options.GetType ().GetProperties ();
+            PropertyInfo propertyToChange = properties.First (p => p.Name == optionName.Replace (" ", ""));
+            string currentValue = (string) propertyToChange.GetValue (options);
+            string valueToSet;
+            if (string.IsNullOrEmpty (currentValue))
+                valueToSet = value;
+            else
+                valueToSet = $"{currentValue},{value}";
+            propertyToChange.SetValue (options, valueToSet);
+            await commandOptionsContext.SaveChangesAsync ();
         }
     }
 }

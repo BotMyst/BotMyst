@@ -153,6 +153,8 @@
       border-radius: 0.3rem;
       display: inline-block;
       padding: 5px 10px; }
+      #blobPicker ul.roleList li.role a:hover {
+        cursor: pointer; }
       #blobPicker ul.roleList li.role a p {
         font-size: 1.3rem;
         margin: 0;
