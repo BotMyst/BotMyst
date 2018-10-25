@@ -43,5 +43,30 @@ namespace BotMyst.Web.Helpers
             propertyToChange.SetValue (options, valueToSet);
             await commandOptionsContext.SaveChangesAsync ();
         }
+
+        /// <summary>
+        /// Removes an item from a string representing a list in a command option.
+        /// Example is RoleWhitelist (Staff,Admin,Bot).
+        /// If the list doesn't contain said item, no error or exception is thrown.
+        /// </summary>
+        public static async Task RemoveItemFromOptionStringList<T> (T options, CommandOptionsContext commandOptionsContext, string optionName, string value) where T : CommandOptions
+        {
+            PropertyInfo [] properties = options.GetType ().GetProperties ();
+            PropertyInfo propertyToChange = properties.First (p => p.Name == optionName.Replace (" ", ""));
+            string currentValue = (string) propertyToChange.GetValue (options);
+            string valueToSet;
+            if (string.IsNullOrEmpty (currentValue))
+            {
+                return;
+            }
+            else
+            {
+                List<string> allValues = currentValue.Split (',').ToList ();
+                if (allValues.Remove (value) == false) return;
+                valueToSet = string.Join (',', allValues);
+            }
+            propertyToChange.SetValue (options, valueToSet);
+            await commandOptionsContext.SaveChangesAsync ();
+        }
     }
 }

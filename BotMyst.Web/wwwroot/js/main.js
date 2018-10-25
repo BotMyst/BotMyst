@@ -78,9 +78,9 @@ async function openRolePicker (guildId, commandId, optionName)
     }
 }
 
-async function addRoleToRoleList (guildId, commandId, optionName, blob, color)
+async function addRoleToRoleList (guildId, commandId, optionName, roleName, color)
 {
-    await fetch (`/CommandOptions/AddBlobToBlobList?guildId=${guildId}&commandId=${commandId}&optionName=${optionName}&blob=${blob}`);
+    await fetch (`/CommandOptions/AddBlobToBlobList?guildId=${guildId}&commandId=${commandId}&optionName=${optionName}&blob=${roleName}`);
 
     var blobPicker = document.getElementById ('blobPicker');
     var content = blobPicker.getElementsByClassName ('content') [0];
@@ -89,7 +89,7 @@ async function addRoleToRoleList (guildId, commandId, optionName, blob, color)
     for (var i = 0; i < list.children.length; i++)
     {
         var blobValue = list.children [i].getElementsByTagName ('p') [0].innerText;
-        if (blobValue === blob)
+        if (blobValue === roleName)
         {
             list.removeChild (list.children [i]);
             break;
@@ -120,18 +120,62 @@ async function addRoleToRoleList (guildId, commandId, optionName, blob, color)
             var role = document.createElement ('li');
             var roleA = document.createElement ('a');
             var roleRemove = roleA.appendChild (document.createElement ('img'));
-            var roleName = roleA.appendChild (document.createElement ('p'));
+            var roleNameP = roleA.appendChild (document.createElement ('p'));
             role.style = `border-color: #${color};`;
-            roleA.href = '#';
+            roleA.addEventListener ('click', function ()
+            {
+                removeRoleFromRoleList (guildId, commandId, optionName, roleName);
+            });
             roleRemove.style = `border-color: #${color}`;
             roleRemove.classList.add ('blobRemove');
             roleRemove.src = '/img/remove.svg';
-            roleName.classList.add ('blobText');
-            roleName.innerText = blob;
+            roleNameP.classList.add ('blobText');
+            roleNameP.innerText = roleName;
 
             role.appendChild (roleA);
 
             blobList.insertBefore (role, blobList.childNodes [blobList.childNodes.length - 2]);
+
+            break;
+        }
+    }
+}
+
+async function removeRoleFromRoleList (guildId, commandId, optionName, roleName)
+{
+    await fetch (`/CommandOptions/RemoveBlobFromBlobList?guildId=${guildId}&commandId=${commandId}&optionName=${optionName}&blob=${roleName}`);
+
+    var allOptions = document.getElementsByClassName ('option');
+    for (var i = 0; i < allOptions.length; i++)
+    {
+        var name = allOptions [i].getElementsByClassName ('name') [0].innerText.toLowerCase ();
+        if (name === optionName.toLowerCase ())
+        {
+            var blobList = allOptions [i].getElementsByClassName ('blobList') [0].getElementsByTagName ('ul') [0];
+
+            for (var j = 0; j < blobList.children.length; j++)
+            {
+                var blobValue = blobList.children [j].getElementsByClassName ('blobText') [0].innerText;
+                if (blobValue === roleName)
+                {
+                    blobList.removeChild (blobList.children [j]);
+                    break;
+                }
+            }
+
+            if (blobList.children.length === 1)
+            {
+                var emptyRole = document.createElement ('li');
+                var emptyRoleA = document.createElement ('a');
+                emptyRole.appendChild (emptyRoleA);
+                var emptyRoleP = document.createElement ('p');
+                emptyRoleA.appendChild (emptyRoleP);
+                
+                emptyRoleP.classList.add ('blobText');
+                emptyRoleP.innerText = '...';
+
+                blobList.insertBefore (emptyRole, blobList.childNodes [blobList.childNodes.length - 2]);
+            }
 
             break;
         }

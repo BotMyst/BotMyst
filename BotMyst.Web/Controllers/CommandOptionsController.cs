@@ -102,5 +102,17 @@ namespace BotMyst.Web.Controllers
 
             return Ok ();
         }
+
+        public async Task<IActionResult> RemoveBlobFromBlobList (ulong guildId, int commandId, string optionName, string blob)
+        {
+            if (await UserHelper.CanChangeOptionsAsync (User, HttpContext, guildId) == false) return Unauthorized ();
+
+            CommandDescription description = await moduleDescriptionsContext.CommandDescriptions.SingleOrDefaultAsync (c => c.ID == commandId);
+            BaseCommandOptions options = await CommandHelper.GetCommandOptionsAsync<BaseCommandOptions> (guildId, commandOptionsContext, description, commandOptionTypes);
+
+            await CommandHelper.RemoveItemFromOptionStringList<BaseCommandOptions> (options, commandOptionsContext, optionName, blob);
+
+            return Ok ();
+        }
     }
 }

@@ -47,7 +47,7 @@
                             @foreach (DiscordRole role in roles)
                             {
                                 <li style='border-color: #@role.Color.ToString("X");'>
-                                    <a href="#">
+                                    <a onclick="removeRoleFromRoleList('@Model.BotMystGuild.Guild.Id', '@Model.CommandDescription.ID', '@option.Name', '@role.Name')">
                                         <img style='border-color: #@role.Color.ToString("X");' class="blobRemove" src="~/img/remove.svg" />
                                         <p class="blobText">@role.Name</p>
                                     </a>

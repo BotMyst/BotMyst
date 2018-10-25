@@ -16,6 +16,11 @@
             margin-right: 10px;
             margin-left: 10px;
 
+            &:hover
+            {
+                cursor: pointer;
+            }
+
             .blobRemove
             {
                 float: left;

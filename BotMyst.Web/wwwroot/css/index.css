@@ -84,6 +84,8 @@
     padding: 3px 7px;
     margin-right: 10px;
     margin-left: 10px; }
+    .blobList ul li:hover {
+      cursor: pointer; }
     .blobList ul li .blobRemove {
       float: left;
       width: 7px;
